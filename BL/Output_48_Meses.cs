@@ -10,17 +10,41 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace BL
 {
-    class Output_48_Meses
+    public class Output_48_Meses
     {
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
         Database db = factory.Create("SQL_BD_BIP");
+        public double[,] sdata48Meses_x_Region = new double[2,49];
 
-
-        IDataReader Leer_Ultimos_48_Meses(string Cab, string xPeriodos)
+        public void Leer_Ultimos_48_Meses(string Cab, string xPeriodos)
         {
-            DbCommand cmd;
-            cmd = db.GetSqlStringCommand("")
-            return
+            //string consulta = @"SELECT REGION, @Cab "+
+            //    "FROM ( SELECT PERIODO, REGION, FACTOR_UNIDAD_VALORIZADO/1000000 AS FACTOR_UNIDAD_VALORIZADO FROM BASE_REGIONES " +
+            //    "WHERE IDPERIODO IN (@xPeriodos) AND IDMONEDA = 2 ) AS SourceTable "+
+            //    "PIVOT (SUM(FACTOR_UNIDAD_VALORIZADO) "+
+            //    "FOR PERIODO IN (@Cab)) AS pvt "+
+            //    "ORDER BY REGION";
+            string consulta = @"SELECT REGION, " + @Cab +
+                " FROM ( SELECT PERIODO, REGION, FACTOR_UNIDAD_VALORIZADO/1000000 AS FACTOR_UNIDAD_VALORIZADO FROM BASE_REGIONES " +
+                "WHERE IDPERIODO IN (" + @xPeriodos + ") AND IDMONEDA = 2 ) AS SourceTable " +
+                "PIVOT (SUM(FACTOR_UNIDAD_VALORIZADO) " +
+                "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                "ORDER BY REGION";
+            using (DbCommand cmd = db.GetSqlStringCommand(consulta))
+            {
+                //db.AddInParameter(cmd, "@Cab", DbType.String, Cab);
+                //db.AddInParameter(cmd, "@xPeriodos", DbType.String, xPeriodos);
+
+                using (IDataReader reader = db.ExecuteReader(cmd)) 
+                {
+                    //return reader;
+                    int cols = reader.FieldCount;
+                    for (int i = 0; i < cols; i++)
+                    {
+                        sdata48Meses_x_Region[0, i] = (double)reader[i];
+                    }                    
+                }
+            }
         }
     }
 }

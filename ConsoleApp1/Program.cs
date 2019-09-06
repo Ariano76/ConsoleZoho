@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using BL;
 
 namespace ConsoleApp1
@@ -14,8 +15,9 @@ namespace ConsoleApp1
             DateTime HoraInicio, HoraFin;
             int xAño, xMes, xCiudad;
             string xMess;
-            var obj = new BL.BD_Zoho();
-                       
+            var obj = new BD_Zoho();
+            var obj48 = new Output_48_Meses();
+
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
             xAño = int.Parse(Console.ReadLine());
             Console.WriteLine("Por favor Ingrese el Mes de Proceso :");
@@ -50,6 +52,12 @@ namespace ConsoleApp1
             Console.WriteLine($"{xPeriodos48Meses[0]}");
             Console.WriteLine($"{xPeriodos48Meses[1]}");
 
+            //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+
+            double x = obj48.sdata48Meses_x_Region[0, 5];
+            Console.WriteLine(x.ToString());
+            
+            
             Console.ReadKey();
         }
     }
