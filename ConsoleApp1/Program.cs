@@ -54,10 +54,10 @@ namespace ConsoleApp1
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
 
-            double x = obj48.sdata48Meses_x_Region[0, 5];
+            obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            double x = obj48.sdata48Meses_x_Region[0, 1];
             Console.WriteLine(x.ToString());
-            
-            
+                        
             Console.ReadKey();
         }
     }

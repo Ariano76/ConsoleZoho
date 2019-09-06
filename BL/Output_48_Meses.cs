@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Diagnostics;
 
 namespace BL
 {
@@ -15,7 +16,7 @@ namespace BL
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
         Database db = factory.Create("SQL_BD_BIP");
         public double[,] sdata48Meses_x_Region = new double[2,49];
-
+   
         public void Leer_Ultimos_48_Meses(string Cab, string xPeriodos)
         {
             //string consulta = @"SELECT REGION, @Cab "+
@@ -37,12 +38,16 @@ namespace BL
 
                 using (IDataReader reader = db.ExecuteReader(cmd)) 
                 {
-                    //return reader;
                     int cols = reader.FieldCount;
-                    for (int i = 0; i < cols; i++)
+                    while (reader.Read())
                     {
-                        sdata48Meses_x_Region[0, i] = (double)reader[i];
-                    }                    
+                        Debug.Write(reader[0].ToString());
+                        for (int i = 1; i < cols; i++)
+                        {
+                            sdata48Meses_x_Region[0, i] = double.Parse(reader[i].ToString());
+                        }
+                    }
+
                 }
             }
         }
