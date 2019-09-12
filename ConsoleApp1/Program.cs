@@ -37,28 +37,39 @@ namespace ConsoleApp1
                 $"Periodo de inicio 48 meses atras (4 años): {xFecha[6].ToShortDateString()}\n" +
                 $"El mes es {xFecha[0].Month} del año {xFecha[0].Year}");
 
-            //HoraInicio = DateTime.Now;
+            HoraInicio = DateTime.Now;
             //obj.Calcular_Periodos( xAño,xMes);
             //foreach (double item in obj.sShareValor)
             //{
             //    Console.WriteLine(item);
             //}
-            //Console.WriteLine($"El proceso tardo: {DateTime.Now - HoraInicio}");
+            
             
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
             xCiudad = 0;
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
             
             Console.WriteLine($"{xPeriodos48Meses[0]}");
+
             Console.WriteLine($"{xPeriodos48Meses[1]}");
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
 
-            obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
-            double x = obj48.sdata48Meses_x_Region[0, 1];
-            Console.WriteLine(x.ToString());
-                        
+            obj.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            double x = obj.sdata48Meses_x_Region_NSE[2, 1];
+
+            Console.WriteLine(obj48.sdata48Meses_x_Region.GetUpperBound(1) - obj.sdata48Meses_x_Region_NSE.GetLowerBound(1) + 1);
+            Console.WriteLine($"Numero de filas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(0)}");
+            Console.WriteLine($"Numero de columnas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(1)}");
+
+            for (int i = 0; i < obj.sdata48Meses_x_Region_NSE.GetLength(1); i++)
+            {
+                Console.WriteLine($"{obj.sdata48Meses_x_Region_NSE[0, i]} - {obj.sdata48Meses_x_Region_NSE[1, i]} - {obj.sdata48Meses_x_Region_NSE[2, i]}");
+            }
+            Console.WriteLine(obj.resultadoBD);
+            Console.WriteLine($"El proceso tardo: {DateTime.Now - HoraInicio}");
             Console.ReadKey();
+
         }
     }
 }
