@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD_Zoho.cs" />
+    <Compile Include="BL_HOGARES.cs" />
     <Compile Include="Output_48_Meses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

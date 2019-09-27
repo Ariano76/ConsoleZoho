@@ -12,11 +12,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            DateTime HoraInicio, HoraFin;
+            DateTime HoraInicio;
             int xAño, xMes, xCiudad;
             string xMess;
             var obj = new BD_Zoho();
+            var objHogar = new BL_HOGARES();
+
             var obj48 = new Output_48_Meses();
+
 
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
             xAño = int.Parse(Console.ReadLine());
@@ -55,17 +58,34 @@ namespace ConsoleApp1
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
 
-            obj.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            obj.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            obj.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA
+            obj.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
+            obj.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPOS
+
+            objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            
             double x = obj.sdata48Meses_x_Region_NSE[2, 1];
 
             Console.WriteLine(obj48.sdata48Meses_x_Region.GetUpperBound(1) - obj.sdata48Meses_x_Region_NSE.GetLowerBound(1) + 1);
             Console.WriteLine($"Numero de filas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(0)}");
             Console.WriteLine($"Numero de columnas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(1)}");
+            Console.WriteLine($"Totales por NSE \n");
+            //for (int i = 0; i < obj.sdata48Meses_x_Region_NSE.GetLength(1); i++)
+            //{
+            //    Console.WriteLine($"{obj.sdata48Meses_x_Region_NSE[0, i]} - {obj.sdata48Meses_x_Region_NSE[5, i]} - ({obj.sdata48Meses_x_Region_NSE[i, i] + obj.sdata48Meses_x_Region_NSE[5, i]})");
+            //}
+            //Console.WriteLine($"Totales por CANAL DE VENTA \n");
+            //for (int i = 0; i < obj.sdata48Meses_x_Region_Modalidad_Mes.GetLength(1); i++)
+            //{
+            //    Console.WriteLine($"{obj.sdata48Meses_x_Region_Modalidad_Mes[0, i]} - {obj.sdata48Meses_x_Region_Modalidad_Mes[1, i]} - {obj.sdata48Meses_x_Region_Modalidad_Mes[2, i]}");
+            //}
+            //Console.WriteLine($"Totales por TIPOS \n");
+            //for (int i = 0; i < obj.sdata48Meses_x_Region_Tipos_Mes.GetLength(1); i++)
+            //{
+            //    Console.WriteLine($"{obj.sdata48Meses_x_Region_Tipos_Mes[0, i]} - {obj.sdata48Meses_x_Region_Tipos_Mes[1, i]} - {obj.sdata48Meses_x_Region_Tipos_Mes[2, i]}");
+            //}
 
-            for (int i = 0; i < obj.sdata48Meses_x_Region_NSE.GetLength(1); i++)
-            {
-                Console.WriteLine($"{obj.sdata48Meses_x_Region_NSE[0, i]} - {obj.sdata48Meses_x_Region_NSE[1, i]} - {obj.sdata48Meses_x_Region_NSE[2, i]}");
-            }
             Console.WriteLine(obj.resultadoBD);
             Console.WriteLine($"El proceso tardo: {DateTime.Now - HoraInicio}");
             Console.ReadKey();
