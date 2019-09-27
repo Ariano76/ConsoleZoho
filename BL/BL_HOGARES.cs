@@ -18,11 +18,12 @@ namespace BL
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
+
         Database db = factory.Create("SQL_BD_BIP");
         Database db_Zoho = factory.Create("ZOHO");
 
         public string resultadoBD;
-        string NSE_, Ciudad_, Mercado_;
+        string NSE_, Ciudad_ , Mercado_, prueba ;
 
         public void Leer_Ultimos_48_Meses_Ciudad_NSE(string Cab, string xPeriodos)
         {
