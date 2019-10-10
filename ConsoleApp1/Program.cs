@@ -13,6 +13,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             DateTime HoraInicio;
+            TimeSpan HoraFin;
             int xAño, xMes, xCiudad;
             string xMess;
             var obj = new BD_Zoho();
@@ -66,6 +67,8 @@ namespace ConsoleApp1
             objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR NSE
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR CATEGORIA
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y NSE
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD
 
             double x = obj.sdata48Meses_x_Region_NSE[2, 1];
 
@@ -89,7 +92,9 @@ namespace ConsoleApp1
             //}
 
             Console.WriteLine(obj.resultadoBD);
-            Console.WriteLine($"El proceso tardo: {DateTime.Now - HoraInicio}");
+            HoraFin = DateTime.Now - HoraInicio;
+            Console.WriteLine($"El proceso tardo: {HoraFin}");
+            Console.WriteLine($"El proceso tardo: {HoraFin.TotalSeconds}");
             Console.ReadKey();
 
         }
