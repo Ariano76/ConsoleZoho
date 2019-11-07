@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
+using System.Windows.Forms;
 using BL;
 
-namespace ConsoleApp1
+namespace win_BD_Zoho
 {
-    class Program
+    public partial class Form1 : Form
     {
-        
-        static void Main(string[] args)
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             int[] Codigo_Tipos_Importantes = { 158, 161, 215, 202, 237, 226 };
-            
+
             DateTime HoraInicio;
             TimeSpan HoraFin;
             int xAño, xMes, xCiudad;
@@ -25,17 +37,16 @@ namespace ConsoleApp1
             var obj48 = new Output_48_Meses();
 
 
-            Console.WriteLine("Por favor Ingrese el Año de Proceso :");
-            xAño = int.Parse(Console.ReadLine());
-            Console.WriteLine("Por favor Ingrese el Mes de Proceso :");
-            xMes = int.Parse(Console.ReadLine());
-            xMess = xMes.ToString();
-            DateTime[] xFecha = obj.Restar_Meses_Fechas(xAño, xMes);
-            
-            obj.Periodo_Actual(xAño, xMes);
-            Console.WriteLine(obj.sPeriodoActual[0]);
 
-            Console.WriteLine($"La fecha de un año atras es: {xFecha[0].ToShortDateString()}\n" +
+            xAño = int.Parse(txtAño.Text);
+            xMes = int.Parse(txtMes.Text);
+
+            DateTime[] xFecha = obj.Restar_Meses_Fechas(xAño, xMes);
+
+            obj.Periodo_Actual(xAño, xMes);
+            rtb_Mensajes.AppendText(obj.sPeriodoActual[0].ToString());
+
+            rtb_Mensajes.AppendText($"La fecha de un año atras es: {xFecha[0].ToShortDateString()}\n" +
                 $"La fecha dos años atras: {xFecha[1].ToShortDateString()}\n" +
                 $"La fecha seis meses atras: {xFecha[2].ToShortDateString()}\n" +
                 $"La fecha seis meses atras dos años: {xFecha[3].ToShortDateString()}\n" +
@@ -50,15 +61,14 @@ namespace ConsoleApp1
             //{
             //    Console.WriteLine(item);
             //}
-            Console.WriteLine($"Hora de Inicio: {HoraInicio}");
-            
-            Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
+
+            rtb_Mensajes.AppendText("********** GENERACION DE ULTIMOS 48 MESES ************");
             xCiudad = 0;
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
-            
-            Console.WriteLine($"{xPeriodos48Meses[0]}");
 
-            Console.WriteLine($"{xPeriodos48Meses[1]}");
+            rtb_Mensajes.AppendText($"{xPeriodos48Meses[0]}");
+
+            rtb_Mensajes.AppendText($"{xPeriodos48Meses[1]}");
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
 
@@ -74,7 +84,7 @@ namespace ConsoleApp1
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y NSE
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD
                                                                                                                  //*** FIN ***//
-            objHogar.Leer_Ultimos_48_Meses_CIUDAD_NSE_TIPOS_V1(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD            
+            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_NSE_TIPOS_V1(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD            
 
             /////* LEYENDO LOS TIPOS ALMACENADOS EN UN ARREGLO*/
             ////string xTipos ="";
@@ -85,11 +95,10 @@ namespace ConsoleApp1
             ////Console.WriteLine($"Total Tipos Importantes:{xTipos}");
 
 
-
-            Console.WriteLine(obj48.sdata48Meses_x_Region.GetUpperBound(1) - obj.sdata48Meses_x_Region_NSE.GetLowerBound(1) + 1);
-            Console.WriteLine($"Numero de filas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(0)}");
-            Console.WriteLine($"Numero de columnas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(1)}");
-            Console.WriteLine($"Totales por NSE \n");
+            rtb_Mensajes.AppendText((obj48.sdata48Meses_x_Region.GetUpperBound(1) - obj.sdata48Meses_x_Region_NSE.GetLowerBound(1) + 1).ToString());
+            rtb_Mensajes.AppendText($"Numero de filas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(0)}");
+            rtb_Mensajes.AppendText($"Numero de columnas del Array: {obj.sdata48Meses_x_Region_NSE.GetLength(1)}");
+            rtb_Mensajes.AppendText($"Totales por NSE \n");
             //for (int i = 0; i < obj.sdata48Meses_x_Region_NSE.GetLength(1); i++)
             //{
             //    Console.WriteLine($"{obj.sdata48Meses_x_Region_NSE[0, i]} - {obj.sdata48Meses_x_Region_NSE[5, i]} - ({obj.sdata48Meses_x_Region_NSE[i, i] + obj.sdata48Meses_x_Region_NSE[5, i]})");
@@ -105,12 +114,10 @@ namespace ConsoleApp1
             //    Console.WriteLine($"{obj.sdata48Meses_x_Region_Tipos_Mes[0, i]} - {obj.sdata48Meses_x_Region_Tipos_Mes[1, i]} - {obj.sdata48Meses_x_Region_Tipos_Mes[2, i]}");
             //}
 
-            Console.WriteLine(obj.resultadoBD);
+            rtb_Mensajes.AppendText(obj.resultadoBD);
             HoraFin = DateTime.Now - HoraInicio;
-            Console.WriteLine($"El proceso tardo: {HoraFin}");
-            Console.WriteLine($"El proceso tardo: {HoraFin.TotalSeconds}");
-            Console.ReadKey();
-
+            rtb_Mensajes.AppendText($"El proceso tardo: {HoraFin}");
+            rtb_Mensajes.AppendText($"El proceso tardo: {HoraFin.TotalSeconds}");
         }
     }
 }

@@ -33,7 +33,6 @@ namespace BL
         private readonly DateTime[] Periodos = new DateTime[7];
         string sSource = "Dashboard ZOHO";
         string sLog = "ZOHO";
-        string sEvent = "Mensaje de nuestro evento";
         string NSE_, Ciudad_, Mercado_, Periodo;
         int xMesFin;
         public string resultadoBD;
@@ -47,18 +46,13 @@ namespace BL
         {
             // To avoid storing the connection string in your code, 
             // you can retrieve it from a configuration file.
-            return "Data Source=PEDT0108243; Initial Catalog=BIP; Integrated Security=SSPI";
+            return "Data Source=PEDT0108243; Initial Catalog=BIP; User Id=Procesamiento; Password=P@ssw0rd";
         }
 
         public void Periodo_Actual(int pAño, int pMes)
         {
             //'RECUPERA EL ID DEL PERIODO CORRESPONDIENTE AL AÑO Y MES ANTERIOR
             
-            if (!EventLog.SourceExists(sSource))
-            {
-                EventLog.CreateEventSource(sSource, sLog);
-            }
-
             using (SqlConnection con = new SqlConnection(GetConnectionString()))
             {
                 string Sql;
