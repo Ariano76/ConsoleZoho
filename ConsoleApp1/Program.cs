@@ -74,7 +74,7 @@ namespace ConsoleApp1
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y NSE
             objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD
                                                                                                                  //*** FIN ***//
-            objHogar.Leer_Ultimos_48_Meses_CIUDAD_NSE_TIPOS_V1(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD            
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_NSE_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD            
 
             /////* LEYENDO LOS TIPOS ALMACENADOS EN UN ARREGLO*/
             ////string xTipos ="";
