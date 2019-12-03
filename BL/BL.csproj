@@ -54,6 +54,8 @@
     <Compile Include="BD_Zoho.cs" />
     <Compile Include="BL_HOGARES.cs" />
     <Compile Include="BL_Hogares_V1.cs" />
+    <Compile Include="BL_PPU_Dolares.cs" />
+    <Compile Include="BL_Unidades.cs" />
     <Compile Include="cls_BD_Zoho.cs" />
     <Compile Include="Output_48_Meses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

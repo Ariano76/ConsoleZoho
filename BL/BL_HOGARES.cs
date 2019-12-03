@@ -25,7 +25,9 @@ namespace BL
 
         public double[,] sdata48Meses_x_Region_Categoria_NSE_Mes = new double[30, 50];
         public double[,] sdata48Meses_x_Region_Categoria_Modalidad_Mes = new double[12, 50];
-        public double[,] sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes = new double[60, 50];
+        public double[,] sdata48Meses_x_Region_Tipos_Nse_Mes = new double[60, 50];
+        public double[,] sdata48Meses_x_Region_Tipos_Modalidad_Mes = new double[24, 50];
+        public double[,] sdata48Meses_x_Region_Tipos_Total_Mes = new double[12, 50];
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
@@ -35,6 +37,8 @@ namespace BL
 
         public string resultadoBD;
         string V1_, NSE_, Ciudad_ , Mercado_, MercadoV1_, Periodo ;
+        string xTiposCompletos, xTiposInCompletos;
+
 
         public void Leer_Ultimos_48_Meses_Ciudad_NSE(string Cab, string xPeriodos)
         {
@@ -94,19 +98,19 @@ namespace BL
                             switch (int.Parse(reader[1].ToString()))
                             {
                                 case 1:
-                                    NSE_ = "ALTO";
+                                    NSE_ = "Alto";
                                     break;
                                 case 2:
-                                    NSE_ = "MEDIO";
+                                    NSE_ = "Medio";
                                     break;
                                 case 3:
-                                    NSE_ = "MEDIO BAJO";
+                                    NSE_ = "Medio Bajo";
                                     break;
                                 case 4:
-                                    NSE_ = "BAJO";
+                                    NSE_ = "Bajo";
                                     break;
                                 case 5:
-                                    NSE_ = "MUY BAJO";
+                                    NSE_ = "Muy Bajo";
                                     break;
                             }
 
@@ -139,7 +143,7 @@ namespace BL
                         //OBTIENE TOTAL PAIS Y LO ALMACENA EN ARRAY sdata48Meses_x_Total
                         sdata48Meses_x_Total[0, i] = sdata48Meses_x_Capital_Provincia[0, i] + sdata48Meses_x_Capital_Provincia[1, i];
 
-                        Actualizar_BD("COSMETICOS", "SUMA", "HOGARES", "1. Capital", "0. Cosmeticos", "HOGARES",
+                        Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "1. Capital", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         
                         // GUARDANDO VALORES CON VARIABLES INVERTIDAS - CAPITAL
@@ -158,7 +162,7 @@ namespace BL
                         {
                             Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
                         }
-                        Actualizar_BD("COSMETICOS", "SUMA", "HOGARES", "2. Ciudades", "0. Cosmeticos", "HOGARES",
+                        Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "2. Ciudades", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[1, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         
                         // GUARDANDO VALORES CON VARIABLES INVERTIDAS - CIUDADES
@@ -177,7 +181,7 @@ namespace BL
                             Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
                         }
                         /* INSERTANDO VALORES DEL TOTAL PAIS A BD ZOHO*/
-                        Actualizar_BD("CONSOLIDADO", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                        Actualizar_BD("Consolidado", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Total[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                     }
 
@@ -186,19 +190,19 @@ namespace BL
                         switch (id)
                         {
                             case 0:
-                                NSE_ = "ALTO";
+                                NSE_ = "Alto";
                                 break;
                             case 1:
-                                NSE_ = "MEDIO";
+                                NSE_ = "Medio";
                                 break;
                             case 2:
-                                NSE_ = "MEDIO BAJO";
+                                NSE_ = "Medio Bajo";
                                 break;
                             case 3:
-                                NSE_ = "BAJO";
+                                NSE_ = "Bajo";
                                 break;
                             case 4:
-                                NSE_ = "MUY BAJO";
+                                NSE_ = "Muy Bajo";
                                 break;
                         }
 
@@ -786,10 +790,7 @@ namespace BL
             }
         }
 
-
-
-
-        public void Leer_Ultimos_48_Meses_CIUDAD_NSE_TIPOS(string Cab, string xPeriodos)
+        public void Leer_Ultimos_48_Meses_CIUDAD_TIPOS_NSE(string Cab, string xPeriodos)
         {
             /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR REGIONES, NSE Y TIPOS (CAPITAL Y PROVINCIA, NSE Y TIPOS PRINCIPALES) */
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_NSE_TIPOS"))
@@ -830,12 +831,6 @@ namespace BL
                     }
                 }
 
-                string xTiposCompletos = "";
-
-                //foreach (int item in codigo_Tipos_Importantes_Completos)
-                //{
-                //    xTiposCompletos += item + ",";
-                //}
                 for (int i = 0; i < codigo_Tipos_Importantes_Completos.GetLength(0); i++)
                 {
                     if (codigo_Tipos_Importantes_Completos[i] != 0)
@@ -844,8 +839,22 @@ namespace BL
                     }
                 }
 
+                for (int i = 0; i < codigo_Tipos_Importantes_Incompletos.GetLength(0); i++)
+                {
+                    if (codigo_Tipos_Importantes_Incompletos[i] != 0)
+                    {
+                        xTiposInCompletos += codigo_Tipos_Importantes_Incompletos[i] + ",";
+                    }
+                }
+
                 xTiposCompletos = xTiposCompletos.Substring(0, xTiposCompletos.Length - 1);
+                xTiposInCompletos = xTiposInCompletos.Substring(0, xTiposInCompletos.Length - 1);
+
+                // *************************************************** //
+                // PROCESAR LOS TIPOS CON NSE O REGIONES COMPLETOS.    //
+                // *************************************************** //
                 // RUTINA PARA RECORRER LOS TIPOS QUE TIENEN LOS NSE COMPLETOS, 10 REGISTROS.
+
                 consulta = @"SELECT REGION, NSE, PARAMETROTIPO, " + @Cab +
                     " FROM ( SELECT PERIODO, REGION, NSE, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_NSE_TIPOS) AS SourceTable " +
                     "PIVOT (SUM(FACTOR_HOGAR) " +
@@ -876,9 +885,9 @@ namespace BL
                                     valor = double.Parse(reader_1[i].ToString());
                                 }
 
-                                sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[rows, 0] = int.Parse(reader_1[1].ToString()); // GUARDANDO NSE
-                                sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[rows, 1] = int.Parse(reader_1[2].ToString()); // GUARDANDO PARAMETROTIPO
-                                sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[rows, i - 1] = valor; // GUARDANDO NUMERO DE HOGARES
+                                sdata48Meses_x_Region_Tipos_Nse_Mes[rows, 0] = int.Parse(reader_1[1].ToString()); // GUARDANDO NSE
+                                sdata48Meses_x_Region_Tipos_Nse_Mes[rows, 1] = int.Parse(reader_1[2].ToString()); // GUARDANDO PARAMETROTIPO
+                                sdata48Meses_x_Region_Tipos_Nse_Mes[rows, i - 1] = valor; // GUARDANDO NUMERO DE HOGARES
 
                                 // implementar switch para validar NSE
                                 switch (int.Parse(reader_1[1].ToString()))
@@ -959,9 +968,9 @@ namespace BL
 
                         for (int id = 0; id < 25; id++)
                         {
-                            for (int i = 0; i < sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes.GetLength(1) - 2; i++)
+                            for (int i = 0; i < sdata48Meses_x_Region_Tipos_Nse_Mes.GetLength(1) - 2; i++)
                             {
-                                switch (int.Parse(sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[id, 0].ToString()))
+                                switch (int.Parse(sdata48Meses_x_Region_Tipos_Nse_Mes[id, 0].ToString()))
                                 {
                                     case 1:
                                         NSE_ = "Alto";
@@ -982,7 +991,7 @@ namespace BL
                                         break;
                                 }
 
-                                switch (int.Parse(sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[id, 1].ToString()))
+                                switch (int.Parse(sdata48Meses_x_Region_Tipos_Nse_Mes[id, 1].ToString()))
                                 {
                                     case 158:
                                         Mercado_ = "01. Colonia Femeninas";
@@ -1020,7 +1029,7 @@ namespace BL
                                 //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                                 /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
                                 Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
-                                    sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[id, i + 2] + sdata48Meses_x_Region_Categoria_Nse_Tipos_Mes[id + 25, i + 2],
+                                    sdata48Meses_x_Region_Tipos_Nse_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Nse_Mes[id + 25, i + 2],
                                     int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                                 //////DUPLICANDO VALORES CON VARIABLES INVERTIDAS
                                 //////Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
@@ -1030,8 +1039,612 @@ namespace BL
                         }
                     }
                 }
+
+                // *************************************************** //
+                // PROCESAR LOS TIPOS CON NSE O REGIONES INCOMPLETOS.  //
+                // *************************************************** //
+
+                // 1.- Ejecutamos una vez mas la consulta para traer los datos por tipos y poder procesar los tipos incompletos. 
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_NSE_TIPOS"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                    db_Zoho.ExecuteNonQuery(cmd_1);
+                }
+
+                consulta = @"SELECT REGION, NSE, PARAMETROTIPO, " + @Cab +
+                    " FROM ( SELECT PERIODO, REGION, NSE, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_NSE_TIPOS) AS SourceTable " +
+                    "PIVOT (SUM(FACTOR_HOGAR) " +
+                    "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                    "WHERE PARAMETROTIPO IN (" + xTiposInCompletos + ") " +
+                    "ORDER BY REGION, NSE, PARAMETROTIPO";
+
+                using (DbCommand cmd_2 = db.GetSqlStringCommand(consulta))
+                {
+                    using (IDataReader reader_1 = db.ExecuteReader(cmd_2))
+                    {
+                        int cols = reader_1.FieldCount;
+                        int rows = 0;
+                        double valor;
+
+                        while (reader_1.Read())
+                        {
+                            //Debug.Write(reader[0].ToString());
+                            /* INICIA EN 2 PARA NO LEER COLUMNA REGION Y NSE*/
+                            for (int i = 3; i < cols; i++)
+                            {
+                                if (reader_1[i] == DBNull.Value)
+                                {
+                                    valor = 0;
+                                }
+                                else
+                                {
+                                    valor = double.Parse(reader_1[i].ToString());
+                                }
+
+                                // implementar switch para validar NSE
+                                switch (int.Parse(reader_1[1].ToString()))
+                                {
+                                    case 1:
+                                        NSE_ = "Alto";
+                                        MercadoV1_ = "1. VD";
+                                        break;
+                                    case 2:
+                                        NSE_ = "Medio";
+                                        MercadoV1_ = "2. VR";
+                                        break;
+                                    case 3:
+                                        NSE_ = "Medio Bajo";
+                                        break;
+                                    case 4:
+                                        NSE_ = "Bajo";
+                                        break;
+                                    case 5:
+                                        NSE_ = "Muy Bajo";
+                                        break;
+                                }
+
+                                switch (int.Parse(reader_1[2].ToString()))
+                                {
+                                    case 158:
+                                        Mercado_ = "01. Colonia Femeninas";
+                                        V1_ = "Fragancias";
+                                        break;
+                                    case 161:
+                                        Mercado_ = "02. Colonia Masculinas";
+                                        V1_ = "Maquillaje";
+                                        break;
+                                    case 215:
+                                        Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                        V1_ = "Cuidado Personal";
+                                        break;
+                                    case 202:
+                                        Mercado_ = "08. Nutritiva Revit. Facial";
+                                        V1_ = "Cuidado Personal";
+                                        break;
+                                    case 237:
+                                        Mercado_ = "14. Roll-On";
+                                        V1_ = "Cuidado Personal";
+                                        break;
+                                    case 226:
+                                        Mercado_ = "10. Shampoo Adultos";
+                                        V1_ = "Cuidado Personal";
+                                        break;
+                                }
+
+                                if (reader_1[0].ToString() == "CAPITAL")
+                                {
+                                    Ciudad_ = "1. Capital";
+                                }
+                                else
+                                {
+                                    Ciudad_ = "2. Ciudades";
+                                }
+
+                                if (i <= 11)
+                                {
+                                    Periodo = "0" + ((i - 3) + 1) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
+                                }
+                                else
+                                {
+                                    Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
+                                }
+
+                                Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                    "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
+                                ////DUPLICANDO VALORES CON VARIABLES INVERTIDAS
+                                ////Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                                ////    "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
+                            }
+                            rows++;
+                        }
+                    }
+                }
+
+
+                // *************************************************** //
+                // PROCESAR LOS TOTALES NSE O REGIONES INCOMPLETOS.    //
+                // *************************************************** //
+                // 2.- Obtenemos los totales por Tipos y NSE = Consolidado
+
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_NSE_TIPOS"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                    db_Zoho.ExecuteNonQuery(cmd_1);
+                }
+
+                consulta = @"SELECT NSE, PARAMETROTIPO, " + @Cab +
+                  " FROM ( SELECT PERIODO, NSE, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_NSE_TIPOS) AS SourceTable " +
+                  "PIVOT (SUM(FACTOR_HOGAR) " +
+                  "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                  "WHERE PARAMETROTIPO IN (" + xTiposInCompletos + ") " +
+                  "ORDER BY NSE, PARAMETROTIPO";
+
+                using (DbCommand cmd_2 = db.GetSqlStringCommand(consulta))
+                {
+                    using (IDataReader reader_1 = db.ExecuteReader(cmd_2))
+                    {
+                        int cols = reader_1.FieldCount;
+                        int rows = 0;
+                        double valor;
+
+                        while (reader_1.Read())
+                        {
+                            //Debug.Write(reader[0].ToString());
+                            /* INICIA EN 2 PARA NO LEER COLUMNA REGION Y NSE*/
+                            for (int i = 2; i < cols; i++)
+                            {
+                                if (reader_1[i] == DBNull.Value)
+                                {
+                                    valor = 0;
+                                }
+                                else
+                                {
+                                    valor = double.Parse(reader_1[i].ToString());
+                                }
+
+                                // implementar switch para validar NSE
+                                switch (int.Parse(reader_1[0].ToString()))
+                                {
+                                    case 1:
+                                        NSE_ = "Alto";
+                                        break;
+                                    case 2:
+                                        NSE_ = "Medio";
+                                        break;
+                                    case 3:
+                                        NSE_ = "Medio Bajo";
+                                        break;
+                                    case 4:
+                                        NSE_ = "Bajo";
+                                        break;
+                                    case 5:
+                                        NSE_ = "Muy Bajo";
+                                        break;
+                                }
+
+                                switch (int.Parse(reader_1[1].ToString()))
+                                {
+                                    case 158:
+                                        Mercado_ = "01. Colonia Femeninas";
+                                        break;
+                                    case 161:
+                                        Mercado_ = "02. Colonia Masculinas";
+                                        break;
+                                    case 215:
+                                        Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                        break;
+                                    case 202:
+                                        Mercado_ = "08. Nutritiva Revit. Facial";
+                                        break;
+                                    case 237:
+                                        Mercado_ = "14. Roll-On";
+                                        break;
+                                    case 226:
+                                        Mercado_ = "10. Shampoo Adultos";
+                                        break;
+                                }
+
+                                if (i <= 10)
+                                {
+                                    Periodo = "0" + ((i - 2) + 1) + ". " + BD_Zoho.sCabecera48Meses[(i+1) - 3];
+                                }
+                                else
+                                {
+                                    Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[(i+1) - 3];
+                                }
+
+                                Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                                    "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[(i+1) - 3].Substring(0, 4)));
+                            }
+                            rows++;
+                        }
+                    }
+                }
+
             }
         }
+
+        public void Leer_Ultimos_48_Meses_CIUDAD_TIPOS_MODALIDAD(string Cab, string xPeriodos)
+        {
+            /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR REGIONES Y CATEGORIAS (CAPITAL Y PROVINCIA Y CATEGORIAS - FRAGANCIAS,MAQUILLAJE,CUIDADO PERSONAL) */
+            //double capital = 0;
+            //double provinci = 0;
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_REGION_TIPOS_MODALIDAD"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+
+            string consulta = @"SELECT REGION, COD_MOD_VENTA, PARAMETROTIPO, " + @Cab +
+                " FROM ( SELECT PERIODO, REGION, COD_MOD_VENTA, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_REGION_TIPOS_MODALIDAD) AS SourceTable " +
+                "PIVOT (SUM(FACTOR_HOGAR) " +
+                "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                "ORDER BY REGION, COD_MOD_VENTA, PARAMETROTIPO";
+
+            using (DbCommand cmd = db.GetSqlStringCommand(consulta))
+            {
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    int cols = reader.FieldCount;
+                    int rows = 0;
+                    double valor;
+
+                    while (reader.Read())
+                    {
+                        //Debug.Write(reader[0].ToString());
+                        /* INICIA EN 2 PARA NO LEER COLUMNA REGION Y NSE*/
+                        for (int i = 3; i < cols; i++)
+                        {
+                            if (reader[i] == DBNull.Value)
+                            {
+                                valor = 0;
+                            }
+                            else
+                            {
+                                valor = double.Parse(reader[i].ToString());
+                            }
+
+                            sdata48Meses_x_Region_Tipos_Modalidad_Mes[rows, 0] = int.Parse(reader[1].ToString()); // GUARDANDO MODALIDAD
+                            sdata48Meses_x_Region_Tipos_Modalidad_Mes[rows, 1] = int.Parse(reader[2].ToString()); // GUARDANDO PARAMETROTIPO
+                            sdata48Meses_x_Region_Tipos_Modalidad_Mes[rows, i - 1] = valor; // GUARDANDO NUMERO DE HOGARES
+
+                            // implementar switch para validar NSE
+
+                            switch (int.Parse(reader[1].ToString()))
+                            {
+                                case 87:
+                                    NSE_ = "VD";
+                                    MercadoV1_ = "1. VD";
+                                    break;
+                                case 88:
+                                    NSE_ = "VR";
+                                    MercadoV1_ = "2. VR";
+                                    break;
+                            }
+
+                            switch (int.Parse(reader[2].ToString()))
+                            {
+                                case 158:
+                                    Mercado_ = "01. Colonia Femeninas";
+                                    V1_ = "Colonia Femeninas";
+                                    break;
+                                case 161:
+                                    Mercado_ = "02. Colonia Masculinas";
+                                    V1_ = "Colonia Masculinas";
+                                    break;
+                                case 215:
+                                    Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                    V1_ = "Humectante/Nutritiva Corporal";
+                                    break;
+                                case 202:
+                                    Mercado_ = "08. Nutritiva Revit. Facial";
+                                    V1_ = "Nutritiva Revit. Facial";
+                                    break;
+                                case 237:
+                                    Mercado_ = "14. Roll-On";
+                                    V1_ = "Roll-On";
+                                    break;
+                                case 226:
+                                    Mercado_ = "10. Shampoo Adultos";
+                                    V1_ = "Shampoo Adultos";
+                                    break;
+                            }
+
+                            if (reader[0].ToString() == "CAPITAL")
+                            {
+                                Ciudad_ = "1. Capital";
+                            }
+                            else
+                            {
+                                Ciudad_ = "2. Ciudades";
+                            }
+
+                            if (i <= 11)
+                            {
+                                Periodo = "0" + ((i - 3) + 1) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
+                            }
+                            else
+                            {
+                                Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
+                            }
+
+                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
+                            // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
+                        }
+                        rows++;
+                    }
+
+                    for (int id = 0; id < 12; id++)
+                    {
+                        for (int i = 0; i < sdata48Meses_x_Region_Tipos_Modalidad_Mes.GetLength(1) - 2; i++)
+                        {
+                            switch (int.Parse(sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, 0].ToString()))
+                            {
+                                case 87:
+                                    NSE_ = "VD";
+                                    MercadoV1_ = "1. VD";
+                                    break;
+                                case 88:
+                                    NSE_ = "VR";
+                                    MercadoV1_ = "2. VR";
+                                    break;
+                            }
+
+                            switch (int.Parse(sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, 1].ToString()))
+                            {
+                                case 158:
+                                    Mercado_ = "01. Colonia Femeninas";
+                                    V1_ = "Colonia Femeninas";
+                                    break;
+                                case 161:
+                                    Mercado_ = "02. Colonia Masculinas";
+                                    V1_ = "Colonia Masculinas";
+                                    break;
+                                case 215:
+                                    Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                    V1_ = "Humectante/Nutritiva Corporal";
+                                    break;
+                                case 202:
+                                    Mercado_ = "08. Nutritiva Revit. Facial";
+                                    V1_ = "Nutritiva Revit. Facial";
+                                    break;
+                                case 237:
+                                    Mercado_ = "14. Roll-On";
+                                    V1_ = "Roll-On";
+                                    break;
+                                case 226:
+                                    Mercado_ = "10. Shampoo Adultos";
+                                    V1_ = "Shampoo Adultos";
+                                    break;
+                            }
+                            if (i < 9)
+                            {
+                                Periodo = "0" + (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
+                            }
+                            else
+                            {
+                                Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
+                            }
+                            //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
+                            /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
+                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Modalidad_Mes[id + 12, i + 2],
+                                int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
+                            // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
+                                sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Modalidad_Mes[id + 12, i + 2],
+                                int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        public void Leer_Ultimos_48_Meses_CIUDAD_TIPOS_REGION(string Cab, string xPeriodos)
+        {
+            /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR REGIONES Y TIPOS  */
+            //double capital = 0;
+            //double provinci = 0;
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_REGION_TIPOS_TOTAL"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+
+            string consulta = @"SELECT REGION, PARAMETROTIPO, " + @Cab +
+                " FROM ( SELECT PERIODO, REGION, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_REGION_TIPOS_TOTAL) AS SourceTable " +
+                "PIVOT (SUM(FACTOR_HOGAR) " +
+                "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                "ORDER BY REGION, PARAMETROTIPO";
+
+            using (DbCommand cmd = db.GetSqlStringCommand(consulta))
+            {
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    int cols = reader.FieldCount;
+                    int rows = 0;
+                    double valor;
+
+                    while (reader.Read())
+                    {
+                        //Debug.Write(reader[0].ToString());
+                        /* INICIA EN 2 PARA NO LEER COLUMNA REGION Y PARAMETROTIPO*/
+                        for (int i = 2; i < cols; i++)
+                        {
+                            if (reader[i] == DBNull.Value)
+                            {
+                                valor = 0;
+                            }
+                            else
+                            {
+                                valor = double.Parse(reader[i].ToString());
+                            }
+
+                            //sdata48Meses_x_Region_Tipos_Total_Mes[rows, 0] = int.Parse(reader[0].ToString()); // GUARDANDO REGION
+                            sdata48Meses_x_Region_Tipos_Total_Mes[rows, i-2] = int.Parse(reader[1].ToString()); // GUARDANDO PARAMETROTIPO
+                            //sdata48Meses_x_Region_Tipos_Total_Mes[rows, i] = valor; // GUARDANDO NUMERO DE HOGARES
+
+                            // implementar switch para validar TIPOS
+
+                            switch (int.Parse(reader[1].ToString()))
+                            {
+                                case 158:
+                                    Mercado_ = "01. Colonia Femeninas";
+                                    V1_ = "Colonia Femeninas";
+                                    break;
+                                case 161:
+                                    Mercado_ = "02. Colonia Masculinas";
+                                    V1_ = "Colonia Masculinas";
+                                    break;
+                                case 215:
+                                    Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                    V1_ = "Humectante/Nutritiva Corporal";
+                                    break;
+                                case 202:
+                                    Mercado_ = "08. Nutritiva Revit. Facial";
+                                    V1_ = "Nutritiva Revit. Facial";
+                                    break;
+                                case 237:
+                                    Mercado_ = "14. Roll-On";
+                                    V1_ = "Roll-On";
+                                    break;
+                                case 226:
+                                    Mercado_ = "10. Shampoo Adultos";
+                                    V1_ = "Shampoo Adultos";
+                                    break;
+                            }
+
+                            if (reader[0].ToString() == "CAPITAL")
+                            {
+                                Ciudad_ = "1. Capital";
+                            }
+                            else
+                            {
+                                Ciudad_ = "2. Ciudades";
+                            }
+
+                            if (i <= 10)
+                            {
+                                Periodo = "0" + ((i - 2) + 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
+                            }
+                            else
+                            {
+                                Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
+                            }
+
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
+                            // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
+                        }
+                        rows++;
+                    }
+                }
+            }
+        }
+
+        public void Leer_Ultimos_48_Meses_CIUDAD_TIPOS(string Cab, string xPeriodos)
+        {
+            /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR TIPOS  */
+            //double capital = 0;
+            //double provinci = 0;
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_CREA_TABLA_TEMPORAL_HOGAR_TIPOS"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+
+            string consulta = @"SELECT PARAMETROTIPO, " + @Cab +
+                " FROM ( SELECT PERIODO, PARAMETROTIPO, FACTOR_HOGAR/1000 AS FACTOR_HOGAR FROM ##TEMP_HOGAR_TIPOS) AS SourceTable " +
+                "PIVOT (SUM(FACTOR_HOGAR) " +
+                "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
+                "ORDER BY PARAMETROTIPO";
+
+            using (DbCommand cmd = db.GetSqlStringCommand(consulta))
+            {
+                using (IDataReader reader = db.ExecuteReader(cmd))
+                {
+                    int cols = reader.FieldCount;
+                    int rows = 0;
+                    double valor;
+
+                    while (reader.Read())
+                    {
+                        //Debug.Write(reader[0].ToString());
+                        /* INICIA EN 2 PARA NO LEER COLUMNA REGION Y PARAMETROTIPO*/
+                        for (int i = 1; i < cols; i++)
+                        {
+                            if (reader[i] == DBNull.Value)
+                            {
+                                valor = 0;
+                            }
+                            else
+                            {
+                                valor = double.Parse(reader[i].ToString());
+                            }
+
+                            //sdata48Meses_x_Region_Tipos_Total_Mes[rows, 0] = int.Parse(reader[0].ToString()); // GUARDANDO REGION
+                            //sdata48Meses_x_Region_Tipos_Total_Mes[rows, i - 1] = int.Parse(reader[1].ToString()); // GUARDANDO PARAMETROTIPO
+                            //sdata48Meses_x_Region_Tipos_Total_Mes[rows, i] = valor; // GUARDANDO NUMERO DE HOGARES
+
+                            // implementar switch para validar TIPOS
+
+                            switch (int.Parse(reader[0].ToString()))
+                            {
+                                case 158:
+                                    Mercado_ = "01. Colonia Femeninas";
+                                    V1_ = "Colonia Femeninas";
+                                    break;
+                                case 161:
+                                    Mercado_ = "02. Colonia Masculinas";
+                                    V1_ = "Colonia Masculinas";
+                                    break;
+                                case 215:
+                                    Mercado_ = "09. Humectante/Nutritiva Corporal";
+                                    V1_ = "Humectante/Nutritiva Corporal";
+                                    break;
+                                case 202:
+                                    Mercado_ = "08. Nutritiva Revit. Facial";
+                                    V1_ = "Nutritiva Revit. Facial";
+                                    break;
+                                case 237:
+                                    Mercado_ = "14. Roll-On";
+                                    V1_ = "Roll-On";
+                                    break;
+                                case 226:
+                                    Mercado_ = "10. Shampoo Adultos";
+                                    V1_ = "Shampoo Adultos";
+                                    break;
+                            }
+
+                            if (i <= 9)
+                            {
+                                Periodo = "0" + ((i - 1) + 1) + ". " + BD_Zoho.sCabecera48Meses[i - 1];
+                            }
+                            else
+                            {
+                                Periodo = i  + ". " + BD_Zoho.sCabecera48Meses[i - 1];
+                            }
+
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 1].Substring(0, 4)));
+                            // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
+                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                                "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 1].Substring(0, 4)));
+                        }
+                        rows++;
+                    }
+                }
+            }
+        }
+
+
 
         private bool Contar_Registros_DT(DataRow[] dataRows)
         {
