@@ -21,6 +21,8 @@ namespace BL
         public static readonly string[] sCabecera48Meses = new string[48];
 
 
+        public double[,] sdata48Meses_x_valor = new double[1, 48];       // TOTAL POR REGION VALORES
+        public double[,] sdata48Meses_x_unid = new double[1, 48];       // TOTAL POR REGION UNIDADES
         public double[,] sdata48Meses_x_Region_valor = new double[2, 48];       // TOTAL POR REGION VALORES
         public double[,] sdata48Meses_x_Region_unid = new double[2, 48];        // TOTAL POR REGION UNIDADES
         public double[,] sdata48Meses_x_NSE_valor = new double[5, 48];          // TOTAL POR NSE VALORES
@@ -44,7 +46,7 @@ namespace BL
         private readonly DateTime[] Periodos = new DateTime[7];
         string sSource = "Dashboard ZOHO";
         string sLog = "ZOHO";
-        string NSE_, Ciudad_, Mercado_, Periodo;
+        string NSE_, V1, Mercado_, Periodo;
         int xMesFin;
         public string resultadoBD;
 
@@ -253,86 +255,81 @@ namespace BL
                     {
                         valor_1 = sdata48Meses_x_NSE_valor[i, x] / sdata48Meses_x_NSE_unid[i, x];
                     }
-                    //Debug.WriteLine(sdata48Meses_x_Capital_Provincia[0, i] + " - " + sdata48Meses_x_Capital_Provincia[1, i]);   
+
                     Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
                         "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
-                    // LOS MISMOS VALORES DEL SP ANTERIOR PERO ACTUALIZANDO V1 Y CIUDAD
-                    // Actualizar_BD("Lima", "SUMA", "UNIDADES", "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)",
-                    //    "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
+                }
+            }
+            
+            /* INSERTANDO VALORES - PPU TOTAL REGION A BD */
+            for (int i = 0; i < 2; i++) // LEYENDO LAS FILAS DEL ARRAY
+            {
+                for (int x = 0; x < sdata48Meses_x_Region_valor.GetLength(1); x++) // LEYENDO LAS COLUMNAS DEL ARRAY
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            Mercado_ = "1. Capital";
+                            V1 = "Lima";
+                            break;
+                        case 1:
+                            Mercado_ = "2. Ciudades";
+                            V1 = "Ciudades";
+                            break;
+                    }
+                    sdata48Meses_x_valor[0, x] = sdata48Meses_x_valor[0, x] + sdata48Meses_x_Region_valor[i, x];
+                    sdata48Meses_x_unid[0, x] = sdata48Meses_x_unid[0, x] + sdata48Meses_x_Region_unid[i, x];
+
+                    if (x < 9)
+                    {
+                        Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                    }
+                    else
+                    {
+                        Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                    }
+
+                    if (sdata48Meses_x_Region_valor[i, x] <= 0)
+                    {
+                        valor_1 = 0;
+                    }
+                    else
+                    {
+                        valor_1 = sdata48Meses_x_Region_valor[i, x] / sdata48Meses_x_Region_unid[i, x];
+                    }
+
+                    Actualizar_BD("Cosmeticos", "SUMA", "PPU (DOL)", Mercado_, "0. Cosmeticos", "PPU (DOL)",
+                        "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+
+                    // COPIAN VALORES CON VARIABLES INVERTIDAS
+                    Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                        "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
 
-            ///* INSERTANDO VALORES DEL TOTAL PROVINCIA A BD ZOHO*/
-            //for (int i = 0; i < sdata48Meses_x_Capital_Provincia.GetLength(1); i++)
-            //{
-            //    if (i < 9)
-            //    {
-            //        Periodo = "0" + (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //    }
-            //    else
-            //    {
-            //        Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //    }
-            //    Actualizar_BD("Cosmeticos", "SUMA", "UNIDADES", "2. Ciudades", "0. Cosmeticos", "UNIDADES (%)",
-            //        "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[1, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
-            //    // LOS MISMOS VALORES DEL SP ANTERIOR PERO ACTUALIZANDO V1 Y CIUDAD
-            //    Actualizar_BD("Ciudades", "SUMA", "UNIDADES", "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)",
-            //        "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[1, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
-            //}
+            /* INSERTANDO VALORES - PPU TOTAL PAIS A BD */
+            for (int x = 0; x < sdata48Meses_x_valor.GetLength(1); x++) // LEYENDO LAS COLUMNAS DEL ARRAY
+            {
+                if (x < 9)
+                {
+                    Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                }
+                else
+                {
+                    Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                }
+                if (sdata48Meses_x_valor[0, x] <= 0)
+                {
+                    valor_1 = 0;
+                }
+                else
+                {
+                    valor_1 = sdata48Meses_x_valor[0, x] / sdata48Meses_x_unid[0, x];
+                }
+                Actualizar_BD("Consolidado", "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                        "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+            }
 
-            //for (int i = 0; i < sdata48Meses_x_Total.GetLength(1); i++)
-            //{
-            //    if (i < 9)
-            //    {
-            //        Periodo = "0" + (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //    }
-            //    else
-            //    {
-            //        Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //    }
-            //    //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
-            //    /* INSERTANDO VALORES DEL TOTAL PAIS A BD ZOHO*/
-            //    Actualizar_BD("Consolidado", "SUMA", "UNIDADES", "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)",
-            //        "MENSUAL", Periodo, sdata48Meses_x_Total[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
-            //}
-
-            //for (int id = 0; id < 5; id++)
-            //{
-            //    switch (id)
-            //    {
-            //        case 0:
-            //            NSE_ = "Alto";
-            //            break;
-            //        case 1:
-            //            NSE_ = "Medio";
-            //            break;
-            //        case 2:
-            //            NSE_ = "Medio Bajo";
-            //            break;
-            //        case 3:
-            //            NSE_ = "Bajo";
-            //            break;
-            //        case 4:
-            //            NSE_ = "Muy Bajo";
-            //            break;
-            //    }
-
-            //    for (int i = 0; i < sdata48Meses_x_Region_NSE.GetLength(1); i++)
-            //    {
-            //        if (i < 9)
-            //        {
-            //            Periodo = "0" + (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //        }
-            //        else
-            //        {
-            //            Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
-            //        }
-            //        //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
-            //        /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-            //        Actualizar_BD(NSE_, "SUMA", "UNIDADES", "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo,
-            //            sdata48Meses_x_Region_NSE[id, i] + sdata48Meses_x_Region_NSE[id + 5, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
-            //    }
-            //}
         }
 
 
