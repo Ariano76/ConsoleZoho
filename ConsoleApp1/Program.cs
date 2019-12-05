@@ -17,7 +17,7 @@ namespace ConsoleApp1
             
             DateTime HoraInicio;
             TimeSpan HoraFin;
-            int xAño, xMes, xCiudad;
+            int xAño, xMes;
             string xMess;
             var obj = new BD_Zoho();
             var objHogar = new BL_HOGARES();
@@ -54,7 +54,7 @@ namespace ConsoleApp1
             Console.WriteLine($"Hora de Inicio: {HoraInicio}");
             
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
-            xCiudad = 0;
+            
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
             
             Console.WriteLine($"{xPeriodos48Meses[0]}");
@@ -86,6 +86,7 @@ namespace ConsoleApp1
             objUnidades.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPOS
 
             objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
 
 
             /////* LEYENDO LOS TIPOS ALMACENADOS EN UN ARREGLO*/

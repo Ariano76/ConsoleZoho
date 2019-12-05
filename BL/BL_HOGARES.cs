@@ -123,7 +123,8 @@ namespace BL
                                 Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Mercado_, "0. Cosmeticos", "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Mercado_, "0. Cosmeticos", "HOGARES",
+                            Add_Dapper(NSE_, "SUMA", "HOGARES", Mercado_, "0. Cosmeticos", "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                         }
                         rows++;
@@ -143,11 +144,13 @@ namespace BL
                         //OBTIENE TOTAL PAIS Y LO ALMACENA EN ARRAY sdata48Meses_x_Total
                         sdata48Meses_x_Total[0, i] = sdata48Meses_x_Capital_Provincia[0, i] + sdata48Meses_x_Capital_Provincia[1, i];
 
-                        Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "1. Capital", "0. Cosmeticos", "HOGARES",
+                        //Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "1. Capital", "0. Cosmeticos", "HOGARES",
+                        Add_Dapper("Cosmeticos", "SUMA", "HOGARES", "1. Capital", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         
                         // GUARDANDO VALORES CON VARIABLES INVERTIDAS - CAPITAL
-                        Actualizar_BD("Lima", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                        //Actualizar_BD("Lima", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                            Add_Dapper("Lima", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                     }
 
@@ -162,11 +165,13 @@ namespace BL
                         {
                             Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
                         }
-                        Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "2. Ciudades", "0. Cosmeticos", "HOGARES",
+                        //Actualizar_BD("Cosmeticos", "SUMA", "HOGARES", "2. Ciudades", "0. Cosmeticos", "HOGARES",
+                            Add_Dapper("Cosmeticos", "SUMA", "HOGARES", "2. Ciudades", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[1, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         
                         // GUARDANDO VALORES CON VARIABLES INVERTIDAS - CIUDADES
-                        Actualizar_BD("Ciudades", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                        //Actualizar_BD("Ciudades", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                            Add_Dapper("Ciudades", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Capital_Provincia[1, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                     }
 
@@ -181,7 +186,8 @@ namespace BL
                             Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
                         }
                         /* INSERTANDO VALORES DEL TOTAL PAIS A BD ZOHO*/
-                        Actualizar_BD("Consolidado", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                        //Actualizar_BD("Consolidado", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                            Add_Dapper("Consolidado", "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
                             "MENSUAL", Periodo, sdata48Meses_x_Total[0, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                     }
 
@@ -217,7 +223,8 @@ namespace BL
                                 Periodo = (i + 1) + ". " + BD_Zoho.sCabecera48Meses[i];
                             }
                             /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_NSE[id, i] + sdata48Meses_x_Region_NSE[id + 5, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
                     }
@@ -303,10 +310,12 @@ namespace BL
                                 Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                             // CREANDO UNA COPIA DE LOS DATOS PERO CON VALOR "0. Consolidado"  EN LA VARIABLE MERCADO
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                         }
                         rows++;
@@ -342,10 +351,12 @@ namespace BL
                             }
                             //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                             /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Categoria_Mes[id, i] + sdata48Meses_x_Region_Categoria_Mes[id + 3, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                             // CREANDO UNA COPIA DE LOS DATOS PERO CON VALOR "0. Consolidado"  EN LA VARIABLE MERCADO
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Categoria_Mes[id, i] + sdata48Meses_x_Region_Categoria_Mes[id + 3, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
                     }
@@ -429,10 +440,12 @@ namespace BL
                                 Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                             // INSERTANDO DATOS DONDE LOS VALORES EN MODALIDAD APARECE COMO '0. Cosmeticos'
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                         }
                         rows++;
@@ -464,10 +477,12 @@ namespace BL
                             }
                             //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                             /* INSERTANDO VALORES POR MODALIDAD A TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Modalidad_Mes[id, i] + sdata48Meses_x_Region_Modalidad_Mes[id + 2, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                             // INSERTANDO DATOS DONDE LOS VALORES EN MODALIDAD APARECE COMO '0. Cosmeticos'
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Modalidad_Mes[id, i] + sdata48Meses_x_Region_Modalidad_Mes[id + 2, i], int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
                     }
@@ -571,7 +586,8 @@ namespace BL
                                 Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                         }
                         rows++;
@@ -622,7 +638,8 @@ namespace BL
                             }
                             //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                             /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Categoria_NSE_Mes[id, i + 2] + sdata48Meses_x_Region_Categoria_NSE_Mes[id + 15, i + 2],
                                 int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
@@ -725,10 +742,12 @@ namespace BL
                                 Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                         }
                         rows++;
@@ -775,11 +794,13 @@ namespace BL
                             }
                             //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                             /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Categoria_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Categoria_Modalidad_Mes[id + 6, i + 2],
                                 int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Categoria_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Categoria_Modalidad_Mes[id + 6, i + 2],
                                 int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
@@ -957,7 +978,8 @@ namespace BL
                                     Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                    Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                     "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                                 ////DUPLICANDO VALORES CON VARIABLES INVERTIDAS
                                 ////Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
@@ -1028,7 +1050,8 @@ namespace BL
                                 }
                                 //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                                 /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                                Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                    Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                     sdata48Meses_x_Region_Tipos_Nse_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Nse_Mes[id + 25, i + 2],
                                     int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                                 //////DUPLICANDO VALORES CON VARIABLES INVERTIDAS
@@ -1149,7 +1172,8 @@ namespace BL
                                     Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                    Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                     "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                                 ////DUPLICANDO VALORES CON VARIABLES INVERTIDAS
                                 ////Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
@@ -1253,7 +1277,8 @@ namespace BL
                                     Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[(i+1) - 3];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                                //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                                    Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
                                     "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[(i+1) - 3].Substring(0, 4)));
                             }
                             rows++;
@@ -1368,10 +1393,12 @@ namespace BL
                                 Periodo = (i - 2) + ". " + BD_Zoho.sCabecera48Meses[i - 3];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", Ciudad_, MercadoV1_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 3].Substring(0, 4)));
                         }
                         rows++;
@@ -1430,11 +1457,13 @@ namespace BL
                             }
                             //Debug.WriteLine(sdata48Meses_x_Total[0, i]);                       
                             /* INSERTANDO VALORES DE NSE TOTAL PAIS A BD ZOHO*/
-                            Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(NSE_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Modalidad_Mes[id + 12, i + 2],
                                 int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
+                                Add_Dapper(V1_, "SUMA", "HOGARES", "0. Consolidado", MercadoV1_, "HOGARES", "MENSUAL", Periodo,
                                 sdata48Meses_x_Region_Tipos_Modalidad_Mes[id, i + 2] + sdata48Meses_x_Region_Tipos_Modalidad_Mes[id + 12, i + 2],
                                 int.Parse(BD_Zoho.sCabecera48Meses[i].Substring(0, 4)));
                         }
@@ -1537,10 +1566,12 @@ namespace BL
                                 Periodo = (i - 1) + ". " + BD_Zoho.sCabecera48Meses[i - 2];
                             }
 
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", Ciudad_, "0. Cosmeticos", "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", Ciudad_, Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 2].Substring(0, 4)));
                         }
                         rows++;
@@ -1632,10 +1663,12 @@ namespace BL
                                 Periodo = i  + ". " + BD_Zoho.sCabecera48Meses[i - 1];
                             }
 
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", "0. Consolidado", "0. Cosmeticos", "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 1].Substring(0, 4)));
                             // DUPLICANDO VALORES CON VARIABLES INVERTIDAS
-                            Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                            //Actualizar_BD(V1_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
+                                Add_Dapper(V1_, "SUMA", "HOGARES", "0. Consolidado", Mercado_, "HOGARES",
                                 "MENSUAL", Periodo, valor, int.Parse(BD_Zoho.sCabecera48Meses[i - 1].Substring(0, 4)));
                         }
                         rows++;

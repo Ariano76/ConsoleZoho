@@ -31,8 +31,7 @@ namespace BL
 
 
         private readonly DateTime[] Periodos = new DateTime[7];
-        string sSource = "Dashboard ZOHO";
-        string sLog = "ZOHO";
+        string sSource = "Dashboard ZOHO";        
         string NSE_, Ciudad_, Mercado_, Periodo;
         int xMesFin;
         public string resultadoBD;
