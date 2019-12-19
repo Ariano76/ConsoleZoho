@@ -33,7 +33,7 @@ namespace BL
 
         private readonly DateTime[] Periodos = new DateTime[7];
         string NSE_, Ciudad_, Mercado_, Periodo;
-        int xMesFin;
+        //int xMesFin;
         public string resultadoBD;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
