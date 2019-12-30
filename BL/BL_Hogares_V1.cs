@@ -224,6 +224,7 @@ namespace BL
 
             }
         }
+
         private void Add_Dapper(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, string _Periodo, double _Datos, int _Año)
         {
             using (IDbConnection dbDapper = new  SqlConnection(ConfigurationManager.ConnectionStrings["Zoho"].ConnectionString))
