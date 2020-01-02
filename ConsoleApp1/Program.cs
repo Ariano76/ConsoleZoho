@@ -335,6 +335,36 @@ namespace ConsoleApp1
             Tiempo_Proceso("SHARE VALOR NSE Y TIPO", HoraStart);
             Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE 
+            Tiempo_Proceso("SHARE VALOR NSE", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD 
+            Tiempo_Proceso("SHARE VALOR CIUDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, REGION Y MODALIDAD
+            Tiempo_Proceso("SHARE VALOR CATEGORIA REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y REGION
+            Tiempo_Proceso("SHARE VALOR CATEGORIA Y REGION ", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y MODALIDAD
+            Tiempo_Proceso("SHARE VALOR CATEGORIA Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA
+            Tiempo_Proceso("SHARE VALOR CATEGORIA", HoraStart);
+            Record_Progreso();
+
 
 
 
