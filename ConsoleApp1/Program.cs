@@ -365,6 +365,17 @@ namespace ConsoleApp1
             Tiempo_Proceso("SHARE VALOR CATEGORIA", HoraStart);
             Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
+            Tiempo_Proceso("SHARE VALOR TIPO, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareValor.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION
+            Tiempo_Proceso("SHARE VALOR TIPO Y REGION", HoraStart);
+            Record_Progreso();
+
+
 
 
 
