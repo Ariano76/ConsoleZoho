@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD_Zoho.cs" />
+    <Compile Include="BL_Gasto_Medio_Dolares.cs" />
     <Compile Include="BL_HOGARES.cs" />
     <Compile Include="BL_Hogares_V1.cs" />
     <Compile Include="BL_PPU_Dolares.cs" />

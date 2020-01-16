@@ -75,15 +75,15 @@ namespace BL
             double valor_1;
 
             string consulta_1 = @"SELECT REGION, NSE, " + @Cab +
-                " FROM ( SELECT PERIODO, REGION, NSE, FACTOR_UNIDAD_VALORIZADO/1000000 AS FACTOR_UNIDAD_VALORIZADO FROM BASE_REGIONES " +
-                "WHERE IDPERIODO IN (" + @xPeriodos + ") AND IDMONEDA = 1 ) AS SourceTable " +
+                " FROM ( SELECT PERIODO, REGION, NSE, SUM(FACTOR_UNIDAD_VALORIZADO)/1000000 AS FACTOR_UNIDAD_VALORIZADO FROM BASE_REGIONES " +
+                "WHERE IDPERIODO IN (" + @xPeriodos + ") AND IDMONEDA = 1 GROUP BY PERIODO, REGION, NSE) AS SourceTable " +
                 "PIVOT (SUM(FACTOR_UNIDAD_VALORIZADO) " +
                 "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
                 "ORDER BY REGION,NSE";
 
             string consulta_2 = @"SELECT REGION, NSE, " + @Cab +
-                " FROM ( SELECT PERIODO, REGION, NSE, FACTOR_UNIDAD/1000000 AS FACTOR_UNIDAD FROM BASE_REGIONES " +
-                "WHERE IDPERIODO IN (" + @xPeriodos + ") AND IDMONEDA = 1 ) AS SourceTable " +
+                " FROM ( SELECT PERIODO, REGION, NSE, SUM(FACTOR_UNIDAD)/1000000 AS FACTOR_UNIDAD FROM BASE_REGIONES " +
+                "WHERE IDPERIODO IN (" + @xPeriodos + ") AND IDMONEDA = 1 GROUP BY PERIODO, REGION, NSE) AS SourceTable " +
                 "PIVOT (SUM(FACTOR_UNIDAD) " +
                 "FOR PERIODO IN (" + @Cab + ")) AS pvt " +
                 "ORDER BY REGION,NSE";
