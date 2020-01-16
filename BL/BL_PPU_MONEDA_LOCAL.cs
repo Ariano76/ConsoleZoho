@@ -1063,7 +1063,7 @@ namespace BL
                             Actualizar_BD(NSE_, "SUMA", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             // DUPLICANDO VALORES CON DIFERENTE MERCADO_
-                            Actualizar_BD(NSE_, "SUMA", "PPU (ML)", "0. Consolidado", "0, Cosmeticos", "PPU (ML)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
