@@ -31,6 +31,7 @@ namespace ConsoleApp1
             var objPPUDol = new BL_PPU_Dolares();
             var objPPUML = new BL_PPU_Moneda_Local();
             var objShareValor = new BL_Share_Dolares();
+            var objShareUnidad = new BL_Share_Unidades();
 
 
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
@@ -93,215 +94,215 @@ namespace ConsoleApp1
 
             //** RESULTADOS HOGARES **//
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR NSE
-            //Tiempo_Proceso("HOGARES CIUDAD Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR NSE
+            Tiempo_Proceso("HOGARES CIUDAD Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR CATEGORIA
-            //Tiempo_Proceso("HOGARES CIUDAD Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR CATEGORIA
+            Tiempo_Proceso("HOGARES CIUDAD Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
-            //Tiempo_Proceso("HOGARES CIUDAD Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
+            Tiempo_Proceso("HOGARES CIUDAD Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y NSE
-            //Tiempo_Proceso("HOGARES CIUDAD, CATEGORIA Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y NSE
+            Tiempo_Proceso("HOGARES CIUDAD, CATEGORIA Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD
-            //Tiempo_Proceso("HOGARES CIUDAD, CATEGORIA Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, CATEGORIA Y MODALIDAD
+            Tiempo_Proceso("HOGARES CIUDAD, CATEGORIA Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y NSE
-            //Tiempo_Proceso("HOGARES CIUDAD, TIPO Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y NSE
+            Tiempo_Proceso("HOGARES CIUDAD, TIPO Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y MODALIDAD            
-            //Tiempo_Proceso("HOGARES CIUDAD, TIPOS Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y MODALIDAD            
+            Tiempo_Proceso("HOGARES CIUDAD, TIPOS Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y TOTAL
-            //Tiempo_Proceso("HOGARES CIUDAD, TIPOS Y REGION", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y TOTAL
+            Tiempo_Proceso("HOGARES CIUDAD, TIPOS Y REGION", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y TOTAL
-            //Tiempo_Proceso("HOGARES CIUDAD Y TIPOS", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objHogar.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, TIPOS Y TOTAL
+            Tiempo_Proceso("HOGARES CIUDAD Y TIPOS", HoraStart);
+            Record_Progreso();
 
             ////** UNIDADES **//
-            //HoraStart = DateTime.Now;
-            //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            //Tiempo_Proceso("UNIDADES CIUDAD Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objUnidades.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("UNIDADES CIUDAD Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA
-            //Tiempo_Proceso("UNIDADES CIUDAD Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objUnidades.Leer_Ultimos_48_Meses_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA
+            Tiempo_Proceso("UNIDADES CIUDAD Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
-            //Tiempo_Proceso("UNIDADES CIUDAD Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objUnidades.Leer_Ultimos_48_Meses_CIUDAD_CANAL_VENTA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD DE VENTA
+            Tiempo_Proceso("UNIDADES CIUDAD Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPOS
-            //Tiempo_Proceso("UNIDADES CIUDAD Y TIPOS", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objUnidades.Leer_Ultimos_48_Meses_CIUDAD_TIPOS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPOS
+            Tiempo_Proceso("UNIDADES CIUDAD Y TIPOS", HoraStart);
+            Record_Progreso();
 
             ////****PPU DOLARES**** //
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            //Tiempo_Proceso("PPU (DOL) CIUDAD Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("PPU (DOL) CIUDAD Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            //Tiempo_Proceso("PPU (DOL) CIUDAD Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("PPU (DOL) CIUDAD Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y CATEGORIA
-            //Tiempo_Proceso("PPU (DOL) NSE, CIUDAD Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y CATEGORIA
+            Tiempo_Proceso("PPU (DOL) NSE, CIUDAD Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (DOL) NSE Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (DOL) NSE Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, REGION Y MODALIDAD
-            //Tiempo_Proceso("PPU (DOL) CATEGORIA, REGION Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, REGION Y MODALIDAD
+            Tiempo_Proceso("PPU (DOL) CATEGORIA, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y MODALIDAD
-            //Tiempo_Proceso("PPU (DOL) CATEGORIA Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y MODALIDAD
+            Tiempo_Proceso("PPU (DOL) CATEGORIA Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y REGION
-            //Tiempo_Proceso("PPU (DOL) CATEGORIA Y REGION", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y REGION
+            Tiempo_Proceso("PPU (DOL) CATEGORIA Y REGION", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
-            //Tiempo_Proceso("PPU (DOL) CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
+            Tiempo_Proceso("PPU (DOL) CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y TIPO
-            //Tiempo_Proceso("PPU (DOL) NSE, CIUDAD Y TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y TIPO
+            Tiempo_Proceso("PPU (DOL) NSE, CIUDAD Y TIPO", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPO
-            //Tiempo_Proceso("PPU (DOL) NSE Y TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPO
+            Tiempo_Proceso("PPU (DOL) NSE Y TIPO", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
-            //Tiempo_Proceso("PPU (DOL) TIPO, REGION Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
+            Tiempo_Proceso("PPU (DOL) TIPO, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION
-            //Tiempo_Proceso("PPU (DOL) TIPO Y REGION", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION
+            Tiempo_Proceso("PPU (DOL) TIPO Y REGION", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, MODALIDAD
-            //Tiempo_Proceso("PPU (DOL) TIPO Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, MODALIDAD
+            Tiempo_Proceso("PPU (DOL) TIPO Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUDol.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO
-            //Tiempo_Proceso("PPU (DOL) TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUDol.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO
+            Tiempo_Proceso("PPU (DOL) TIPO", HoraStart);
+            Record_Progreso();
 
-            //// **** PPU SOLES **** //
+            // **** PPU SOLES **** //
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            //Tiempo_Proceso("PPU (ML) CIUDAD Y NSE", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("PPU (ML) CIUDAD Y NSE", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            //Tiempo_Proceso("PPU (ML) CIUDAD Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("PPU (ML) CIUDAD Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) NSE, CIUDAD Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, REGION Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) NSE, CIUDAD Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) NSE Y CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) NSE Y CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) CATEGORIA, REGION Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) CATEGORIA, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) CATEGORIA Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) CATEGORIA Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) CATEGORIA Y REGION", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) CATEGORIA Y REGION", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) CATEGORIA", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) CATEGORIA", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) NSE, CIUDAD Y TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) NSE, CIUDAD Y TIPO", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) NSE Y TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) NSE Y TIPO", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) TIPO, REGION Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) TIPO, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) TIPO Y REGION", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) TIPO Y REGION", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) TIPO Y MODALIDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) TIPO Y MODALIDAD", HoraStart);
+            Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPPUML.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            //Tiempo_Proceso("PPU (ML) TIPO", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPPUML.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("PPU (ML) TIPO", HoraStart);
+            Record_Progreso();
 
             //****SHARE VALOR **** //
 
@@ -390,6 +391,92 @@ namespace ConsoleApp1
             Tiempo_Proceso("SHARE VALOR MODALIDAD", HoraStart);
             Record_Progreso();
 
+            ////****SHARE UNIDADES **** //
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD Y NSE
+            Tiempo_Proceso("SHARE UNIDAD CIUDAD Y NSE", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD, MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD CIUDAD Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD, CATEGORIA
+            Tiempo_Proceso("SHARE UNIDAD NSE, CIUDAD Y CATEGORIA", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD, TIPO
+            Tiempo_Proceso("SHARE UNIDAD NSE, CIUDAD Y TIPO", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("SHARE UNIDAD NSE Y CATEGORIA", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPO
+            Tiempo_Proceso("SHARE UNIDAD NSE Y TIPO", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE 
+            Tiempo_Proceso("SHARE UNIDAD NSE", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD 
+            Tiempo_Proceso("SHARE UNIDAD CIUDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CATEGORIA_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, REGION Y MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD CATEGORIA REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y REGION
+            Tiempo_Proceso("SHARE UNIDAD CATEGORIA Y REGION ", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA Y MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD CATEGORIA Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA
+            Tiempo_Proceso("SHARE UNIDAD CATEGORIA", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_TIPO_REGION_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD TIPO, REGION Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION
+            Tiempo_Proceso("SHARE UNIDAD TIPO Y REGION", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD TIPO Y MODALIDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y TOTAL
+            Tiempo_Proceso("SHARE UNIDAD TIPO Y TOTAL", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objShareUnidad.Leer_Ultimos_48_Meses_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD
+            Tiempo_Proceso("SHARE UNIDAD MODALIDAD", HoraStart);
+            Record_Progreso();
 
 
 
