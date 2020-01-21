@@ -61,6 +61,7 @@
     <Compile Include="BL_Share_Dolares.cs" />
     <Compile Include="BL_Share_Unidades.cs" />
     <Compile Include="BL_Unidades.cs" />
+    <Compile Include="BL_Unidades_Promedio_Hogar.cs" />
     <Compile Include="cls_BD_Zoho.cs" />
     <Compile Include="Output_48_Meses.cs" />
     <Compile Include="Procesos_Genericos.cs" />

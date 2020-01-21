@@ -580,7 +580,6 @@ namespace ConsoleApp1
 
             #endregion
 
-
             #region GASTO MEDIO MONEDA LOCAL
 
             HoraStart = DateTime.Now;
