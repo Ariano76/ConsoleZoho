@@ -33,6 +33,7 @@ namespace ConsoleApp1
             var objShareValor = new BL_Share_Dolares();
             var objShareUnidad = new BL_Share_Unidades();
             var objGastoMedioDol = new BL_Gasto_Medio_Dolares();
+            var objGastoMedioML = new BL_Gasto_Medio_ML();
 
 
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
@@ -492,91 +493,180 @@ namespace ConsoleApp1
 
             #region GASTO MEDIO DOLARES
 
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y CIUDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y CATEGORIA
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE, CIUDAD Y CATEGORIA", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y TIPOS
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE, CIUDAD Y TIPOS", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y CATEGORIA", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y TIPOS", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            //Tiempo_Proceso("GASTO MEDIO DOLARES NSE", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES TIPO, CIUDAD Y MODALIDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION 
+            //Tiempo_Proceso("GASTO MEDIO DOLARES TIPO Y CIUDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES TIPO Y MODALIDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO 
+            //Tiempo_Proceso("GASTO MEDIO DOLARES TIPO", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES CIUDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, CIUDAD Y MODALIDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA, CIUDAD Y MODALIDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y CIUDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA Y CIUDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y MODALIDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA Y MODALIDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIAS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
+            //Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIAS", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD Y CIUDAD
+            //Tiempo_Proceso("GASTO MEDIO DOLARES MODALIDAD Y CIUDAD", HoraStart);
+            //Record_Progreso();
+
+            //HoraStart = DateTime.Now;
+            //objGastoMedioDol.Leer_Ultimos_48_Meses_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD 
+            //Tiempo_Proceso("GASTO MEDIO DOLARES MODALIDAD", HoraStart);
+            //Record_Progreso();
+
+            #endregion
+
+
+            #region GASTO MEDIO MONEDA LOCAL
+
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y CIUDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE Y CIUDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y CATEGORIA
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE, CIUDAD Y CATEGORIA", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y CATEGORIA
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE, CIUDAD Y CATEGORIA", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y TIPOS
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE, CIUDAD Y TIPOS", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y TIPOS
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE, CIUDAD Y TIPOS", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y CATEGORIA", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CATEGORIA
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE Y CATEGORIA", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE Y TIPOS", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE Y TIPOS", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
-            Tiempo_Proceso("GASTO MEDIO DOLARES NSE", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL NSE", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES TIPO, CIUDAD Y MODALIDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_TIPO_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO, REGION Y MODALIDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL TIPO, CIUDAD Y MODALIDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION 
-            Tiempo_Proceso("GASTO MEDIO DOLARES TIPO Y CIUDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_TIPO_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION 
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL TIPO Y CIUDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES TIPO Y MODALIDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_TIPO_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL TIPO Y MODALIDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO 
-            Tiempo_Proceso("GASTO MEDIO DOLARES TIPO", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO 
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL TIPO", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES CIUDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL CIUDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, CIUDAD Y MODALIDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA, CIUDAD Y MODALIDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, CIUDAD Y MODALIDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL CATEGORIA, CIUDAD Y MODALIDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y CIUDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA Y CIUDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y CIUDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL CATEGORIA Y CIUDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y MODALIDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIA Y MODALIDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y MODALIDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL CATEGORIA Y MODALIDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_CATEGORIAS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
-            Tiempo_Proceso("GASTO MEDIO DOLARES CATEGORIAS", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_CATEGORIAS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL CATEGORIAS", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD Y CIUDAD
-            Tiempo_Proceso("GASTO MEDIO DOLARES MODALIDAD Y CIUDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD Y CIUDAD
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL MODALIDAD Y CIUDAD", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objGastoMedioDol.Leer_Ultimos_48_Meses_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD 
-            Tiempo_Proceso("GASTO MEDIO DOLARES MODALIDAD", HoraStart);
+            objGastoMedioML.Leer_Ultimos_48_Meses_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD 
+            Tiempo_Proceso("GASTO MEDIO MONEDALOCAL MODALIDAD", HoraStart);
             Record_Progreso();
-
 
             #endregion
 
