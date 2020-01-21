@@ -86,7 +86,7 @@ namespace BL
 
             double valor_1;
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_REGION_NSE"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_REGION_NSE"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
@@ -223,7 +223,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_NSE_REGION_CATEGORIA"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_NSE_REGION_CATEGORIA"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -372,7 +372,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_NSE_REGION_TIPOS"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_NSE_REGION_TIPOS"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -575,7 +575,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_NSE_CATEGORIA"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_NSE_CATEGORIA"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -715,7 +715,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_NSE_TIPOS"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_NSE_TIPOS"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -827,7 +827,7 @@ namespace BL
 
             double valor_1;
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_NSE"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_NSE"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
@@ -970,7 +970,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_TIPO_REGION_MODALIDAD"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TIPO_REGION_MODALIDAD"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1116,7 +1116,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_TOTAL_REGION_TIPOS"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_REGION_TIPOS"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1251,7 +1251,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_TIPO_MODALIDAD"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TIPO_MODALIDAD"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1388,7 +1388,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_TOTAL_TIPOS"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_TIPOS"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1484,7 +1484,7 @@ namespace BL
 
             double valor_1;
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_REGION"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_REGION"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
@@ -1618,7 +1618,7 @@ namespace BL
                 }
 
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_CATEG_REGION_MODALIDAD"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_CATEG_REGION_MODALIDAD"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1753,7 +1753,7 @@ namespace BL
                 }
 
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_CATEG_REGION"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_CATEG_REGION"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1877,7 +1877,7 @@ namespace BL
                 }
 
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_CATEG_MODALIDAD"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_CATEG_MODALIDAD"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, item);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1984,7 +1984,7 @@ namespace BL
 
             double valor_1;
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_CATEGORIAS"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_CATEGORIAS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
@@ -2094,7 +2094,7 @@ namespace BL
             /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR REGIONES Y NSE (CAPITAL Y PROVINCIA Y NSE) */
 
             double valor_1;
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_REGION_MODALIDAD"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_REGION_MODALIDAD"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
@@ -2205,7 +2205,7 @@ namespace BL
             /* ESTE PROCEDIMIENTO RECUPERA LA DATA EN FORMATO PIVOT POR REGIONES Y NSE (CAPITAL Y PROVINCIA Y NSE) */
 
             double valor_1;
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_VALOR_ML_TOTAL_MODALIDAD"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_MODALIDAD"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
