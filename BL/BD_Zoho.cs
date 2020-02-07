@@ -45,7 +45,7 @@ namespace BL
         {
             // To avoid storing the connection string in your code, 
             // you can retrieve it from a configuration file.
-            return "Data Source=PEDT0108243; Initial Catalog=BIP; User Id=Procesamiento; Password=P@ssw0rd";
+            return "Data Source=PELT0113401; Initial Catalog=BIP; User Id=Procesamiento; Password=P@ssw0rd";
         }
 
         public void Periodo_Actual(int pAño, int pMes)

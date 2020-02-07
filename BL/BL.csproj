@@ -56,6 +56,7 @@
     <Compile Include="BL_Gasto_Medio_ML.cs" />
     <Compile Include="BL_HOGARES.cs" />
     <Compile Include="BL_Hogares_V1.cs" />
+    <Compile Include="BL_Penetracion_Hogar.cs" />
     <Compile Include="BL_PPU_Dolares.cs" />
     <Compile Include="BL_PPU_MONEDA_LOCAL.cs" />
     <Compile Include="BL_Share_Dolares.cs" />
