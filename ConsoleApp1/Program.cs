@@ -12,13 +12,14 @@ namespace ConsoleApp1
     {
         public static DateTime HoraInicio;
         public static DateTime HoraStart;
-
+        
         public static int Total_Record = 0;
         public static int Records = 0;
 
         static void Main(string[] args)
         {
-            int[] Codigo_Tipos_Importantes = { 158, 161, 215, 202, 237, 226 };           
+            int[] Codigo_Tipos_Importantes = { 158, 161, 215, 202, 237, 226 };
+             
             TimeSpan HoraFin;
             int xAño, xMes;
             string xMess;
@@ -35,21 +36,24 @@ namespace ConsoleApp1
             var objGastoMedioDol = new BL_Gasto_Medio_Dolares();
             var objGastoMedioML = new BL_Gasto_Medio_ML();
             var objUnidadesPromedioHogar = new BL_Unidades_Promedio_Hogar();
-            var objPenetracines = new BL_Penetracion_Hogar();
+            var objPenetraciones = new BL_Penetracion_Hogar();
 
 
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
-            xAño = int.Parse(Console.ReadLine());
+            xAño = int.Parse(Console.ReadLine());           
+
             Console.WriteLine("Por favor Ingrese el Mes de Proceso :");
             xMes = int.Parse(Console.ReadLine());
             xMess = xMes.ToString();
             DateTime[] xFecha = obj.Restar_Meses_Fechas(xAño, xMes);
+           
 
             obj.Periodo_Actual(xAño, xMes);
             Console.WriteLine(obj.sPeriodoActual[0]);
 
-            Console.WriteLine($"La fecha de un año atras es: {xFecha[0].ToShortDateString()}\n" +
+            Console.WriteLine($"La fecha un año atras es: {xFecha[0].ToShortDateString()}\n" +
                 $"La fecha dos años atras: {xFecha[1].ToShortDateString()}\n" +
+                $"La fecha tres años atras: {xFecha[7].ToShortDateString()}\n" +
                 $"La fecha seis meses atras: {xFecha[2].ToShortDateString()}\n" +
                 $"La fecha seis meses atras dos años: {xFecha[3].ToShortDateString()}\n" +
                 $"La fecha tres meses atras: {xFecha[4].ToShortDateString()}\n" +
@@ -68,10 +72,12 @@ namespace ConsoleApp1
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
 
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
+            string[] xPeriodos_Inicio_Fin = obj.Obtener_Ultimos_48_meses_Factores_Capital(xFecha[6].Year, xFecha[6].Month, xAño, xMes);
 
             Console.WriteLine($"{xPeriodos48Meses[0]}");
-
             Console.WriteLine($"{xPeriodos48Meses[1]}\n");
+            Console.WriteLine($"Tabla Factor Cabecera : {xPeriodos_Inicio_Fin[0]}\n");
+            Console.WriteLine($"Tabla Factor Periodos : {xPeriodos_Inicio_Fin[1]}\n");
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
 
@@ -763,19 +769,25 @@ namespace ConsoleApp1
             #region PENETRACIONES HOGAR
 
             HoraStart = DateTime.Now;
-            objPenetracines.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
             Tiempo_Proceso("PENETRACION HOGAR NSE, CIUDAD Y CATEGORIA", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objPenetracines.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y TIPOS
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE_CIUDAD_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE, CIUDAD Y TIPOS
             Tiempo_Proceso("PENETRACION HOGAR NSE, CIUDAD Y TIPOS", HoraStart);
             Record_Progreso();
 
-            //HoraStart = DateTime.Now;
-            //objPenetracines.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y CIUDAD 
-            //Tiempo_Proceso("PENETRACION HOGAR NSE Y CIUDAD", HoraStart);
-            //Record_Progreso();
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1], xPeriodos_Inicio_Fin[0], xPeriodos_Inicio_Fin[1]); // RESULTADOS POR NSE Y CIUDAD 
+            Tiempo_Proceso("PENETRACION HOGAR NSE Y CIUDAD", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD Y CIUDAD
+            Tiempo_Proceso("PENETRACION HOGAR MODALIDAD Y CIUDAD", HoraStart);
+            Record_Progreso();
+
 
 
             //HoraStart = DateTime.Now;
@@ -836,11 +848,6 @@ namespace ConsoleApp1
             //HoraStart = DateTime.Now;
             //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_CATEGORIAS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
             //Tiempo_Proceso("PENETRACION HOGAR CATEGORIAS", HoraStart);
-            //Record_Progreso();
-
-            //HoraStart = DateTime.Now;
-            //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR MODALIDAD Y CIUDAD
-            //Tiempo_Proceso("PENETRACION HOGAR MODALIDAD Y CIUDAD", HoraStart);
             //Record_Progreso();
 
             //HoraStart = DateTime.Now;

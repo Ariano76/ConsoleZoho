@@ -20,6 +20,10 @@ namespace BL
         public double[] sShareValor ;
         public static readonly string[] sPeriodos48Meses = new string[2];
         public static readonly string[] sCabecera48Meses = new string[48];
+        
+        public static readonly string[] sPeriodos48MesesFactor = new string[2];
+        //public static readonly string[] sCabecera48MesesFactorCapital = new string[48];       
+        //public static readonly string[] sCabecera48MesesFactorCiudad = new string[48];
 
         public double[,] sdata48Meses_x_Region_NSE = new double[10, 48];
         public double[,] sdata48Meses_x_Capital_Provincia = new double[2, 48];
@@ -30,10 +34,11 @@ namespace BL
         public double[,] sdata48Meses_x_Region_Tipos_Mes = new double[12, 48];
 
 
-        private readonly DateTime[] Periodos = new DateTime[7];
+        private readonly DateTime[] Periodos = new DateTime[8];
         string sSource = "Dashboard ZOHO";        
         string NSE_, Ciudad_, Mercado_, Periodo;
         int xMesFin;
+        int xMesInicial;
         public string resultadoBD;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
@@ -137,6 +142,7 @@ namespace BL
             //DateTime oneYearAgoToday = DateTime.Now.AddYears(-1);
             DateTime oneYearAgoToday = FechaProceso.AddYears(-1);
             DateTime twoYearAgoToday = FechaProceso.AddYears(-2);
+            DateTime threeYearAgoToday = FechaProceso.AddYears(-3);
             DateTime sixMonthAgoToday = FechaProceso.AddMonths(-5);
             DateTime sixMonthTwoYearAgo = oneYearAgoToday.AddMonths(-5);
             DateTime threeMonthAgoToday = FechaProceso.AddMonths(-2);
@@ -146,6 +152,7 @@ namespace BL
             DateTime weekago = DateTime.Now.AddDays(-7);
             Periodos[0] = oneYearAgoToday;
             Periodos[1] = twoYearAgoToday;
+            Periodos[7] = threeYearAgoToday;
             Periodos[2] = sixMonthAgoToday;
             Periodos[3] = sixMonthTwoYearAgo;
             Periodos[4] = threeMonthAgoToday;
@@ -156,8 +163,7 @@ namespace BL
         }
 
         public string[] Obtener_Ultimos_48_meses(int pAño, int pMes)
-        {
-            int xMesInicial;
+        {            
             StringBuilder xPeriodos = new StringBuilder();
             StringBuilder xPeriodosInt = new StringBuilder();
             DbCommand cmd;
@@ -191,6 +197,45 @@ namespace BL
             sPeriodos48Meses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
             return sPeriodos48Meses;
         }
+
+        public string[] Obtener_Ultimos_48_meses_Factores_Capital(int pAñoFin, int pMesFin, int pAñoIni, int pMesIni)
+        {
+            string xMesInicial;
+            string xMesFinal;
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+            DbCommand cmd;
+            cmd = db.GetSqlStringCommand("SELECT PERIODO FROM FACTORES WHERE AÑO = " + pAñoFin + " AND MES = " + pMesFin + " AND IDCIUDADESTUDIO = 1 ORDER BY IDPOBLACION ASC");
+            xMesInicial = db.ExecuteScalar(cmd).ToString();
+            cmd = db.GetSqlStringCommand("SELECT PERIODO FROM FACTORES WHERE AÑO = " + pAñoIni + " AND MES = " + pMesIni + " AND IDCIUDADESTUDIO = 1 ORDER BY IDPOBLACION ASC");
+            xMesFinal = db.ExecuteScalar(cmd).ToString();
+
+            //// GENERAR CABECERAS TABLA FACTORES
+            //cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM FACTORES WHERE PERIODO >= '" + xMesInicial + "' AND PERIODO <= '" + xMesFinal + "' AND IDCIUDADESTUDIO = 1");
+            //using (IDataReader reader = db.ExecuteReader(cmd))
+            //{
+            //    while (reader.Read())
+            //    {
+            //        xPeriodos.Append("[" + reader[0].ToString() + "],");
+            //    }
+            //}
+            //// GENERAR PERIODOS TABLA FACTORES
+            //cmd = db.GetSqlStringCommand("SELECT IDPOBLACION FROM FACTORES WHERE PERIODO >= '" + xMesInicial + "' AND PERIODO <= '" + xMesFinal + "'");
+            //using (IDataReader reader = db.ExecuteReader(cmd))
+            //{
+            //    while (reader.Read())
+            //    {
+            //        xPeriodosInt.Append(reader[0].ToString() + ",");                    
+            //    }
+            //}
+            //sPeriodos48MesesFactor[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            //sPeriodos48MesesFactor[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+
+            sPeriodos48MesesFactor[0] = xMesInicial;
+            sPeriodos48MesesFactor[1] = xMesFinal;
+            return sPeriodos48MesesFactor;
+        }
+
 
         //public void Leer_Ultimos_48_Meses(string Cab, string xPeriodos)
         //{            
