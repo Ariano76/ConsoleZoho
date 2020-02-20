@@ -103,7 +103,7 @@ namespace ConsoleApp1
             Record_Progreso();
 
             #region HOGARES            
-            
+
             //HoraStart = DateTime.Now;
             //objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR NSE
             //Tiempo_Proceso("HOGARES CIUDAD Y NSE . . .", HoraStart);
@@ -151,7 +151,7 @@ namespace ConsoleApp1
             #endregion
 
             #region UNIDADES
-            
+
             //HoraStart = DateTime.Now;
             //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
             //Tiempo_Proceso("UNIDADES CIUDAD Y NSE . . .", HoraStart);
@@ -174,7 +174,7 @@ namespace ConsoleApp1
             #endregion
 
             #region PPU DOLARES
-            
+
             //HoraStart = DateTime.Now;
             //objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
             //Tiempo_Proceso("PPU (DOL) CIUDAD Y NSE . .", HoraStart);
@@ -765,6 +765,21 @@ namespace ConsoleApp1
             #region PENETRACIONES HOGAR
 
             HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1], xPeriodos_Inicio_Fin[0], xPeriodos_Inicio_Fin[1]); // RESULTADOS POR NSE Y TIPOS
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR NSE . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE_CATEGORIA_CONSOLIDADO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR NSE Y CATEGORIA .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_NSE_TIPO_CONSOLIDADO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR NSE Y TIPO .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
             objPenetraciones.Leer_Ultimos_48_Meses_NSE_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
             Tiempo_Proceso("PENETRACION HOGAR NSE, CIUDAD Y CATEGORIA .", HoraStart);
             Record_Progreso();
@@ -785,7 +800,7 @@ namespace ConsoleApp1
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, CIUDAD Y MODALIDAD
+            objPenetraciones.Leer_Ultimos_48_Meses_MODALIDAD_CIUDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA, CIUDAD Y MODALIDAD
             Tiempo_Proceso("PENETRACION HOGAR CATEGORIA, CIUDAD Y MODALIDAD .", HoraStart);
             Record_Progreso();
 
@@ -795,7 +810,7 @@ namespace ConsoleApp1
             Record_Progreso();
 
             HoraStart = DateTime.Now;
-            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y MODALIDAD
+            objPenetraciones.Leer_Ultimos_48_Meses_MODALIDAD_CATEGORIA(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y MODALIDAD
             Tiempo_Proceso("PENETRACION HOGAR CATEGORIA Y MODALIDAD . .", HoraStart);
             Record_Progreso();
 
@@ -809,9 +824,40 @@ namespace ConsoleApp1
             Tiempo_Proceso("PENETRACION HOGAR MODALIDAD . . . .", HoraStart);
             Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO 
+            Tiempo_Proceso("PENETRACION HOGAR TIPO, REGION . . .", HoraStart);
+            Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_TIPO_MODALIDAD_CONSOLIDADO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR TIPO Y MODALIDAD .", HoraStart);
+            Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_TIPO_CONSOLIDADO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR TIPO . . .", HoraStart);
+            Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION HOGAR CATEGORIA, CIUDAD, MODALIDAD . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION HOGAR CATEGORIA, CIUDAD . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_MODALIDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION HOGAR CATEGORIA, MODALIDAD . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPenetraciones.Leer_Ultimos_48_Meses_CATEGORIA_CONSOLIDADO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y MODALIDAD
+            Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR CATEGORIA . . .", HoraStart);
+            Record_Progreso();
 
 
 
@@ -834,28 +880,6 @@ namespace ConsoleApp1
             //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_TIPO_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO Y REGION 
             //Tiempo_Proceso("PENETRACION HOGAR TIPO Y CIUDAD", HoraStart);
             //Record_Progreso();
-
-            //HoraStart = DateTime.Now;
-            //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_TIPO(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR TIPO 
-            //Tiempo_Proceso("PENETRACION HOGAR TIPO", HoraStart);
-            //Record_Progreso();
-
-            //HoraStart = DateTime.Now;
-            //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD
-            //Tiempo_Proceso("PENETRACION HOGAR CIUDAD", HoraStart);
-            //Record_Progreso();
-
-            //HoraStart = DateTime.Now;
-            //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_CATEGORIA_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA y CIUDAD
-            //Tiempo_Proceso("PENETRACION HOGAR CATEGORIA Y CIUDAD", HoraStart);
-            //Record_Progreso();
-
-            //HoraStart = DateTime.Now;
-            //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_CATEGORIAS(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CATEGORIA 
-            //Tiempo_Proceso("PENETRACION HOGAR CATEGORIAS", HoraStart);
-            //Record_Progreso();
-
-
 
             #endregion
 
