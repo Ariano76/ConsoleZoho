@@ -2112,7 +2112,7 @@ namespace BL
                             {
                                 valor_1 = double.Parse(reader_1[i].ToString());
                             }
-                            sdata48Meses_x_Modalidad_Total[rows, i] = valor_1;
+                            sdata48Meses_x_TOTAL[rows, i] = valor_1;
                         }
                         rows++;
                     }
@@ -2150,7 +2150,7 @@ namespace BL
                         break;
                 }
 
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TIPO_MODALIDAD"))
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_TIPOS"))
                 {
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
                     db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -2163,7 +2163,7 @@ namespace BL
 
                         while (reader_1.Read())
                         {
-                            for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                            for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                             {
                                 if (reader_1[i] == DBNull.Value)
                                 {
@@ -2173,16 +2173,16 @@ namespace BL
                                 {
                                     valor_1 = double.Parse(reader_1[i].ToString());
                                 }
-                                sdata48Meses_x_Tipo_Modalidad[rows, i - 1] = valor_1;
+                                sdata48Meses_x_Tipo_Total[rows, i] = valor_1;
                             }
                             rows++;
                         }
                     }
 
                     /* INSERTANDO VALORES - PPU REGION Y MODALIDAD A BD */
-                    for (int i = 0; i < 2; i++) // LEYENDO LAS FILAS DEL ARRAY
+                    for (int i = 0; i < 1; i++) // LEYENDO LAS FILAS DEL ARRAY
                     {
-                        for (int x = 0; x < sdata48Meses_x_Tipo_Modalidad.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                        for (int x = 0; x < sdata48Meses_x_Tipo_Total.GetLength(1); x++) //LEYENDO LAS COLUMNAS
                         {
                             if (x < 9)
                             {
@@ -2192,13 +2192,13 @@ namespace BL
                             {
                                 Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
                             }
-                            if (sdata48Meses_x_Tipo_Modalidad[i, x] <= 0)
+                            if (sdata48Meses_x_Tipo_Total[i, x] <= 0)
                             {
                                 valor_1 = 0;
                             }
                             else
                             {
-                                valor_1 = sdata48Meses_x_Tipo_Modalidad[i, x] / sdata48Meses_x_Modalidad_Total[0, x] * 100;
+                                valor_1 = sdata48Meses_x_Tipo_Total[i, x] / sdata48Meses_x_TOTAL[0, x] * 100;
                             }
                             Actualizar_BD(V1, "%", "SHARE UNIDADES", "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
