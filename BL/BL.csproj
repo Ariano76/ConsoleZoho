@@ -61,6 +61,8 @@
     <Compile Include="BL_PPU_MONEDA_LOCAL.cs" />
     <Compile Include="BL_Share_Dolares.cs" />
     <Compile Include="BL_Share_Unidades.cs" />
+    <Compile Include="Marcas\BL_Share_Unidades_Marca.cs" />
+    <Compile Include="Marcas\BL_Share_Valor_Marca.cs" />
     <Compile Include="BL_Unidades.cs" />
     <Compile Include="BL_Unidades_Promedio_Hogar.cs" />
     <Compile Include="cls_BD_Zoho.cs" />
