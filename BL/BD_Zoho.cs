@@ -787,27 +787,27 @@ namespace BL
                             {
                                 case 158:
                                     NSE_ = "Colonia Femeninas";
-                                    Mercado_ = "1. Colonia Femeninas";
+                                    Mercado_ = "01. Colonia Femeninas";
                                     break;
                                 case 161:
                                     NSE_ = "Colonia Masculinas";
-                                    Mercado_ = "2. Colonia Masculinas";
+                                    Mercado_ = "02. Colonia Masculinas";
                                     break;
                                 case 202:
                                     NSE_ = "Nutritiva Revit. Facial";
-                                    Mercado_ = "3. Nutritiva Revit. Facial";
+                                    Mercado_ = "03. Nutritiva Revit. Facial";
                                     break;
                                 case 215:
                                     NSE_ = "Humectante/Nutritiva Corporal";
-                                    Mercado_ = "4. Humectante/Nutritiva Corporal";
+                                    Mercado_ = "04. Humectante/Nutritiva Corporal";
                                     break;
                                 case 226:
                                     NSE_ = "Shampoo Adultos";
-                                    Mercado_ = "5. Shampoo Adultos";
+                                    Mercado_ = "05. Shampoo Adultos";
                                     break;
                                 case 237:
                                     NSE_ = "Roll-On";
-                                    Mercado_ = "6. Roll-On";
+                                    Mercado_ = "06. Roll-On";
                                     break;
                             }
 
@@ -841,27 +841,27 @@ namespace BL
                         {
                             case 0:
                                 NSE_ = "Colonia Femeninas";
-                                Mercado_ = "1. Colonia Femeninas";
+                                Mercado_ = "01. Colonia Femeninas";
                                 break;
                             case 1:
                                 NSE_ = "Colonia Masculinas";
-                                Mercado_ = "2. Colonia Masculinas";
+                                Mercado_ = "02. Colonia Masculinas";
                                 break;
                             case 2:
                                 NSE_ = "Nutritiva Revit. Facial";
-                                Mercado_ = "3. Nutritiva Revit. Facial";
+                                Mercado_ = "03. Nutritiva Revit. Facial";
                                 break;
                             case 3:
                                 NSE_ = "Humectante/Nutritiva Corporal";
-                                Mercado_ = "4. Humectante/Nutritiva Corporal";
+                                Mercado_ = "04. Humectante/Nutritiva Corporal";
                                 break;
                             case 4:
                                 NSE_ = "Shampoo Adultos";
-                                Mercado_ = "5. Shampoo Adultos";
+                                Mercado_ = "05. Shampoo Adultos";
                                 break;
                             case 5:
                                 NSE_ = "Roll-On";
-                                Mercado_ = "6. Roll-On";
+                                Mercado_ = "06. Roll-On";
                                 break;
                         }
 

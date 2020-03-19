@@ -1050,8 +1050,6 @@ namespace BL
         #region CAPITAL
         public void Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(string xPeriodos, int xTipo)
         {
-            Codigo_MARCA_VR = new string[5];
-            Codigo_MARCA_Nombre_VR = new string[5];
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
             {

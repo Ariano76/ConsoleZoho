@@ -99,27 +99,27 @@ namespace BL
                             {
                                 case 158:
                                     Mercado_ = "COLONIA FEMENINAS";
-                                    V1_ = "1. COLONIA FEMENINAS";
+                                    V1_ = "01. COLONIA FEMENINAS";
                                     break;
                                 case 161:
                                     Mercado_ = "COLONIA MASCULINAS";
-                                    V1_ = "2. COLONIA MASCULINAS";
+                                    V1_ = "02. COLONIA MASCULINAS";
                                     break;
                                 case 202:
                                     Mercado_ = "NUTRITIVA REVIT. FACIAL";
-                                    V1_ = "3. NUTRITIVA REVIT. FACIAL";
+                                    V1_ = "03. NUTRITIVA REVIT. FACIAL";
                                     break;
                                 case 215:
                                     Mercado_ = "HUMECTANTE/NUTRITIVA CORPORAL";
-                                    V1_ = "4. HUMECTANTE/NUTRITIVA CORPORAL";
+                                    V1_ = "04. HUMECTANTE/NUTRITIVA CORPORAL";
                                     break;
                                 case 226:
                                     Mercado_ = "SHAMPOO ADULTOS";
-                                    V1_ = "5. SHAMPOO ADULTOS";
+                                    V1_ = "05. SHAMPOO ADULTOS";
                                     break;
                                 case 237:
                                     Mercado_ = "ROLL-ON";
-                                    V1_ = "6. ROLL-ON";
+                                    V1_ = "06. ROLL-ON";
                                     break;
                             }
 

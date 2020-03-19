@@ -976,6 +976,37 @@ namespace ConsoleApp1
 
             #endregion
 
+            #region SHARE MARCAS UNIDADES TOTAL CAPITAL
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasShareUnidad.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item); // 
+                objMarcasShareUnidad.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objMarcasShareUnidad.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objMarcasShareUnidad.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objMarcasShareUnidad.Leer_Ultimos_48_Meses_TIPO_TOTAL_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("SHARE UNIDADES MARCA TIPO CAPITAL . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasShareUnidad.Recuperar_Marcas_Top_5_Retail_x_Categoria_Capital(xPeriodos3Meses[1], item); // 
+                objMarcasShareUnidad.Leer_Ultimos_48_Meses_CATEGORIA_TOTAL_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("SHARE UNIDADES MARCA CATEGORIA CAPITAL . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasShareUnidad.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Capital(xPeriodos3Meses[1]); // 
+            objMarcasShareUnidad.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("SHARE UNIDADES MARCA TOTAL COSMETICOS CAPITAL .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
             #region SHARE MARCAS VALOR TOTAL CIUDADES
 
             HoraStart = DateTime.Now;
