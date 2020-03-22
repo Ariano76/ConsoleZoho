@@ -1943,6 +1943,903 @@ namespace BL
         }
         #endregion
 
+        #region PROVINCIAS
+        public void Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(string xPeriodos, int xTipo)
+        {
+            Codigo_MARCA_VR = new string[5];
+            Codigo_MARCA_Nombre_VR = new string[5];
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Tipo = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_TOP_5_TIPO_3M_Region_Unid"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipo);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Tipo += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_Retail_x_Categoria_Region(string xPeriodos, int xCateg)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Categoria = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_TOP_5_CATEG_3M_Region_Unid"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xCateg);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Region(string xPeriodos)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Total_Cosmeticos = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_TOP_5_TOTAL_COSMETICOS_3M_Region_Unid"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+
+        public void Leer_Ultimos_48_Meses_TIPO_TOTAL_REGION(string Cab, string xPeriodos, int xTipo)
+        {
+            xTipos_ = xTipo.ToString();
+            switch (xTipo)
+            {
+                case 158:
+                    Mercado = "01. Colonia Femeninas";
+                    break;
+                case 161:
+                    Mercado = "02. Colonia Masculinas";
+                    break;
+                case 215:
+                    Mercado = "09. Humectante/Nutritiva Corporal";
+                    break;
+                case 202:
+                    Mercado = "08. Nutritiva Revit. Facial";
+                    break;
+                case 237:
+                    Mercado = "14. Roll-On";
+                    break;
+                case 226:
+                    Mercado = "10. Shampoo Adultos";
+                    break;
+            }
+            //Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], 158);
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_TIPOS_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    int rows = 0;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Total[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_SHARE_UNIDAD_TOTAL_TIPO_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    V1 = Validar_marca(sdata48Meses_x_Tipo_Marcas[i, 0].ToString());
+                    for (int x = 1; x < sdata48Meses_x_Tipo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 10)
+                        {
+                            Periodo = "0" + (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        else
+                        {
+                            Periodo = (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        if (sdata48Meses_x_Tipo_Marcas[i, x - 1] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Tipo_Marcas[i, x] / sdata48Meses_x_Tipo_Total[0, x - 1] * 100;
+                        }
+                        Actualizar_BD(V1, "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO BELCORP
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_TIPO_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Tipo_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Tipo_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas[i, x] / sdata48Meses_x_Tipo_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("00.Belcorp", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LOREAL
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_TIPO_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Tipo_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Tipo_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas[i, x] / sdata48Meses_x_Tipo_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("50.Total L'Oreal", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LAUDER
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_TIPO_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Tipo_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Tipo_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas[i, x] / sdata48Meses_x_Tipo_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("51.Total Estee Lauder", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+        }
+        public void Leer_Ultimos_48_Meses_CATEGORIA_TOTAL_REGION(string Cab, string xPeriodos, int xCategoria)
+        {
+            xTipos_ = xCategoria.ToString();
+            switch (xCategoria)
+            {
+                case 123:
+                    Mercado = "1. Fragancias";
+                    break;
+                case 124:
+                    Mercado = "2. Maquillaje";
+                    break;
+                case 127:
+                    Mercado = "5. Cuidado Personal";
+                    break;
+            }
+            //Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], 158);
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_CATEGORIA_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    int rows = 0;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Total[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_SHARE_UNIDAD_TOTAL_CATEGORIA_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Categoria);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    V1 = Validar_marca(sdata48Meses_x_Categoria_Marcas[i, 0].ToString());
+                    for (int x = 1; x < sdata48Meses_x_Categoria_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 10)
+                        {
+                            Periodo = "0" + (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        else
+                        {
+                            Periodo = (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        if (sdata48Meses_x_Categoria_Marcas[i, x - 1] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Categoria_Marcas[i, x] / sdata48Meses_x_Categoria_Total[0, x - 1] * 100;
+                        }
+                        Actualizar_BD(V1, "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO BELCORP
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_CATEGORIA_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Categoria_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Categoria_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas[i, x] / sdata48Meses_x_Categoria_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("00.Belcorp", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LOREAL
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_CATEGORIA_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Categoria_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Categoria_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas[i, x] / sdata48Meses_x_Categoria_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("50.Total L'Oreal", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LAUDER
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_CATEGORIA_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Categoria_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Categoria_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas[i, x] / sdata48Meses_x_Categoria_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("51.Total Estee Lauder", "%", "SHARE UNIDADES", "2. Ciudades", Mercado, "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+        }
+        public void Leer_Ultimos_48_Meses_COSMETICOS_TOTAL_REGION(string Cab, string xPeriodos)
+        {
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_SHARE_UNIDAD_TOTAL_MERCADO_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    int rows = 0;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Cosmeticos_Total[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_MARCAS_SHARE_UNIDAD_TOTAL_COSMETICOS_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Cosmeticos_Total_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    V1 = Validar_marca(sdata48Meses_x_Cosmeticos_Total_Marcas[i, 0].ToString());
+                    for (int x = 1; x < sdata48Meses_x_Cosmeticos_Total_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 10)
+                        {
+                            Periodo = "0" + (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        else
+                        {
+                            Periodo = (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
+                        }
+                        if (sdata48Meses_x_Cosmeticos_Total_Marcas[i, x - 1] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Cosmeticos_Total_Marcas[i, x] / sdata48Meses_x_Cosmeticos_Total[0, x - 1] * 100;
+                        }
+                        Actualizar_BD(V1, "%", "SHARE UNIDADES", "2. Ciudades", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO BELCORP
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_COSMETICOS_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] / sdata48Meses_x_Cosmeticos_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("00.Belcorp", "%", "SHARE UNIDADES", "2. Ciudades", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LOREAL
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_COSMETICOS_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] / sdata48Meses_x_Cosmeticos_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("50.Total L'Oreal", "%", "SHARE UNIDADES", "2. Ciudades", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+
+            // GRUPO LAUDER
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_GRUPO_MARCAS_SHARE_UNIDAD_TOTAL_COSMETICOS_REGION"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+                for (int i = 0; i < rows; i++) // LEYENDO LAS FILAS DEL ARRAY
+                {
+                    for (int x = 0; x < sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas.GetLength(1); x++) //LEYENDO LAS COLUMNAS
+                    {
+                        if (x < 9)
+                        {
+                            Periodo = "0" + (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        else
+                        {
+                            Periodo = (x + 1) + ". " + BD_Zoho.sCabecera48Meses[x];
+                        }
+                        if (sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] <= 0)
+                        {
+                            valor_1 = 0;
+                        }
+                        else
+                        {
+                            valor_1 = sdata48Meses_x_Cosmeticos_Total_Grupo_Marcas[i, x] / sdata48Meses_x_Cosmeticos_Total[0, x] * 100;
+                        }
+                        Actualizar_BD("51.Total Estee Lauder", "%", "SHARE UNIDADES", "2. Ciudades", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", Periodo, valor_1,
+                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    }
+                }
+            }
+        }
+        #endregion
 
 
         private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, string _Periodo, double _Datos, int _Año)

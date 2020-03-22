@@ -59,6 +59,7 @@
     <Compile Include="BL_Penetracion_Hogar.cs" />
     <Compile Include="BL_PPU_Dolares.cs" />
     <Compile Include="BL_PPU_MONEDA_LOCAL.cs" />
+    <Compile Include="Marcas\BL_PPU_Moneda_Local_Marcas.cs" />
     <Compile Include="BL_Share_Dolares.cs" />
     <Compile Include="BL_Share_Unidades.cs" />
     <Compile Include="Marcas\BL_Share_Unidades_Marca.cs" />

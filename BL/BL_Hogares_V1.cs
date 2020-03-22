@@ -107,19 +107,19 @@ namespace BL
                                     break;
                                 case 202:
                                     Mercado_ = "NUTRITIVA REVIT. FACIAL";
-                                    V1_ = "03. NUTRITIVA REVIT. FACIAL";
+                                    V1_ = "08. NUTRITIVA REVIT. FACIAL";
                                     break;
                                 case 215:
                                     Mercado_ = "HUMECTANTE/NUTRITIVA CORPORAL";
-                                    V1_ = "04. HUMECTANTE/NUTRITIVA CORPORAL";
+                                    V1_ = "09. HUMECTANTE/NUTRITIVA CORPORAL";
                                     break;
                                 case 226:
                                     Mercado_ = "SHAMPOO ADULTOS";
-                                    V1_ = "05. SHAMPOO ADULTOS";
+                                    V1_ = "10. SHAMPOO ADULTOS";
                                     break;
                                 case 237:
                                     Mercado_ = "ROLL-ON";
-                                    V1_ = "06. ROLL-ON";
+                                    V1_ = "14. ROLL-ON";
                                     break;
                             }
 
