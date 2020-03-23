@@ -41,6 +41,7 @@ namespace ConsoleApp1
             var objMarcasShareValor = new BL_Share_Valor_Marca();
             var objMarcasShareUnidad = new BL_Share_Unidades_Marca();
             var objMarcasPPU_Valor = new BL_PPU_Moneda_Local_Marcas();
+            var objMarcasPPU_Dolares = new BL_PPU_Dolares_Marcas();
 
 
 
@@ -1072,7 +1073,7 @@ namespace ConsoleApp1
             #endregion
 
 
-            #region PPU VALORES MARCAS VALOR TOTAL PAIS
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL PAIS
 
             HoraStart = DateTime.Now;
             foreach (var item in Codigo_TIPOS)
@@ -1083,7 +1084,7 @@ namespace ConsoleApp1
                 objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objMarcasPPU_Valor.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
             }
-            Tiempo_Proceso("PPU VALORES MARCA TIPO . . .", HoraStart);
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TIPO . .", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
@@ -1092,17 +1093,166 @@ namespace ConsoleApp1
                 objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Categoria(xPeriodos3Meses[1], item, 1); // 
                 objMarcasPPU_Valor.Leer_Ultimos_48_Meses_CATEGORIA_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
             }
-            Tiempo_Proceso("PPU VALORES MARCA CATEGORIA CIUDADES . .", HoraStart);
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA CATEGORIA . .", HoraStart);
             Record_Progreso();
 
             HoraStart = DateTime.Now;
             objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xPeriodos3Meses[1], 1); // 
             objMarcasPPU_Valor.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], 1);
-            Tiempo_Proceso("PPU VALORES MARCA TOTAL COSMETICOS . .", HoraStart);
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL COSMETICOS .", HoraStart);
             Record_Progreso();
 
+            #endregion
+
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL CAPITAL
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item, 1); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objMarcasPPU_Valor.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
+            }
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TIPO CAPITAL .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Categoria_Capital(xPeriodos3Meses[1], item, 1); // 
+                objMarcasPPU_Valor.Leer_Ultimos_48_Meses_CATEGORIA_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
+            }
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA CATEGORIA CAPITAL .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Capital(xPeriodos3Meses[1], 1); // 
+            objMarcasPPU_Valor.Leer_Ultimos_48_Meses_TOTAL_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], 1);
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL CAPITAL .", HoraStart);
+            Record_Progreso();
 
             #endregion
+
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL CIUDADES
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item, 1); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objMarcasPPU_Valor.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objMarcasPPU_Valor.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
+            }
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TIPO REGION .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Categoria_Region(xPeriodos3Meses[1], item, 1); // 
+                objMarcasPPU_Valor.Leer_Ultimos_48_Meses_CATEGORIA_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 1);
+            }
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA CATEGORIA REGION .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasPPU_Valor.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Region(xPeriodos3Meses[1], 1); // 
+            objMarcasPPU_Valor.Leer_Ultimos_48_Meses_TOTAL_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], 1);
+            Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL REGION .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region PPU DOLARES MARCAS VALOR TOTAL PAIS
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objMarcasPPU_Dolares.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objMarcasPPU_Dolares.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA TIPO . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Categoria(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_CATEGORIA_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA CATEGORIA . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xPeriodos3Meses[1], 2); // 
+            objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], 2);
+            Tiempo_Proceso("PPU DOLARES MARCA TOTAL COSMETICOS . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region PPU DOLARES MARCAS VALOR TOTAL CAPITAL
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA TIPO CAPITAL . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Categoria_Capital(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_CATEGORIA_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA CATEGORIA CAPITAL . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Capital(xPeriodos3Meses[1], 2); // 
+            objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_TOTAL_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], 2);
+            Tiempo_Proceso("PPU DOLARES MARCA TOTAL CAPITAL . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region PPU DOLARES MARCAS VALOR TOTAL CIUDADES
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA TIPO REGION . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Categoria_Region(xPeriodos3Meses[1], item, 2); // 
+                objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_CATEGORIA_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("PPU DOLARES MARCA CATEGORIA REGION . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objMarcasPPU_Dolares.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Region(xPeriodos3Meses[1], 2); // 
+            objMarcasPPU_Dolares.Leer_Ultimos_48_Meses_TOTAL_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], 2);
+            Tiempo_Proceso("PPU DOLARES MARCA TOTAL REGION . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
 
 
 

@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace BL
 {
-    public class BL_PPU_Moneda_Local_Marcas
+    public class BL_PPU_Dolares_Marcas
     {
         private int[] Codigo_MARCA_VD = { 540, 5914, 1163, 504, 24, 1764, 318, 3206, 8019, 8420 }; // MARCAS PREDEFINIDAS VENTA DIRECTA 
         public string[] Codigo_MARCA_VR = new string[5];
@@ -273,7 +273,7 @@ namespace BL
                     Mercado = "10. Shampoo Adultos";
                     break;
             }
-            
+
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_MARCAS_UNIDAD_TOTAL_TIPO"))
             {
@@ -351,8 +351,8 @@ namespace BL
                         {
                             Periodo = (x) + ". " + BD_Zoho.sCabecera48Meses[x - 1];
                         }
-                        if (sdata48Meses_x_Tipo_Marcas_Valores[i, x] <= 0 || 
-                            sdata48Meses_x_Tipo_Marcas_Valores[i, x].ToString() == null) 
+                        if (sdata48Meses_x_Tipo_Marcas_Valores[i, x] <= 0 ||
+                            sdata48Meses_x_Tipo_Marcas_Valores[i, x].ToString() == null)
                         {
                             valor_1 = 0;
                         }
@@ -360,7 +360,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -395,7 +395,7 @@ namespace BL
                         rows++;
                     }
                 }
-            }          
+            }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_GRUPO_MARCAS_VALOR_TOTAL_TIPO"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
@@ -446,7 +446,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -532,7 +532,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -618,7 +618,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -669,7 +669,7 @@ namespace BL
                         rows++;
                     }
                 }
-            }            
+            }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_MARCAS_VALOR_TOTAL_CATEGORIA"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
@@ -721,7 +721,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -756,7 +756,7 @@ namespace BL
                         rows++;
                     }
                 }
-            }            
+            }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_GRUPO_MARCAS_VALOR_TOTAL_CATEGORIA"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
@@ -807,7 +807,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -893,7 +893,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -979,7 +979,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "0. Consolidado", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1015,7 +1015,7 @@ namespace BL
                         rows++;
                     }
                 }
-            }            
+            }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_MARCAS_VALOR_TOTAL_COSMETICOS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1066,7 +1066,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / sdata48Meses_x_Total_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -1150,7 +1150,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1234,7 +1234,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1318,7 +1318,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1534,7 +1534,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -1620,7 +1620,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1706,7 +1706,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1792,7 +1792,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1895,7 +1895,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -1981,7 +1981,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2067,7 +2067,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2153,7 +2153,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "1. Capital", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "1. Capital", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2240,7 +2240,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / sdata48Meses_x_Total_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "1. Capital", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "1. Capital", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -2324,7 +2324,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "1. Capital", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "1. Capital", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2408,7 +2408,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "1. Capital", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "1. Capital", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2492,7 +2492,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "1. Capital", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "1. Capital", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2708,7 +2708,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -2794,7 +2794,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2880,7 +2880,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2966,7 +2966,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3069,7 +3069,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -3155,7 +3155,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3241,7 +3241,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3327,7 +3327,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "2. Ciudades", Mercado, "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "2. Ciudades", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3414,7 +3414,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / sdata48Meses_x_Total_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD(V1, "Suma", "PPU (ML)", "2. Ciudades", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "PPU (DOL.)", "2. Ciudades", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
@@ -3498,7 +3498,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PPU (ML)", "2. Ciudades", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "PPU (DOL.)", "2. Ciudades", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3582,7 +3582,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (ML)", "2. Ciudades", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PPU (DOL.)", "2. Ciudades", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -3666,7 +3666,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Grupo_Marcas_Unidades[i, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (ML)", "2. Ciudades", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PPU (DOL.)", "2. Ciudades", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
