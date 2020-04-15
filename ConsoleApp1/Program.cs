@@ -42,6 +42,7 @@ namespace ConsoleApp1
             var objMarcasShareUnidad = new BL_Share_Unidades_Marca();
             var objMarcasPPU_Valor = new BL_PPU_Moneda_Local_Marcas();
             var objMarcasPPU_Dolares = new BL_PPU_Dolares_Marcas();
+            var objHogar_Marcas = new BL_Hogares_Marcas();
 
 
 
@@ -1254,7 +1255,20 @@ namespace ConsoleApp1
             #endregion
 
 
+            #region HOGARES MARCAS TOTAL PAIS
 
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objHogar_Marcas.Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], item, 2); // 
+                objHogar_Marcas.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objHogar_Marcas.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objHogar_Marcas.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objHogar_Marcas.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item, 2);
+            }
+            Tiempo_Proceso("HOGARES DOLARES MARCA TIPO . . .", HoraStart);
+            Record_Progreso();
+            #endregion
 
 
 
