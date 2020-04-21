@@ -1348,6 +1348,15 @@ namespace ConsoleApp1
             #endregion
 
 
+
+
+
+
+
+
+
+
+
             /////* LEYENDO LOS TIPOS ALMACENADOS EN UN ARREGLO*/
             ////string xTipos ="";
             ////foreach (int item in Codigo_Tipos_Importantes)
@@ -1390,7 +1399,6 @@ namespace ConsoleApp1
             HoraFin = DateTime.Now - Inicio;
             Console.Write($"El Proceso {Proceso} tardo {HoraFin} segundos.");
         }
-
         static void Record_Progreso()
         {
             var objGenerico = new Procesos_Genericos();

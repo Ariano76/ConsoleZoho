@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Practices.EnterpriseLibrary.Data;
+using System;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
-using Microsoft.Practices.EnterpriseLibrary.Data;
-using System.Diagnostics;
 
 namespace BL
 {
@@ -32,17 +26,17 @@ namespace BL
         public double[,] sdata48Meses_x_Tipo_Total = new double[1, 48];  // TOTAL POR TIPO VALORES
 
         public double[,] sdata48Meses_x_Tipo_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y TIPO VALORES
-        //public double[,] sdata48Meses_x_Tipo_Marcas_Unidades = new double[15, 49];  // TOTAL POR MARCAS Y TIPO UNIDADES
+        
         public double[,] sdata48Meses_x_Tipo_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TIPO VALORES
-        //public double[,] sdata48Meses_x_Tipo_Grupo_Marcas_Unidades = new double[1, 48];  // TOTAL POR MARCAS Y TIPO UNIDADES
+        
         public double[,] sdata48Meses_x_Categoria_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y CATEGORIA VALORES
-        public double[,] sdata48Meses_x_Categoria_Marcas_Unidades = new double[15, 49];  // TOTAL POR MARCAS Y CATEGORIA UNIDADES
+        
         public double[,] sdata48Meses_x_Categoria_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y CATEGORIA VALORES
-        public double[,] sdata48Meses_x_Categoria_Grupo_Marcas_Unidades = new double[1, 48];  // TOTAL POR MARCAS Y CATEGORIA UNIDADES
+        
         public double[,] sdata48Meses_x_Total_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y TOTAL COSMETICOS VALORES
-        public double[,] sdata48Meses_x_Total_Marcas_Unidades = new double[15, 49];  // TOTAL POR MARCAS Y TOTAL COSMETICOS UNIDADES
+        
         public double[,] sdata48Meses_x_Total_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TOTAL COSMETICOS VALORES
-        public double[,] sdata48Meses_x_Total_Grupo_Marcas_Unidades = new double[1, 48];  // TOTAL POR MARCAS Y TOTAL COSMETICOS UNIDADES
+        
 
         private readonly DateTime[] Periodos = new DateTime[7];
         string V1, Mercado, Periodo, xTipos_;
