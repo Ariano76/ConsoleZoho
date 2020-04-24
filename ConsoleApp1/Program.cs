@@ -43,6 +43,7 @@ namespace ConsoleApp1
             var objMarcasPPU_Valor = new BL_PPU_Moneda_Local_Marcas();
             var objMarcasPPU_Dolares = new BL_PPU_Dolares_Marcas();
             var objHogar_Marcas = new BL_Hogares_Marcas();
+            var objUnidadPromedioHogar_Marca = new BL_Unidad_Promedio_Hogar_Marcas();
 
 
 
@@ -1348,10 +1349,98 @@ namespace ConsoleApp1
             #endregion
 
 
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS TOTAL PAIS
 
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TIPO . .", HoraStart);
+            Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_CATEGORIA_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA CATEGORIAS . .", HoraStart);
+            Record_Progreso();
 
+            HoraStart = DateTime.Now;
+            objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xPeriodos3Meses[1]); // 
+            objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS .", HoraStart);
+            Record_Progreso();
 
+            #endregion
+
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS CAPITAL
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TIPO CAPITAL .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria_Capital(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_Categoria_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA CATEGORIAS CAPITAL .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Capital(xPeriodos3Meses[1]); // 
+            objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_Cosmeticos_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS CAPITAL", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS CIUDADES
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TIPO REGION .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria_Region(xPeriodos3Meses[1], item); // 
+                objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_Categoria_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA CATEGORIAS REGION .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Region(xPeriodos3Meses[1]); // 
+            objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_Cosmeticos_Region(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS REGION", HoraStart);
+            Record_Progreso();
+
+            #endregion
 
 
 
