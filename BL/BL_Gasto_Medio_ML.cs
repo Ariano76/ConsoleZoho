@@ -196,8 +196,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_Region_NSE[i, x] / sdata48Meses_x_Hogar_Region_NSE[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -335,7 +334,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Valor_NSE_Region_Categoria[i, x] / sdata48Meses_x_Hogar_NSE_Region_Categoria[i, x];
                         }
 
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -485,8 +484,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Valor_NSE_Region_Tipo[i, x] / sdata48Meses_x_Hogar_NSE_Region_Tipo[i, x];
                             }
 
-                            Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                                Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                            Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
                 }
@@ -544,8 +542,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Valor_NSE_Region_Tipo[i, x] / sdata48Meses_x_Hogar_NSE_Region_Tipo[i, x];
                             }
 
-                            Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                                Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                            Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
                 }
@@ -678,8 +675,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Valor_NSE_Categoria[i, x] / sdata48Meses_x_Hogar_NSE_Categoria[i, x];
                         }
 
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -814,8 +810,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_NSE_Tipo[i, x] / sdata48Meses_x_Hogar_NSE_Tipo[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -928,8 +923,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_NSE[i, x] / sdata48Meses_x_Hogar_NSE[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -1070,10 +1064,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Tipo_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Tipo_Region_Modalidad[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1205,11 +1199,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Tipo_Region[i, x] / sdata48Meses_x_Hogar_Tipo_Region[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         /***/
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1342,11 +1335,9 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Tipo_Modalidad[i, x] / sdata48Meses_x_Hogar_Tipo_Modalidad[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1468,11 +1459,9 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Tipo[i, x] / sdata48Meses_x_Hogar_Tipo[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //***///
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1577,17 +1566,13 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_Region[i, x] / sdata48Meses_x_Hogar_Region[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD("Cosmeticos", "Suma", "Gasto Medio (ML)", Ciudad_, "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD("Cosmeticos", "Suma", "GASTO MEDIO (ML)", Ciudad_, "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //***//
                     if (i == 0)
                     {
-                        Actualizar_BD("Consolidado", "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, sdata48Meses_x_Valor[0, x] / sdata48Meses_x_Hogar[0, x],
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("Consolidado", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, sdata48Meses_x_Valor[0, x] / sdata48Meses_x_Hogar[0, x], int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1718,10 +1703,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Categoria_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Categoria_Region_Modalidad[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1842,10 +1827,9 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Categoria_Region[i, x] / sdata48Meses_x_Hogar_Categoria_Region[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1968,11 +1952,9 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Valor_Categoria_Modalidad[i, x] / sdata48Meses_x_Hogar_Categoria_Modalidad[i, x];
                         }
-                        Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado, "Gasto Medio (ML)", "MENSUAL",
-                            Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2080,11 +2062,9 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_Categorias[i, x] / sdata48Meses_x_Hogar_Categorias[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -2191,11 +2171,10 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_Modalidad_Region[i, x] / sdata48Meses_x_Hogar_Modalidad_Region[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, Mercado_, "Gasto Medio (ML)", "MENSUAL",
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, Mercado_, "GASTO MEDIO (ML)", "MENSUAL",
                         Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", Ciudad_, "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", Ciudad_, "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -2293,11 +2272,9 @@ namespace BL
                         valor_1 = sdata48Meses_x_Valor_Modalidad[i, x] / sdata48Meses_x_Hogar_Modalidad[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", "0. Cosmeticos", "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD(NSE_, "Suma", "Gasto Medio (ML)", "0. Consolidado", Mercado_, "Gasto Medio (ML)", "MENSUAL",
-                        Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado_, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
