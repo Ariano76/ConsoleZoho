@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace BL
 {
-    public class BL_Gasto_Medio_DOL_Marcas
+    public class BL_Gasto_Medio_ML_Marcas
     {
         private int[] Codigo_MARCA_VD = { 540, 5914, 1163, 504, 24, 1764, 318, 3206, 8019, 8420 }; // MARCAS PREDEFINIDAS VENTA DIRECTA 
         public string[] Codigo_MARCA_VR = new string[5];
@@ -319,7 +319,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_GMDOLM[i, x] / sdata48Meses_x_Tipo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
             }
@@ -375,7 +375,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -431,7 +431,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -488,7 +488,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -562,7 +562,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_GMDOLM[i, x] / sdata48Meses_x_Categoria_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
@@ -619,7 +619,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -676,7 +676,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -733,7 +733,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -792,7 +792,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_GMDOLM[i, x] / sdata48Meses_x_Total_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
@@ -848,7 +848,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -904,7 +904,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -960,7 +960,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "0. Consolidado", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1149,7 +1149,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_GMDOLM[i, x] / sdata48Meses_x_Tipo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
             }
@@ -1205,7 +1205,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1261,7 +1261,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1318,7 +1318,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1392,7 +1392,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_GMDOLM[i, x] / sdata48Meses_x_Categoria_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
@@ -1449,7 +1449,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1506,7 +1506,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1563,7 +1563,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "1. Capital", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1622,7 +1622,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_GMDOLM[i, x] / sdata48Meses_x_Total_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
             }
@@ -1677,7 +1677,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1732,7 +1732,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1787,7 +1787,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "1. Capital", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1975,7 +1975,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_GMDOLM[i, x] / sdata48Meses_x_Tipo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
             }
@@ -2031,7 +2031,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2087,7 +2087,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2144,7 +2144,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Tipo_Grupo_GMDOLM[i, x] / sdata48Meses_x_Tipo_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2218,7 +2218,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_GMDOLM[i, x] / sdata48Meses_x_Categoria_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
@@ -2275,7 +2275,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2332,7 +2332,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2389,7 +2389,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Categoria_Grupo_GMDOLM[i, x] / sdata48Meses_x_Categoria_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", Mercado, "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1,
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", Mercado, "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2448,7 +2448,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_GMDOLM[i, x] / sdata48Meses_x_Total_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "GASTO MEDIO (ML)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 2].Substring(0, 4)));
                     }
                 }
             }
@@ -2503,7 +2503,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2558,7 +2558,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2613,7 +2613,7 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Total_Grupo_GMDOLM[i, x] / sdata48Meses_x_Total_Grupo_GMDOLM[i + 1, x];
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (DOL.)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (DOL.)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "GASTO MEDIO (ML)", "2. Ciudades", "0. Cosmeticos", "GASTO MEDIO (ML)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }

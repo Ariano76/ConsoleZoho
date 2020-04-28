@@ -59,6 +59,7 @@
     <Compile Include="BL_Penetracion_Hogar.cs" />
     <Compile Include="BL_PPU_Dolares.cs" />
     <Compile Include="Marcas\BL_Gasto_Medio_DOL_Marcas.cs" />
+    <Compile Include="Marcas\BL_Gasto_Medio_ML_Marcas.cs" />
     <Compile Include="Marcas\BL_Hogares_Marcas.cs" />
     <Compile Include="Marcas\BL_PPU_Dolares_Marcas.cs" />
     <Compile Include="BL_PPU_MONEDA_LOCAL.cs" />
