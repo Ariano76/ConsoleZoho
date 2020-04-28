@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dapper;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using System;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
-using Dapper;
+using System.Data.SqlClient;
 
 namespace BL
 {
