@@ -829,7 +829,7 @@ namespace BL
                                 Periodo = (i - 1) + ". " + sCabecera48Meses[i - 2];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "DOLARES", Ciudad_, Mercado_.ToLowerInvariant(), "DOLARES (%)",
+                            Actualizar_BD(NSE_, "SUMA", "DOLARES", Ciudad_, Mercado_, "DOLARES (%)",
                                 "MENSUAL", Periodo, valor, int.Parse(sCabecera48Meses[i - 2].Substring(0, 4)));
                         }
                         rows++;
