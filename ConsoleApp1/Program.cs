@@ -41,6 +41,7 @@ namespace ConsoleApp1
             var objUnidadPromedioHogar_Marca = new BL_Unidad_Promedio_Hogar_Marcas();
             var objGastoMedioDol_Marca = new BL_Gasto_Medio_DOL_Marcas();
             var objGastoMedioML_Marca = new BL_Gasto_Medio_ML_Marcas();
+            var objPentraciones_Marca = new BL_Penetraciones_Marcas();
 
 
 
@@ -1624,6 +1625,36 @@ namespace ConsoleApp1
 
             #endregion
 
+            #region PENETRACIONES - MARCAS TOTAL PAIS
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_TIPO_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA TIPO . . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_CATEGORIA_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA CATEGORIAS . . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xPeriodos3Meses[1]); // 
+            objPentraciones_Marca.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("PENETRACIONES MARCA TOTAL . . . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
 
 
 
