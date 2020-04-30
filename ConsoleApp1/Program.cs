@@ -1383,9 +1383,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
             }
             Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TIPO CAPITAL .", HoraStart);
@@ -1414,9 +1414,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objUnidadPromedioHogar_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objUnidadPromedioHogar_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objUnidadPromedioHogar_Marca.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
             }
             Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TIPO REGION .", HoraStart);
@@ -1476,9 +1476,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objGastoMedioDol_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item, "2"); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objGastoMedioDol_Marca.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, "2");
             }
             Tiempo_Proceso("GASTO MEDIO DOLARES MARCA TIPO CAPITAL .", HoraStart);
@@ -1507,9 +1507,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objGastoMedioDol_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item, "2"); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objGastoMedioDol_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objGastoMedioDol_Marca.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, "2");
             }
             Tiempo_Proceso("GASTO MEDIO DOLARES MARCA TIPO REGION .", HoraStart);
@@ -1569,9 +1569,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objGastoMedioML_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item, "1"); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objGastoMedioML_Marca.Leer_Ultimos_48_Meses_TIPO_Capital(xPeriodos48Meses[0], xPeriodos48Meses[1], item, "1");
             }
             Tiempo_Proceso("GASTO MEDIO SOLES MARCA TIPO CAPITAL .", HoraStart);
@@ -1600,9 +1600,9 @@ namespace ConsoleApp1
             foreach (var item in Codigo_TIPOS)
             {
                 objGastoMedioML_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item, "1"); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
-                objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objGastoMedioML_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
                 objGastoMedioML_Marca.Leer_Ultimos_48_Meses_TIPO_Region(xPeriodos48Meses[0], xPeriodos48Meses[1], item, "1");
             }
             Tiempo_Proceso("GASTO MEDIO SOLES MARCA TIPO REGION .", HoraStart);
@@ -1652,6 +1652,68 @@ namespace ConsoleApp1
             objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xPeriodos3Meses[1]); // 
             objPentraciones_Marca.Leer_Ultimos_48_Meses_COSMETICOS_TOTAL(xPeriodos48Meses[0], xPeriodos48Meses[1]);
             Tiempo_Proceso("PENETRACIONES MARCA TOTAL . . . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region PENETRACIONES - MARCAS CAPITAL
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Capital(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_TIPO_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1],item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA TIPO CAPITAL . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria_Capital(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_CATEGORIA_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA CATEGORIAS CAPITAL . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Capital(xPeriodos3Meses[1]); // 
+            objPentraciones_Marca.Leer_Ultimos_48_Meses_COSMETICOS_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("PENETRACIONES MARCA TOTAL CAPITAL . . .", HoraStart);
+            Record_Progreso();
+
+            #endregion
+
+            #region PENETRACIONES - MARCAS CIUDADES
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_TIPOS)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Tipo_Region(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
+                //objPentraciones_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_TIPO_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA TIPO REGION . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            foreach (var item in Codigo_Categoria)
+            {
+                objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Categoria_Region(xPeriodos3Meses[1], item); // 
+                objPentraciones_Marca.Leer_Ultimos_48_Meses_CATEGORIA_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
+            }
+            Tiempo_Proceso("PENETRACIONES MARCA CATEGORIAS REGION . . .", HoraStart);
+            Record_Progreso();
+
+            HoraStart = DateTime.Now;
+            objPentraciones_Marca.Recuperar_Marcas_Top_5_Retail_x_Total_Region(xPeriodos3Meses[1]); // 
+            objPentraciones_Marca.Leer_Ultimos_48_Meses_COSMETICOS_REGION(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            Tiempo_Proceso("PENETRACIONES MARCA TOTAL REGION . . .", HoraStart);
             Record_Progreso();
 
             #endregion

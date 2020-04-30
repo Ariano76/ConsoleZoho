@@ -27,13 +27,13 @@ namespace BL
         public double[,] sdata48Meses_x_Tipo_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y TIPO VALORES
         public double[,] sdata48Meses_x_Tipo_Mercado = new double[1, 48];  // 
 
-        public double[,] sdata48Meses_x_Tipo_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TIPO VALORES
-        public double[,] sdata48Meses_x_Categoria_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y CATEGORIA VALORES
-        public double[,] sdata48Meses_x_Categoria_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y CATEGORIA 
+        public double[,] sdata48Meses_x_Tipo_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TIPO 
+        public double[,] sdata48Meses_x_Categoria_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y CATEGORIA
+        public double[,] sdata48Meses_x_Categoria_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y  
         public double[,] sdata48Meses_x_Categoria_Mercado = new double[1, 48];  // 
 
-        public double[,] sdata48Meses_x_Total_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y TOTAL COSMETICOS 
-        public double[,] sdata48Meses_x_Total_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TOTAL COSMETICOS 
+        public double[,] sdata48Meses_x_Total_Marcas_Valores = new double[15, 49];  // TOTAL POR MARCAS Y TOTAL  
+        public double[,] sdata48Meses_x_Total_Grupo_Marcas_Valores = new double[1, 48];  // TOTAL POR MARCAS Y TOTAL  
         public double[,] sdata48Meses_x_Total_Mercado = new double[1, 48];  // 
 
 
@@ -1098,7 +1098,7 @@ namespace BL
                 Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
-        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Capital(string xPeriodos)
+        public void Recuperar_Marcas_Top_5_Retail_x_Total_Capital(string xPeriodos)
         {
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
@@ -1155,7 +1155,34 @@ namespace BL
             }
 
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_TIPO_CAPITAL"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
 
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }           
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_CAPITAL_TIPO"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
@@ -1209,14 +1236,12 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
-
             // GRUPO BELCORP
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_GRUPO_MARCAS_CAPITAL_TIPO"))
             {
@@ -1265,14 +1290,12 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
-
             // GRUPO LOREAL
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_GRUPO_MARCAS_CAPITAL_TIPO"))
             {
@@ -1321,14 +1344,12 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
-
             // GRUPO LAUDER
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_GRUPO_MARCAS_CAPITAL_TIPO"))
             {
@@ -1377,10 +1398,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1402,6 +1422,35 @@ namespace BL
             }
 
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_CATEGORIA_CAPITAL"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_CAPITAL_CATEGORIA"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
@@ -1450,10 +1499,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
@@ -1506,10 +1554,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1562,10 +1609,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1618,17 +1664,44 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
         }
-        public void Leer_Ultimos_48_Meses_TOTAL_CAPITAL(string Cab, string xPeriodos)
+        public void Leer_Ultimos_48_Meses_COSMETICOS_CAPITAL(string Cab, string xPeriodos)
         {
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_TOTAL_CAPITAL"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Total_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_CAPITAL_COSMETICOS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1676,10 +1749,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
@@ -1731,10 +1803,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1786,10 +1857,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1841,16 +1911,15 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "1. Capital", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
         }
 
-        #endregion
+        #endregion  
 
         #region REGION
 
@@ -1916,7 +1985,7 @@ namespace BL
                 Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
-        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_Region(string xPeriodos)
+        public void Recuperar_Marcas_Top_5_Retail_x_Total_Region(string xPeriodos)
         {
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
@@ -1973,6 +2042,35 @@ namespace BL
 
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
 
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_TIPO_CIUDADES"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Tipo_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_REGION_TIPO"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipos_);
@@ -2026,10 +2124,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
@@ -2082,10 +2179,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2138,10 +2234,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2194,10 +2289,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Tipo_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Tipo_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2219,6 +2313,35 @@ namespace BL
             }
 
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_CATEGORIA_CIUDADES"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Categoria_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_REGION_CATEGORIA"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEG", DbType.String, xTipos_);
@@ -2267,10 +2390,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
@@ -2323,10 +2445,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2379,10 +2500,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2435,17 +2555,44 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Categoria_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Categoria_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
         }
-        public void Leer_Ultimos_48_Meses_TOTAL_REGION(string Cab, string xPeriodos)
+        public void Leer_Ultimos_48_Meses_COSMETICOS_REGION(string Cab, string xPeriodos)
         {
             // MARCAS PREDEFINIDAS VD + TOP 5 OTROS
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_HOGAR_TOTAL_CIUDADES"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, Cab);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            sdata48Meses_x_Total_Mercado[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("hogares._SP_MARCAS_REGION_COSMETICOS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -2493,10 +2640,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x - 1] * 100;
                         }
-                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                        Actualizar_BD(V1, "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
                     }
                 }
             }
@@ -2548,10 +2694,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("00.Belcorp", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2603,10 +2748,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("50.Total L'Oreal", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2658,10 +2802,9 @@ namespace BL
                         }
                         else
                         {
-                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / 1000;
+                            valor_1 = sdata48Meses_x_Total_Grupo_Marcas_Valores[i, x] / sdata48Meses_x_Total_Mercado[0, x] * 100;
                         }
-                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD("51.Total Estee Lauder", "Suma", "PENETRACIONES", "2. Ciudades", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
