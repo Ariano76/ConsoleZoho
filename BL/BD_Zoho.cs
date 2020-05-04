@@ -31,7 +31,7 @@ namespace BL
         public double[,] sdata48Meses_x_Region_Tipos_Mes = new double[12, 48];
 
         
-        private readonly DateTime[] Periodos = new DateTime[8];
+        private readonly DateTime[] Periodos = new DateTime[9];
         string sSource = "Dashboard ZOHO";        
         string NSE_, Ciudad_, Mercado_, Periodo;
         int xMesFin;
@@ -151,7 +151,7 @@ namespace BL
             DateTime weekago = DateTime.Now.AddDays(-7);
             Periodos[0] = oneYearAgoToday;
             Periodos[1] = twoYearAgoToday;
-            Periodos[7] = threeYearAgoToday;
+            Periodos[8] = threeYearAgoToday;
             Periodos[2] = sixMonthAgoToday;
             Periodos[3] = sixMonthTwoYearAgo;
             Periodos[4] = threeMonthAgoToday;

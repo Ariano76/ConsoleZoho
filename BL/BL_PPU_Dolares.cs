@@ -209,7 +209,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_Region_NSE_valor[i, x] / sdata48Meses_x_Region_NSE_unid[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Mercado_, "0. Cosmeticos", "PPU (DOL)",
+                    Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Mercado_, "0. Cosmeticos", "PPU (DOL.)",
                         "MENSUAL", Periodo, valor_1, 
                         int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
@@ -257,7 +257,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_NSE_valor[i, x] / sdata48Meses_x_NSE_unid[i, x];
                     }
 
-                    Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                    Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)",
                         "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
@@ -299,11 +299,11 @@ namespace BL
                         valor_1 = sdata48Meses_x_Region_valor[i, x] / sdata48Meses_x_Region_unid[i, x];
                     }
 
-                    Actualizar_BD("Cosmeticos", "SUMA", "PPU (DOL)", Mercado_, "0. Cosmeticos", "PPU (DOL)",
+                    Actualizar_BD("Cosmeticos", "SUMA", "PPU (DOL.)", Mercado_, "0. Cosmeticos", "PPU (DOL.)",
                         "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
                     // COPIAN VALORES CON VARIABLES INVERTIDAS
-                    Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                    Actualizar_BD(V1, "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)",
                         "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
@@ -327,7 +327,7 @@ namespace BL
                 {
                     valor_1 = sdata48Meses_x_valor[0, x] / sdata48Meses_x_unid[0, x];
                 }
-                Actualizar_BD("Consolidado", "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                Actualizar_BD("Consolidado", "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)",
                         "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
             }
 
@@ -417,11 +417,11 @@ namespace BL
                             valor_1 = sdata48Meses_x_Region_Modalidad[i, x] / sdata48Meses_x_Region_Modalidad[i + 4, x];
                         }
 
-                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, "0. Cosmeticos", "PPU (DOL)",
+                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, "0. Cosmeticos", "PPU (DOL.)",
                             "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
-                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)",
+                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)",
                             "MENSUAL", Periodo, valor_1,
                             int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
@@ -468,10 +468,10 @@ namespace BL
                             valor_1 = sdata48Meses_x_Modalidad_valor[i, x] / sdata48Meses_x_Modalidad_unid[i, x];
                         }
 
-                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)",
+                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)",
                             "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
-                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                        Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)",
                             "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
                     }
@@ -579,7 +579,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_NSE_Region_Categoria[i, x] / sdata48Meses_x_NSE_Region_Categoria[i + 6, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
@@ -678,7 +678,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_NSE_Categoria[i, x] / sdata48Meses_x_NSE_Categoria[i + 3, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -779,10 +779,10 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Categoria_Region_Modalidad[i, x] / sdata48Meses_x_Categoria_Region_Modalidad[i + 4, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             // ** COPIANDO VALORES CON ITEM CAMBIADOS
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", Ciudad_, Mercado, "PPU (DOL)",
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", Ciudad_, Mercado, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
                         }
@@ -875,10 +875,10 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Categoria_Modalidad[i, x] / sdata48Meses_x_Categoria_Modalidad[i + 2, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             //** COPIAN VALORES CON ITEM CAMBIADOS
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado, "PPU (DOL)",
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -969,10 +969,10 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Categoria_Region[i, x] / sdata48Meses_x_Categoria_Region[i + 2, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, "0. Cosmeticos", "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, "0. Cosmeticos", "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             // DUPLICANDO VALORES CON DIFERENTE MERCADO_
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -1054,10 +1054,10 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Categoria[i, x] / sdata48Meses_x_Categoria[i + 1, x];
                             }
 
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado, "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             // DUPLICANDO VALORES CON DIFERENTE MERCADO_
-                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)",
+                            Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)",
                                 "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -1178,7 +1178,7 @@ namespace BL
                                     valor_1 = sdata48Meses_x_NSE_Region_Tipo[i, x] / sdata48Meses_x_NSE_Region_Tipo[i + contadorTotal, x];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                     int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             }
                         }
@@ -1237,7 +1237,7 @@ namespace BL
                                     valor_1 = sdata48Meses_x_NSE_Region_Tipo[i, x] / sdata48Meses_x_NSE_Region_Tipo[i + contadorTotal, x];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                     int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             }
                         }
@@ -1348,7 +1348,7 @@ namespace BL
                                     valor_1 = sdata48Meses_x_NSE_Tipo[i, x] / sdata48Meses_x_NSE_Tipo[i + contadorTotal, x];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                     int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             }
                         }
@@ -1396,7 +1396,7 @@ namespace BL
                                     valor_1 = sdata48Meses_x_NSE_Tipo[i, x] / sdata48Meses_x_NSE_Tipo[i + contadorTotal, x];
                                 }
 
-                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                                Actualizar_BD(NSE_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                     int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             }
                         }
@@ -1511,10 +1511,10 @@ namespace BL
                             {
                                 valor_1 = sdata48Meses_x_Tipo_Region_Modalidad[i, x] / sdata48Meses_x_Tipo_Region_Modalidad[i + contadorTotal, x];
                             }
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             //******
-                            Actualizar_BD(V1_, "SUMA", "PPU (DOL)", Ciudad_, Mercado, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1_, "SUMA", "PPU (DOL.)", Ciudad_, Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -1616,10 +1616,10 @@ namespace BL
                             {
                                 valor_1 = sdata48Meses_x_Tipo_Region[i, x] / sdata48Meses_x_Tipo_Region[i + contadorTotal, x];
                             }
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", Ciudad_, Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", Ciudad_, Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             //******
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", Ciudad_, "0. Cosmeticos", "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", Ciudad_, "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -1723,10 +1723,10 @@ namespace BL
                             {
                                 valor_1 = sdata48Meses_x_Tipo_Modalidad[i, x] / sdata48Meses_x_Tipo_Modalidad[i + contadorTotal, x];
                             }
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             //******
-                            Actualizar_BD(V1_, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1_, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
@@ -1819,10 +1819,10 @@ namespace BL
                             {
                                 valor_1 = sdata48Meses_x_Tipo[i, x] / sdata48Meses_x_Tipo[i + contadorTotal, x];
                             }
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", Mercado_, "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", "0. Consolidado", Mercado_, "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                             //******
-                            Actualizar_BD(V1, "SUMA", "PPU (DOL)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL)", "MENSUAL", Periodo, valor_1,
+                            Actualizar_BD(V1, "SUMA", "PPU (DOL.)", "0. Consolidado", "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", Periodo, valor_1,
                                 int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }

@@ -178,7 +178,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_Hogar_NSE[i, x] / sdata48Meses_x_Hogar_Universo_Pais_NSE[i, x] * 100;
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -306,7 +306,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_NSE_Categoria[i, x] / sdata48Meses_x_Hogar_NSE[i, x] * 100;
                         }
 
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -414,7 +414,7 @@ namespace BL
                             {
                                 valor_1 = sdata48Meses_x_Hogar_NSE_Tipo[i, x] / sdata48Meses_x_Hogar_NSE[i, x] * 100;
                             }
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -552,7 +552,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_NSE_Region_Categoria[i, x] / sdata48Meses_x_Hogar_NSE_Region[i, x] * 100;
                         }
 
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -674,7 +674,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Hogar_NSE_Region_Tipo[i, x] / sdata48Meses_x_Hogar_NSE_Region[i, x] * 100;
                             }
 
-                            Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                            Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
                 }
@@ -751,7 +751,7 @@ namespace BL
                                 valor_1 = sdata48Meses_x_Hogar_NSE_Region_Tipo[i, x] / sdata48Meses_x_Hogar_NSE_Region[fila, x] * 100;
                             }
 
-                            Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                            Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         }
                     }
                 }
@@ -875,7 +875,7 @@ namespace BL
                         valor_1 = sdata48Meses_x_Hogar_NSE_Region[i, x] / sdata48Meses_x_Hogar_Universo_Capital_Ciudad[i, x] * 100;
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -984,10 +984,10 @@ namespace BL
                         valor_1 = sdata48Meses_x_Hogar_Modalidad_Region[i, x] / sdata48Meses_x_Hogar_Region[fila, x] * 100;
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL",
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL",
                         Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -1118,10 +1118,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Hogar_Categoria_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Categoria_Region[fila, x] * 100;
                         }
-                        //Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL",
+                        //Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL",
                         //    Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Penetraciones", Ciudad_, Mercado, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE, "Suma", "PENETRACIONES", Ciudad_, Mercado, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1295,10 +1295,10 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Tipo_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Tipo_Region[fila, x] * 100;
                             valor_2 = sdata48Meses_x_Hogar_Tipo_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Region_Modalidad[i, x] * 100;
                         }
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_2, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Penetraciones", Ciudad_, Mercado, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE, "Suma", "PENETRACIONES", Ciudad_, Mercado, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -1422,10 +1422,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Hogar_Categoria_Modalidad[i, x] / sdata48Meses_x_Hogar_Categorias[fila, x] * 100;
                         }
-                        //Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL",
+                        //Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL",
                         //    Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Penetraciones", "0. Consolidado", Mercado, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE, "Suma", "PENETRACIONES", "0. Consolidado", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1558,10 +1558,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Hogar_Tipo_Modalidad[i, x] / sdata48Meses_x_Hogar_Tipo[0, x] * 100;
                         }
-                        //Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones", "MENSUAL",
+                        //Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES", "MENSUAL",
                         //    Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //**//
-                        Actualizar_BD(NSE, "Suma", "Penetraciones", "0. Consolidado", Mercado, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE, "Suma", "PENETRACIONES", "0. Consolidado", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1660,9 +1660,9 @@ namespace BL
                         valor_1 = sdata48Meses_x_Hogar_Modalidad[i, x] / sdata48Meses_x_Hogar[0, x] * 100;
                     }
 
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //**//
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -1797,10 +1797,10 @@ namespace BL
                         {
                             valor_1 = sdata48Meses_x_Hogar_Tipo_Region[i, x] / sdata48Meses_x_Hogar_Categorias_Regiones[fila + i, x] * 100;
                         }
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         //***///
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -1933,7 +1933,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Tipo_Modalidad[i, x] / sdata48Meses_x_Hogar_Modalidad[i, x] * 100;
                         }
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2061,9 +2061,9 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Tipo[i, x] / sdata48Meses_x_Hogar_Categorias_All[fila, x] * 100;
                         }
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                         
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2200,7 +2200,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Categoria_Region_Modalidad[i, x] / sdata48Meses_x_Hogar_Region_Modalidad[i, x] * 100;
                         }
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado_, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado_, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2329,8 +2329,8 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Categoria_Region[i, x] / sdata48Meses_x_Hogar_Region[i, x] * 100;
                         }
 
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", Ciudad_, Mercado, "Penetraciones (%)", "MENSUAL",
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", Ciudad_, Mercado, "PENETRACIONES (%)", "MENSUAL",
                             Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
@@ -2459,7 +2459,7 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Categoria_Modalidad[i, x] / sdata48Meses_x_Hogar_Modalidad[i, x] * 100;
                         }
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2574,9 +2574,9 @@ namespace BL
                             valor_1 = sdata48Meses_x_Hogar_Categorias_All[i, x] / sdata48Meses_x_Hogar[0, x] * 100;
                         }
                         //**//
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
 
-                        Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", Mercado_, "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                        Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", Mercado_, "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     }
                 }
             }
@@ -2678,9 +2678,9 @@ namespace BL
                         valor_1 = sdata48Meses_x_Hogar_Region[i, x] / sdata48Meses_x_Hogar_Universo_Ciudad_Total[i, x] * 100;
                     }
 
-                    Actualizar_BD("Cosmeticos", "Suma", "Penetraciones", Ciudad_, "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD("Cosmeticos", "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                     //***
-                    Actualizar_BD(NSE_, "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD(NSE_, "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
@@ -2771,7 +2771,7 @@ namespace BL
                     {
                         valor_1 = sdata48Meses_x_Hogar[i, x] / sdata48Meses_x_Hogar_Universo_Total[i, x] * 100;
                     }
-                    Actualizar_BD("Consolidado", "Suma", "Penetraciones", "0. Consolidado", "0. Cosmeticos", "Penetraciones (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
+                    Actualizar_BD("Consolidado", "Suma", "PENETRACIONES", "0. Consolidado", "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", Periodo, valor_1, int.Parse(BD_Zoho.sCabecera48Meses[x].Substring(0, 4)));
                 }
             }
         }
