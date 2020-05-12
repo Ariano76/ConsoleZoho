@@ -56,16 +56,20 @@ namespace ConsoleApp1
             obj.Periodo_Actual(xAño, xMes);
             Console.WriteLine(obj.sPeriodoActual[0]);
 
-            Console.WriteLine($"La fecha un año atras es: {xFecha[0].ToShortDateString()}\n" +
-                $"La fecha dos años atras: {xFecha[1].ToShortDateString()}\n" +
-                $"La fecha tres años atras: {xFecha[8].ToShortDateString()}\n" +
-                $"La fecha seis meses atras: {xFecha[2].ToShortDateString()}\n" +
-                $"La fecha seis meses atras dos años: {xFecha[3].ToShortDateString()}\n" +
-                $"La fecha tres meses atras: {xFecha[4].ToShortDateString()}\n" +
-                $"La fecha tres meses atras dos años: {xFecha[5].ToShortDateString()}\n" +
+            Console.WriteLine($"La fecha de inicio un año atras es: {xFecha[0].ToShortDateString()}\n" +
+                $"La fecha de inicio dos años atras: {xFecha[1].ToShortDateString()}\n" +
+                $"La fecha de inicio tres años atras: {xFecha[8].ToShortDateString()}\n" +
+                $"La fecha de inicio tres meses atras: {xFecha[4].ToShortDateString()}\n" +
+                $"La fecha de inicio tres meses atras dos años: {xFecha[5].ToShortDateString()}\n" +
+                $"La fecha de inicio seis meses atras: {xFecha[2].ToShortDateString()}\n" +
+                $"La fecha de inicio seis meses atras dos años: {xFecha[3].ToShortDateString()}\n" +
+                $"La fecha de inicio doce meses atras: {xFecha[9].ToShortDateString()}\n" +         
+                $"La fecha de inicio doce meses atras dos años: {xFecha[10].ToShortDateString()}\n" +
+                $"La fecha de inicio YTD : {xFecha[11].ToShortDateString()}\n" +
+                $"La fecha de inicio YTD un año atras: {xFecha[12].ToShortDateString()}\n" +
                 $"Periodo de inicio 48 meses atras (4 años): {xFecha[6].ToShortDateString()}\n" +
                 $"Periodo de inicio 3 meses atras : {xFecha[7].ToShortDateString()}\n" +
-                $"El mes es {xFecha[0].Month} del año {xFecha[0].Year}");
+                $"La fecha de Proceso Año Anterior es : {xFecha[0].Month} del año {xFecha[0].Year}");
 
             HoraInicio = DateTime.Now;
             //obj.Calcular_Periodos( xAño,xMes);
@@ -73,19 +77,31 @@ namespace ConsoleApp1
             //{
             //    Console.WriteLine(item);
             //}
-            Console.WriteLine($"Hora de Inicio: {HoraInicio}");
+            Console.WriteLine($"Hora de Inicio: {HoraInicio}\n");
 
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
 
             string[] xPeriodos3Meses = obj.Obtener_Ultimos_3_meses(xFecha[7].Year, xFecha[7].Month);
+            string[] xPeriodos6Meses = obj.Obtener_Ultimos_6_meses(xFecha[2].Year, xFecha[2].Month);
+            string[] xPeriodos12Meses = obj.Obtener_Ultimos_12_meses(xFecha[9].Year, xFecha[9].Month);
+            string[] xPeriodos12Meses_One_Year_Ago = obj.Obtener_Ultimos_12_meses_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
+            string[] xPeriodosYTDMeses = obj.Obtener_YTD_meses(xFecha[11].Year, xFecha[11].Month);
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
             string[] xPeriodos_Inicio_Fin = obj.Obtener_Ultimos_48_meses_Factores_Capital(xFecha[6].Year, xFecha[6].Month, xAño, xMes);
 
             Console.WriteLine($"Periodos 3 Meses : {xPeriodos3Meses[0]}");
             Console.WriteLine($"Periodos 3 Meses : {xPeriodos3Meses[1]}\n");
-            Console.WriteLine($"Periodos 48 Meses : \n {xPeriodos48Meses[0]}");
-            Console.WriteLine($"Periodos 48 Meses : \n {xPeriodos48Meses[1]}\n");
-            Console.WriteLine($"Tabla Factor Cabecera : {xPeriodos_Inicio_Fin[0]}\n");
+            Console.WriteLine($"Periodos 6 Meses : {xPeriodos6Meses[0]}");
+            Console.WriteLine($"Periodos 6 Meses : {xPeriodos6Meses[1]}\n");
+            Console.WriteLine($"Periodos 12 Meses : {xPeriodos12Meses[0]}");
+            Console.WriteLine($"Periodos 12 Meses : {xPeriodos12Meses[1]}\n");
+            Console.WriteLine($"Periodos 12 Meses un año atras : {xPeriodos12Meses_One_Year_Ago[0]}");
+            Console.WriteLine($"Periodos 12 Meses un año atras : {xPeriodos12Meses_One_Year_Ago[1]}\n");
+            Console.WriteLine($"Periodos YTD Meses : {xPeriodosYTDMeses[0]}");
+            Console.WriteLine($"Periodos YTD Meses : {xPeriodosYTDMeses[1]}\n");
+            Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[0]}");
+            Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[1]}\n");
+            Console.WriteLine($"Tabla Factor Cabecera : {xPeriodos_Inicio_Fin[0]}");
             Console.WriteLine($"Tabla Factor Periodos : {xPeriodos_Inicio_Fin[1]}\n");
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
