@@ -74,11 +74,13 @@
     <Compile Include="cls_BD_Zoho.cs" />
     <Compile Include="Marcas\BL_Unidad_Promedio_Hogar_Marcas.cs" />
     <Compile Include="Output_48_Meses.cs" />
+    <Compile Include="Periodos\Share_Moneda_Local.cs" />
     <Compile Include="Procesos_Genericos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

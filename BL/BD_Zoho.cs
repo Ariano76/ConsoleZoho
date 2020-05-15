@@ -14,12 +14,17 @@ namespace BL
         //public double[] sShareValor = new double[2000];
 
         public double[] sShareValor ;
+        //public static readonly string[] sPeriodosYTDMeses = new string[2];     
+        public static readonly string[] sPeriodos1Meses = new string[2];
+        public static readonly string[] sPeriodos1MesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodos3Meses = new string[2];
+        public static readonly string[] sPeriodos3MesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodos6Meses = new string[2];
         public static readonly string[] sPeriodos6MesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodos12Meses = new string[2];
         public static readonly string[] sPeriodos12MesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodosYTDMeses = new string[2];
+        public static readonly string[] sPeriodosYTDMesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodos48Meses = new string[2];
         public static readonly string[] sCabecera48Meses = new string[48];
         
@@ -36,11 +41,11 @@ namespace BL
         public double[,] sdata48Meses_x_Region_Tipos_Mes = new double[12, 48];
 
         
-        private readonly DateTime[] Periodos = new DateTime[14];
+        private readonly DateTime[] Periodos = new DateTime[17];
         string sSource = "Dashboard ZOHO";        
         string NSE_, Ciudad_, Mercado_, Periodo;
-        int xMesFin, xMesFin_6, xMesFin_12;
-        int xMesInicial, xMesInicial_6, xMesInicial_12;
+        int xMesFin, xMesFin_1, xMesFin_3, xMesFin_6, xMesFin_12, xMesFin_YTD;
+        int xMesInicial, xMesInicial_1, xMesInicial_3, xMesInicial_6, xMesInicial_12, xMesInicial_YTD;
         public string resultadoBD;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
@@ -137,15 +142,18 @@ namespace BL
 
             //restar un año a una fecha
             //DateTime oneYearAgoToday = DateTime.Now.AddYears(-1);
-            DateTime oneYearAgoToday = FechaProceso.AddYears(-1);
-            DateTime twoYearAgoToday = FechaProceso.AddYears(-2);
+            DateTime oneYearAgoToday = FechaProceso.AddYears(-1); //mes actual un año atras
+            DateTime twoYearAgoToday = FechaProceso.AddYears(-2); //mes actual dos años atras
             DateTime threeYearAgoToday = FechaProceso.AddYears(-3);
             DateTime sixMonthAgoToday = FechaProceso.AddMonths(-5);
+            DateTime EndSixMonthAgoToday = FechaProceso.AddMonths(-5);
+            DateTime StartSixMonthAgoToday = oneYearAgoToday.AddMonths(-5);
             DateTime sixMonthTwoYearAgo = oneYearAgoToday.AddMonths(-5);
-            DateTime threeMonthAgoToday = FechaProceso.AddMonths(-2);
-            DateTime threeMonthTwoYearAgo = oneYearAgoToday.AddMonths(-2);
+            DateTime threeMonthAgoToday = FechaProceso.AddMonths(-3);
+            DateTime threeMonthTwoYearAgo = oneYearAgoToday.AddMonths(-3);
             DateTime fourYearAgo = FechaProceso.AddYears(-4);
             DateTime ThreeMonthsAgo = FechaProceso.AddMonths(-2);
+            DateTime StartThreeMonthAgoToday = oneYearAgoToday.AddMonths(-2);
             DateTime TwelveMonthsAgo = FechaProceso.AddMonths(-11);
             DateTime TwentyFourMonthsAgo = FechaProceso.AddMonths(-23);
             DateTime TwelveMonthTwoYearAgo = oneYearAgoToday.AddMonths(-11);
@@ -168,10 +176,91 @@ namespace BL
             Periodos[11] = Mes_1_Año_Actual;
             Periodos[12] = Mes_1_Año_Anterior;
             Periodos[13] = TwentyFourMonthsAgo;
+            Periodos[14] = StartSixMonthAgoToday;
+            Periodos[15] = EndSixMonthAgoToday;
+            Periodos[16] = StartThreeMonthAgoToday;
 
             return Periodos;
         }
 
+        public string[] Obtener_Ultimos_1_mes(int pAño, int pMes)
+        {
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+            DbCommand cmd;
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
+            xMesInicial_1 = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
+            xMesFin_1 = (Int32)(db.ExecuteScalar(cmd));
+
+
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                int indice = 0;
+                while (reader.Read())
+                {
+                    xPeriodos.Append("[" + reader[0].ToString() + "],");
+                    //sCabecera48Meses[indice] = reader[0].ToString();
+                    indice++;
+                }
+            }
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                while (reader.Read())
+                {
+                    xPeriodosInt.Append(reader[0].ToString() + ",");
+                    Debug.WriteLine(reader[0].ToString() + ",");
+                }
+            }
+
+            sPeriodos1Meses[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            sPeriodos1Meses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+            return sPeriodos1Meses;
+        }
+        public string[] Obtener_Ultimos_1_mes_One_Year_Ago(int pAño, int pMes)
+        {
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+            DbCommand cmd;
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
+            xMesInicial_1 = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
+            xMesFin_1 = (Int32)(db.ExecuteScalar(cmd));
+
+
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                int indice = 0;
+                while (reader.Read())
+                {
+                    xPeriodos.Append("[" + reader[0].ToString() + "],");
+                    //sCabecera48Meses[indice] = reader[0].ToString();
+                    indice++;
+                }
+            }
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                while (reader.Read())
+                {
+                    xPeriodosInt.Append(reader[0].ToString() + ",");
+                    Debug.WriteLine(reader[0].ToString() + ",");
+                }
+            }
+
+            sPeriodos1MesesOneYearAgo[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            sPeriodos1MesesOneYearAgo[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+            return sPeriodos1MesesOneYearAgo;
+        }
         public string[] Obtener_Ultimos_3_meses(int pAño, int pMes)
         {
             StringBuilder xPeriodos = new StringBuilder();
@@ -206,6 +295,44 @@ namespace BL
             sPeriodos3Meses[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
             sPeriodos3Meses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
             return sPeriodos3Meses;
+        }
+        public string[] Obtener_Ultimos_3_meses_One_Year_Ago(int pAño, int pMes)
+        {
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+            DbCommand cmd;
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + Periodos[16].Year + " AND MES = " + Periodos[16].Month + " ORDER BY IDPERIODO ASC");
+            xMesInicial_3 = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
+            xMesFin_3 = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_3 + " AND IDPERIODO <= " + xMesFin_3);
+
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                int indice = 0;
+                while (reader.Read())
+                {
+                    xPeriodos.Append("[" + reader[0].ToString() + "],");
+                    //sCabecera48Meses[indice] = reader[0].ToString();
+                    indice++;
+                }
+            }
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_3 + " AND IDPERIODO <= " + xMesFin_3);
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                while (reader.Read())
+                {
+                    xPeriodosInt.Append(reader[0].ToString() + ",");
+                    Debug.WriteLine(reader[0].ToString() + ",");
+                }
+            }
+
+            sPeriodos3MesesOneYearAgo[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            sPeriodos3MesesOneYearAgo[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+            return sPeriodos3MesesOneYearAgo;
         }
         public string[] Obtener_Ultimos_6_meses(int pAño, int pMes)
         {
@@ -247,8 +374,11 @@ namespace BL
             StringBuilder xPeriodos = new StringBuilder();
             StringBuilder xPeriodosInt = new StringBuilder();
             DbCommand cmd;
-            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + Periodos[14].Year + " AND MES = " + Periodos[14].Month + " ORDER BY IDPERIODO ASC");
             xMesInicial_6 = (Int32)(db.ExecuteScalar(cmd));
+            
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
+            xMesFin_6 = (Int32)(db.ExecuteScalar(cmd));
 
             cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_6 + " AND IDPERIODO <= " + xMesFin_6);
 
@@ -318,12 +448,12 @@ namespace BL
             StringBuilder xPeriodosInt = new StringBuilder();
             DbCommand cmd;
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + Periodos[13].Year + " AND MES = " + Periodos[13].Month + " ORDER BY IDPERIODO ASC");
-            xMesInicial_1 = (Int32)(db.ExecuteScalar(cmd));
+            xMesInicial_12 = (Int32)(db.ExecuteScalar(cmd));
 
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
-            xMesFin_1 = (Int32)(db.ExecuteScalar(cmd));
+            xMesFin_12 = (Int32)(db.ExecuteScalar(cmd));
 
-            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_12 + " AND IDPERIODO <= " + xMesFin_12);
 
             using (IDataReader reader = db.ExecuteReader(cmd))
             {
@@ -336,7 +466,7 @@ namespace BL
                 }
             }
 
-            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_1 + " AND IDPERIODO <= " + xMesFin_1);
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_12 + " AND IDPERIODO <= " + xMesFin_12);
             using (IDataReader reader = db.ExecuteReader(cmd))
             {
                 while (reader.Read())
@@ -385,6 +515,44 @@ namespace BL
             sPeriodosYTDMeses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
             return sPeriodosYTDMeses;
         }
+        public string[] Obtener_YTD_meses_One_Year_Ago(int pAño, int pMes)
+        {
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+            DbCommand cmd;
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
+            xMesInicial_YTD = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + Periodos[0].Year + " AND MES = " + Periodos[0].Month + " ORDER BY IDPERIODO DESC");
+            xMesFin_YTD = (Int32)(db.ExecuteScalar(cmd));
+
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_YTD + " AND IDPERIODO <= " + xMesFin_YTD);
+
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                int indice = 0;
+                while (reader.Read())
+                {
+                    xPeriodos.Append("[" + reader[0].ToString() + "],");
+                    //sCabecera48Meses[indice] = reader[0].ToString();
+                    indice++;
+                }
+            }
+
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial_YTD + " AND IDPERIODO <= " + xMesFin_YTD);
+            using (IDataReader reader = db.ExecuteReader(cmd))
+            {
+                while (reader.Read())
+                {
+                    xPeriodosInt.Append(reader[0].ToString() + ",");
+                    Debug.WriteLine(reader[0].ToString() + ",");
+                }
+            }
+
+            sPeriodosYTDMesesOneYearAgo[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            sPeriodosYTDMesesOneYearAgo[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+            return sPeriodosYTDMesesOneYearAgo;
+        }
         public string[] Obtener_Ultimos_48_meses(int pAño, int pMes)
         {            
             StringBuilder xPeriodos = new StringBuilder();
@@ -420,7 +588,6 @@ namespace BL
             sPeriodos48Meses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
             return sPeriodos48Meses;
         }
-
         public string[] Obtener_Ultimos_48_meses_Factores_Capital(int pAñoFin, int pMesFin, int pAñoIni, int pMesIni)
         {
             string xMesInicial;
@@ -458,6 +625,8 @@ namespace BL
             sPeriodos48MesesFactor[1] = xMesFinal;
             return sPeriodos48MesesFactor;
         }
+
+
 
 
         //public void Leer_Ultimos_48_Meses(string Cab, string xPeriodos)
@@ -1067,8 +1236,6 @@ namespace BL
                 }
             }
         }
-
-
 
         private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, string _Periodo, double _Datos, int _Año)
         {

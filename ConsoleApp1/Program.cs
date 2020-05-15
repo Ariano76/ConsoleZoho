@@ -60,9 +60,11 @@ namespace ConsoleApp1
                 $"La fecha de inicio dos años atras: {xFecha[1].ToShortDateString()}\n" +
                 $"La fecha de inicio tres años atras: {xFecha[8].ToShortDateString()}\n" +
                 $"La fecha de inicio tres meses atras: {xFecha[4].ToShortDateString()}\n" +
-                $"La fecha de inicio tres meses atras dos años: {xFecha[5].ToShortDateString()}\n" +
-                $"La fecha de inicio seis meses atras: {xFecha[2].ToShortDateString()}\n" +
-                $"La fecha de inicio seis meses atras dos años: {xFecha[3].ToShortDateString()}\n" +
+                $"La fecha de inicio tres meses atras año anterior: {xFecha[5].ToShortDateString()}\n" +
+                $"La fecha de inicio seis meses atras : {xFecha[2].ToShortDateString()}\n" +
+                $"La fecha de inicio seis meses atras año anterior: {xFecha[3].ToShortDateString()}\n" +
+                $"La fecha de inicio seis meses atras Periodo 2 : {xFecha[14].ToShortDateString()}\n" +
+                $"La fecha de Fin seis meses atras Periodo 2 : {xFecha[15].ToShortDateString()}\n" +                
                 $"La fecha de inicio doce meses atras: {xFecha[9].ToShortDateString()}\n" +         
                 $"La fecha de inicio doce meses atras dos años: {xFecha[10].ToShortDateString()}\n" +
                 $"La fecha de inicio YTD : {xFecha[11].ToShortDateString()}\n" +
@@ -81,24 +83,40 @@ namespace ConsoleApp1
 
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
 
+            string[] xPeriodos1Meses = obj.Obtener_Ultimos_1_mes(xAño, xMes);
+            string[] xPeriodos1MesesAgo = obj.Obtener_Ultimos_1_mes_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
             string[] xPeriodos3Meses = obj.Obtener_Ultimos_3_meses(xFecha[7].Year, xFecha[7].Month);
+            string[] xPeriodos3MesesAgo = obj.Obtener_Ultimos_3_meses_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
             string[] xPeriodos6Meses = obj.Obtener_Ultimos_6_meses(xFecha[2].Year, xFecha[2].Month);
+            string[] xPeriodos6MesesAgo = obj.Obtener_Ultimos_6_meses_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
             string[] xPeriodos12Meses = obj.Obtener_Ultimos_12_meses(xFecha[9].Year, xFecha[9].Month);
             string[] xPeriodos12Meses_One_Year_Ago = obj.Obtener_Ultimos_12_meses_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
             string[] xPeriodosYTDMeses = obj.Obtener_YTD_meses(xFecha[11].Year, xFecha[11].Month);
+            string[] xPeriodosYTDMesesAgo = obj.Obtener_YTD_meses_One_Year_Ago(xFecha[12].Year, xFecha[12].Month);
+
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
             string[] xPeriodos_Inicio_Fin = obj.Obtener_Ultimos_48_meses_Factores_Capital(xFecha[6].Year, xFecha[6].Month, xAño, xMes);
 
+            Console.WriteLine($"Periodos 1 Mes : {xPeriodos1Meses[0]}");
+            Console.WriteLine($"Periodos 1 Mes : {xPeriodos1Meses[1]}\n");
+            Console.WriteLine($"Periodos 1 Mes año anterior: {xPeriodos1MesesAgo[0]}");
+            Console.WriteLine($"Periodos 1 Mes año anterior: {xPeriodos1MesesAgo[1]}\n");
             Console.WriteLine($"Periodos 3 Meses : {xPeriodos3Meses[0]}");
             Console.WriteLine($"Periodos 3 Meses : {xPeriodos3Meses[1]}\n");
+            Console.WriteLine($"Periodos 3 Meses año anterior : {xPeriodos3MesesAgo[0]}");
+            Console.WriteLine($"Periodos 3 Meses año anterior : {xPeriodos3MesesAgo[1]}\n");
             Console.WriteLine($"Periodos 6 Meses : {xPeriodos6Meses[0]}");
             Console.WriteLine($"Periodos 6 Meses : {xPeriodos6Meses[1]}\n");
+            Console.WriteLine($"Periodos 6 Meses atras : {xPeriodos6MesesAgo[0]}");
+            Console.WriteLine($"Periodos 6 Meses atras : {xPeriodos6MesesAgo[1]}\n");
             Console.WriteLine($"Periodos 12 Meses : {xPeriodos12Meses[0]}");
             Console.WriteLine($"Periodos 12 Meses : {xPeriodos12Meses[1]}\n");
             Console.WriteLine($"Periodos 12 Meses un año atras : {xPeriodos12Meses_One_Year_Ago[0]}");
             Console.WriteLine($"Periodos 12 Meses un año atras : {xPeriodos12Meses_One_Year_Ago[1]}\n");
             Console.WriteLine($"Periodos YTD Meses : {xPeriodosYTDMeses[0]}");
             Console.WriteLine($"Periodos YTD Meses : {xPeriodosYTDMeses[1]}\n");
+            Console.WriteLine($"Periodos YTD Meses un año atras : {xPeriodosYTDMesesAgo[0]}");
+            Console.WriteLine($"Periodos YTD Meses un año atras : {xPeriodosYTDMesesAgo[1]}\n");
             Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[0]}");
             Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[1]}\n");
             Console.WriteLine($"Tabla Factor Cabecera : {xPeriodos_Inicio_Fin[0]}");
