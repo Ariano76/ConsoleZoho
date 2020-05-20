@@ -23,7 +23,9 @@ namespace BL
         public string Codigo_Marcas_3M_Tipo, Codigo_Marcas_3M_Categoria, Codigo_Marcas_3M_Total_Cosmeticos;
         public string Codigo_Grupo_Belcorp_3M_Tipo, Codigo_Grupo_Loreal_3M_Tipo, Codigo_Grupo_Lauder_3M_Tipo;
 
-        public double[,] periodos_Total_Mercado = new double[1, 14];  // TOTAL POR  VALORES
+        public double[,] periodos_Total_Mercado = new double[1, 13];  // TOTAL POR  VALORES
+
+
 
         public double[,] sdata48Meses_x_Tipo_Total = new double[1, 48];  // TOTAL POR TIPO VALORES
         public double[,] sdata48Meses_x_Tipo_Marcas_Valores = new double[15, 49];  // 
@@ -199,7 +201,7 @@ namespace BL
                     int cols = reader_1.FieldCount;
                     while (reader_1.Read())
                     {
-                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                         {
                             if (reader_1[i] == DBNull.Value)
                             {
@@ -214,8 +216,7 @@ namespace BL
                         rows++;
                     }
                 }
-                Actualizar_BD('Consolidado', "Suma", "PPU (ML)", "0. Consolidado", "0. Cosmeticos", "PPU (ML)", "MENSUAL", Periodo, valor_1,
-                            int.Parse(BD_Zoho.sCabecera48Meses[x - 1].Substring(0, 4)));
+                Actualizar_BD("Consolidado", "Suma", "MONEDA LOCAL", "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "JAN-01", valor_1,0);
 
             }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_MARCAS_VALOR_TOTAL_COSMETICOS"))
@@ -3684,7 +3685,7 @@ namespace BL
             return Marca;
         }
 
-        private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, double _Datos, int _Año, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1 , double _PER_12M_2 , double _PER_6M_1 , double _PER_6M_2 , double _PER_3M_1 , double _PER_3M_2 , double _PER_1M_1 , double _PER_1M_2 , double _PER_YTD_1 , double _PER_YTD_2 , double _VAR_ANO, double _VAR_12M , double _VAR_6M , double _VAR_3M , double _VAR_1M , double _VAR_YTD )
+        private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, int _Año, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1 , double _PER_12M_2 , double _PER_6M_1 , double _PER_6M_2 , double _PER_3M_1 , double _PER_3M_2 , double _PER_1M_1 , double _PER_1M_2 , double _PER_YTD_1 , double _PER_YTD_2 , double _VAR_ANO, double _VAR_12M , double _VAR_6M , double _VAR_3M , double _VAR_1M , double _VAR_YTD )
         {
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_INSERTA_DATA_PERIODOS"))
             {
