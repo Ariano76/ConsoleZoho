@@ -24,7 +24,12 @@ namespace BL
         public string Codigo_Marcas_3M_Tipo, Codigo_Marcas_3M_Categoria, Codigo_Marcas_3M_Total_Cosmeticos;
         public string Codigo_Grupo_Belcorp_3M_Tipo, Codigo_Grupo_Loreal_3M_Tipo, Codigo_Grupo_Lauder_3M_Tipo;
 
-        public double[,] periodo_Total_Mercado = new double[1, 13];  // TOTAL POR  VALORES
+        public double[,] periodo_Total_Mercado_Valor = new double[1, 13];  // TOTAL POR  VALORES
+        public double[,] periodo_Total_Lima_Valor = new double[1, 13];  // LIMA POR  VALORES
+        public double[,] periodo_Total_Ciudades_Valor = new double[1, 13];  // CIUDAD POR  VALORES
+        public double[,] periodo_Temp_Valor = new double[1, 13];  // TEMPORAL POR  VALORES
+
+
 
 
 
@@ -177,11 +182,23 @@ namespace BL
         }
 
         #region TOTAL MERCADO
-        public void periodos_Cosmeticos_Total_Valores(string xCab, string xAños, int xMoneda, string _PER12M_1 , string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2 , string _PER1M_1, string _PER1M_2 , string _PERYTDM_1 , string _PERYTDM_2)
+        public void Periodos_Cosmeticos_Total_Valores(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1 , string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2 , string _PER1M_1, string _PER1M_2 , string _PERYTDM_1 , string _PERYTDM_2)
         {
-            
+            if (xCiudad == "1")
+            {
+                V1 = "Lima";              
+            }
+            else if (xCiudad == "1,2,5")
+            {
+                V1 = "Consolidado";
+            }
+            else
+            {
+                V1 = "Ciudades";
+            }
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MERCADO"))
-            {                
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
                 db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
                 db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);             
@@ -212,14 +229,34 @@ namespace BL
                             {
                                 valor_1 = double.Parse(reader_1[i].ToString());
                             }
-                            periodo_Total_Mercado[rows, i - 1] = valor_1;
+
+                            if (V1 == "Consolidado")
+                            {
+                                periodo_Total_Mercado_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                            }
+                            else if (V1 == "Lima")
+                            {
+                                periodo_Total_Lima_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                            }
+                            else
+                            {
+                                periodo_Total_Ciudades_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                            }
+                            
                         }
                         rows++;
                     }
                 }
-                Actualizar_BD("Consolidado", "Suma", "MONEDA LOCAL", "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "MENSUAL PERCY", periodo_Total_Mercado[0, 0], periodo_Total_Mercado[0, 1], periodo_Total_Mercado[0, 2], periodo_Total_Mercado[0, 3], periodo_Total_Mercado[0, 4], periodo_Total_Mercado[0, 5], periodo_Total_Mercado[0, 6], periodo_Total_Mercado[0, 7], periodo_Total_Mercado[0, 8], periodo_Total_Mercado[0, 9], periodo_Total_Mercado[0, 10], periodo_Total_Mercado[0, 11], periodo_Total_Mercado[0, 12]);
+                Actualizar_BD(V1, "Suma", "MONEDA LOCAL", "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "MENSUAL PERCY", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                // PROMEDIO MENSUAL
+                Actualizar_BD(V1, "Suma", "MONEDA LOCAL MES", "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "MENSUAL PERCY", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12 , periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
 
             }
+
+
             //using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("marcas._SP_MARCAS_VALOR_TOTAL_COSMETICOS"))
             //{
             //    db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, xPeriodos);
@@ -1340,7 +1377,7 @@ namespace BL
 
         private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1 , double _PER_12M_2 , double _PER_6M_1 , double _PER_6M_2 , double _PER_3M_1 , double _PER_3M_2 , double _PER_1M_1 , double _PER_1M_2 , double _PER_YTD_1 , double _PER_YTD_2 )
         {
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("_SP_INSERTA_DATA_PERIODOS"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_INSERTA_DATA_PERIODOS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_V1", DbType.String, _V1);
                 db_Zoho.AddInParameter(cmd_1, "_V2", DbType.String, _V2);
@@ -1362,12 +1399,25 @@ namespace BL
                 db_Zoho.AddInParameter(cmd_1, "_PER_1M_2", DbType.Double, _PER_1M_2);
                 db_Zoho.AddInParameter(cmd_1, "_PER_YTD_1", DbType.Double, _PER_YTD_1);
                 db_Zoho.AddInParameter(cmd_1, "_PER_YTD_2", DbType.Double, _PER_YTD_2);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_ANO", DbType.Double, _ANO_2 / _ANO_1 -1);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_12M", DbType.Double, _PER_12M_2 / _PER_12M_1 -1);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_6M", DbType.Double, _PER_6M_2 / _PER_6M_1 -1);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_3M", DbType.Double, _PER_3M_2 / _PER_3M_1 -1);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_1M", DbType.Double, _PER_1M_2 / _PER_1M_1 -1);
-                db_Zoho.AddInParameter(cmd_1, "_VAR_YTD", DbType.Double, _PER_YTD_2 / _PER_YTD_1 -1);
+                if (_Variable == "MONEDA LOCAL MES")
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_ANO", DbType.Double, 0);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_12M", DbType.Double, 0);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_6M", DbType.Double, 0);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_3M", DbType.Double, 0);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_1M", DbType.Double, 0);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_YTD", DbType.Double, 0);
+                }
+                else
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_ANO", DbType.Double, (_ANO_2 / _ANO_1 -1) * 100);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_12M", DbType.Double, (_PER_12M_2 / _PER_12M_1 -1) * 100);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_6M", DbType.Double, (_PER_6M_2 / _PER_6M_1 -1) * 100);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_3M", DbType.Double, (_PER_3M_2 / _PER_3M_1 -1) * 100);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_1M", DbType.Double, (_PER_1M_2 / _PER_1M_1 -1) * 100);
+                    db_Zoho.AddInParameter(cmd_1, "_VAR_YTD", DbType.Double, (_PER_YTD_2 / _PER_YTD_1 -1) * 100);
+                }
+               
                 db_Zoho.ExecuteNonQuery(cmd_1);
             }
         }

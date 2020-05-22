@@ -189,10 +189,11 @@ namespace BL
             StringBuilder xPeriodos = new StringBuilder();
             StringBuilder xPeriodosInt = new StringBuilder();
 
+            pAño -= 3;
             for (int i = 0; i < 3; i++)
             {
-                xPeriodos.Append("[" + (pAño - i) + "],");
-                xPeriodosInt.Append((pAño - i) + ",");
+                xPeriodos.Append("[" + (pAño + i) + "],");
+                xPeriodosInt.Append((pAño + i) + ",");
             }
 
             s3AñosAnteriores[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);

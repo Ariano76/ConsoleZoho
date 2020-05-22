@@ -1703,7 +1703,7 @@ namespace ConsoleApp1
             //    //objPentraciones_Marca.Recuperar_Marcas_Grupo_Belcorp(xPeriodos3Meses[1], item); // 
             //    //objPentraciones_Marca.Recuperar_Marcas_Grupo_Lauder(xPeriodos3Meses[1], item); // 
             //    //objPentraciones_Marca.Recuperar_Marcas_Grupo_Loreal(xPeriodos3Meses[1], item); // 
-            //    objPentraciones_Marca.Leer_Ultimos_48_Meses_TIPO_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1],item);
+            //    objPentraciones_Marca.Leer_Ultimos_48_Meses_TIPO_CAPITAL(xPeriodos48Meses[0], xPeriodos48Meses[1], item);
             //}
             //Tiempo_Proceso("PENETRACIONES MARCA TIPO CAPITAL . . .", HoraStart);
             //Record_Progreso();
@@ -1758,7 +1758,12 @@ namespace ConsoleApp1
 
 
             HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.periodos_Cosmeticos_Total_Valores(x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+
             Tiempo_Proceso("PERIODOS SHARE VALOR CONSOLIDADO . . .", HoraStart);
             Record_Progreso();
 
