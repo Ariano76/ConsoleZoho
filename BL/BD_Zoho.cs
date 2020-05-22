@@ -15,6 +15,7 @@ namespace BL
 
         public double[] sShareValor ;
         //public static readonly string[] sPeriodosYTDMeses = new string[2];     
+        public static readonly string[] s3AñosAnteriores = new string[2];
         public static readonly string[] sPeriodos1Meses = new string[2];
         public static readonly string[] sPeriodos1MesesOneYearAgo = new string[2];
         public static readonly string[] sPeriodos3Meses = new string[2];
@@ -181,6 +182,22 @@ namespace BL
             Periodos[16] = StartThreeMonthAgoToday;
 
             return Periodos;
+        }
+
+        public string[] Obtener_3_Ultimos_años(int pAño)
+        {
+            StringBuilder xPeriodos = new StringBuilder();
+            StringBuilder xPeriodosInt = new StringBuilder();
+
+            for (int i = 0; i < 3; i++)
+            {
+                xPeriodos.Append("[" + (pAño - i) + "],");
+                xPeriodosInt.Append((pAño - i) + ",");
+            }
+
+            s3AñosAnteriores[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
+            s3AñosAnteriores[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+            return s3AñosAnteriores;
         }
 
         public string[] Obtener_Ultimos_1_mes(int pAño, int pMes)
