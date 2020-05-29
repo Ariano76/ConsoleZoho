@@ -21,7 +21,8 @@ namespace BL
         private int[] Codigos_NSE = { 488, 489, 490, 491, 492 }; // NSE
         private int[] Codigo_Tipos = { 229,238,164,158,161,174,215,178,202,237,226,228,173,235,175 }; // TIPOS 
         string[,] Codigo_Nombres_Tipo = new string[15, 2] { {"229","12. Acondic.Adultos-Niños-Bb"},{"238","15. Aerosol"},{"164","03. Colonia Baño"},{"158","01. Colonia Femeninas"},{"161","02. Colonia Masculinas"},{"175","06. Delineador Ojos"},{"174","05. Embellecedor-Rimmel"},{"215","09. Humectante/Nutritiva Corporal"},{"178","07. Labiales"},{"202","08. Nutritiva Revit. Facial"},{"237","14. Roll-On"},{"226","10. Shampoo Adultos"},{"228","11. Shampoo Bebes"},{"173","04. Sombras"},{"235","13. Trat.Capilar Adultos/Niños"}};  // codigos y nombre de tipos
-        string[,] Codigo_Nombres_NSE = new string[5, 2] {{ "488", "Alto" }, { "489", "Medio" }, { "490", "Medio Bajo" }, { "491", "Bajo" }, { "492", "Muy Bajo" }};  // Codigos y Nombre de Tipos
+        string[,] Codigo_Nombres_NSE = new string[5, 2] {{ "488", "Alto" }, { "489", "Medio" }, { "490", "Medio Bajo" }, { "491", "Bajo" }, { "492", "Muy Bajo" }};  // Codigos y Nombre de NSE
+        string[,] Codigo_Nombres_Categoria = new string[5, 2] { { "123", "1. Fragancias" }, { "124", "2. Maquillaje" }, { "125", "3. Tratamiento Facial" }, { "126", "4. Tratamiento Corporal" }, { "127", "5. Cuidado Personal" } };  // Codigos y Nombre de CATEGORIAS
         private int[] Codigo_Categoria_All = { 123, 124, 125, 126, 127 }; // Categorias   
         private int[] Codigo_Categoria = { 123, 124, 127 }; // Categorias que se miden mensualmente
         private int[] Codigo_Modalidad_Venta = { 87,88 }; // Modalidad de Venta 
@@ -48,7 +49,10 @@ namespace BL
         public double[,] periodo_Total_Mercado_NSE_Valor = new double[15, 14];  // NSE
         public double[,] periodo_Total_Lima_NSE_Valor = new double[15, 14];  // NSE
         public double[,] periodo_Total_Ciudades_NSE_Valor = new double[15, 14];  // NSE 
-        
+        public double[,] periodo_Total_Mercado_Categoria_Valor = new double[15, 14];  // 
+        public double[,] periodo_Total_Lima_Categoria_Valor = new double[15, 14];  // 
+        public double[,] periodo_Total_Ciudades_Categoria_Valor = new double[15, 14];  //  
+
 
 
 
@@ -343,8 +347,9 @@ namespace BL
 
             // CODIGO RECORRIDO POR NSE   
             HoraStart = DateTime.Now;
+            double[,] periodo_Total_Temp = new double[15, 14];
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MERCADO_NSE"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_NSE"))
             {                
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
@@ -398,7 +403,7 @@ namespace BL
                         }
                         rows++;
                     }
-
+                    
                     if (rows == 4)
                     {
                         periodo_Total_Temp[rows + 1, 0] = 489; periodo_Total_Temp[rows + 1, 1] = 0; 
@@ -431,105 +436,190 @@ namespace BL
 
             Tiempo_Proceso("PERIODOS SHARE " + V1 + " - " + V1_ + " - " + Ciudad_ + " . .", HoraStart);
 
-            // CODIGO RECORRIDO POR CATEGORIAS  
+            // CODIGO RECORRIDO POR CATEGORIAS   
             HoraStart = DateTime.Now;
-            string CodigoCategoria;
-            for (int k = 0; k < Codigo_Categoria_All.GetLength(0); k++)
+            
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_CATEGORIA"))
             {
-                CodigoCategoria = Codigo_Categoria_All[k].ToString();
-                switch (Codigo_Categoria_All[k])
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);                
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+                int columnas = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
                 {
-                    case 123:
-                        V1_ = "Fragancias";
-                        Mercado = "1. Fragancias";
-                        break;
-                    case 124:
-                        V1_ = "Maquillaje";
-                        Mercado = "2. Maquillaje";
-                        break;
-                    case 125:
-                        V1_ = "Tratamiento Facial";
-                        Mercado = "3. Tratamiento Facial";
-                        break;
-                    case 126:
-                        V1_ = "Tratamiento Corporal";
-                        Mercado = "4. Tratamiento Corporal";
-                        break;
-                    case 127:
-                        V1_ = "Cuidado Personal";
-                        Mercado = "5. Cuidado Personal";
-                        break;
-                }
-
-                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MERCADO"))
-                {
-                    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, CodigoCategoria);
-                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
-                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
-                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
-                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
-                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
-                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
-                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
-                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
-                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
-                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
-                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
-                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
-                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
-                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
-                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
-                    int rows = 0;
-                    int columnas = 0;
-                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
                     {
-                        int cols = reader_1.FieldCount;
-                        columnas = cols;
-                        while (reader_1.Read())
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                         {
-                            for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                            if (reader_1[i] == DBNull.Value)
                             {
-                                if (reader_1[i] == DBNull.Value)
-                                {
-                                    valor_1 = 0;
-                                }
-                                else
-                                {
-                                    valor_1 = double.Parse(reader_1[i].ToString());
-                                }
-
-                                if (V1 == "Consolidado")
-                                {
-                                    periodo_Total_Mercado_Valor[rows, i - 1] = valor_1;
-                                    periodo_Temp_Valor[rows, i - 1] = valor_1;
-                                }
-                                else if (V1 == "Lima")
-                                {
-                                    periodo_Total_Lima_Valor[rows, i - 1] = valor_1;
-                                    periodo_Temp_Valor[rows, i - 1] = valor_1;
-                                }
-                                else
-                                {
-                                    periodo_Total_Ciudades_Valor[rows, i - 1] = valor_1;
-                                    periodo_Temp_Valor[rows, i - 1] = valor_1;
-                                }
+                                valor_1 = 0;
                             }
-                            rows++;
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            if (V1 == "Consolidado")
+                            {
+                                periodo_Total_Mercado_Categoria_Valor[rows, i - 1] = valor_1;
+                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                            }
+                            else if (V1 == "Lima")
+                            {
+                                periodo_Total_Lima_Categoria_Valor[rows, i - 1] = valor_1;
+                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                            }
+                            else
+                            {
+                                periodo_Total_Ciudades_Categoria_Valor[rows, i - 1] = valor_1;
+                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                            }
                         }
-                    }
-                    if (rows < 1)
-                    {
-                        for (int i = 1; i < columnas; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
-                        {
-                            periodo_Temp_Valor[0, i - 1] = 0;
-                        }
-                    }
-                    Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
-                    // PROMEDIO MENSUAL
-                    Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                        rows++;
+                    }                   
                 }
             }
+
+            string CodigoCategoria;
+            for (int k = 0; k < periodo_Total_Temp.GetLength(0); k++) //FILAS
+            {
+                CodigoCategoria = periodo_Total_Temp[k, 0].ToString();
+                for (int i = 0; i < Codigo_Nombres_Categoria.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
+                {
+                    if (CodigoCategoria == Codigo_Nombres_Categoria[i, 0])
+                    {
+                        V1_ = Codigo_Nombres_Categoria[i, 1].Substring(3, Codigo_Nombres_Categoria[i, 1].Length - 3); ;
+                        Mercado = Codigo_Nombres_Categoria[i, 1];
+                    }
+                }
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Total_Temp[k, 1], periodo_Total_Temp[k, 2], periodo_Total_Temp[k, 3], periodo_Total_Temp[k, 4], periodo_Total_Temp[k, 5], periodo_Total_Temp[k, 6], periodo_Total_Temp[k, 7], periodo_Total_Temp[k, 8], periodo_Total_Temp[k, 9], periodo_Total_Temp[k, 10], periodo_Total_Temp[k, 11], periodo_Total_Temp[0, 12], periodo_Total_Temp[k, 13]);
+                // PROMEDIO MENSUAL
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Total_Temp[k, 1] / 12, periodo_Total_Temp[k, 2] / 12, periodo_Total_Temp[k, 3] / 12, periodo_Total_Temp[k, 4] / 12, periodo_Total_Temp[k, 5] / 12, periodo_Total_Temp[k, 6] / 6, periodo_Total_Temp[k, 7] / 6, periodo_Total_Temp[k, 8] / 3, periodo_Total_Temp[k, 9] / 3, periodo_Total_Temp[k, 10] / 1, periodo_Total_Temp[k, 11] / 1, periodo_Total_Temp[k, 12], periodo_Total_Temp[k, 13]);
+            }
+
             Tiempo_Proceso("PERIODOS SHARE " + V1 + " - " + V1_ + " - " + Ciudad_ + " . .", HoraStart);
+
+
+
+
+
+
+
+            //// CODIGO RECORRIDO POR CATEGORIAS  
+            //HoraStart = DateTime.Now;
+            //string CodigoCategoria;
+            //for (int k = 0; k < Codigo_Categoria_All.GetLength(0); k++)
+            //{
+            //    CodigoCategoria = Codigo_Categoria_All[k].ToString();
+            //    switch (Codigo_Categoria_All[k])
+            //    {
+            //        case 123:
+            //            V1_ = "Fragancias";
+            //            Mercado = "1. Fragancias";
+            //            break;
+            //        case 124:
+            //            V1_ = "Maquillaje";
+            //            Mercado = "2. Maquillaje";
+            //            break;
+            //        case 125:
+            //            V1_ = "Tratamiento Facial";
+            //            Mercado = "3. Tratamiento Facial";
+            //            break;
+            //        case 126:
+            //            V1_ = "Tratamiento Corporal";
+            //            Mercado = "4. Tratamiento Corporal";
+            //            break;
+            //        case 127:
+            //            V1_ = "Cuidado Personal";
+            //            Mercado = "5. Cuidado Personal";
+            //            break;
+            //    }
+
+            //    using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MERCADO"))
+            //    {
+            //        db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, CodigoCategoria);
+            //        db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+            //        db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+            //        db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+            //        db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+            //        db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+            //        db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+            //        db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+            //        db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+            //        int rows = 0;
+            //        int columnas = 0;
+            //        using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+            //        {
+            //            int cols = reader_1.FieldCount;
+            //            columnas = cols;
+            //            while (reader_1.Read())
+            //            {
+            //                for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+            //                {
+            //                    if (reader_1[i] == DBNull.Value)
+            //                    {
+            //                        valor_1 = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        valor_1 = double.Parse(reader_1[i].ToString());
+            //                    }
+
+            //                    if (V1 == "Consolidado")
+            //                    {
+            //                        periodo_Total_Mercado_Valor[rows, i - 1] = valor_1;
+            //                        periodo_Temp_Valor[rows, i - 1] = valor_1;
+            //                    }
+            //                    else if (V1 == "Lima")
+            //                    {
+            //                        periodo_Total_Lima_Valor[rows, i - 1] = valor_1;
+            //                        periodo_Temp_Valor[rows, i - 1] = valor_1;
+            //                    }
+            //                    else
+            //                    {
+            //                        periodo_Total_Ciudades_Valor[rows, i - 1] = valor_1;
+            //                        periodo_Temp_Valor[rows, i - 1] = valor_1;
+            //                    }
+            //                }
+            //                rows++;
+            //            }
+            //        }
+            //        if (rows < 1)
+            //        {
+            //            for (int i = 1; i < columnas; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+            //            {
+            //                periodo_Temp_Valor[0, i - 1] = 0;
+            //            }
+            //        }
+            //        Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+            //        // PROMEDIO MENSUAL
+            //        Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+            //    }
+            //}
+            //Tiempo_Proceso("PERIODOS SHARE " + V1 + " - " + V1_ + " - " + Ciudad_ + " . .", HoraStart);
 
             // CODIGO RECORRIDO POR TIPOS      
             HoraStart = DateTime.Now;
