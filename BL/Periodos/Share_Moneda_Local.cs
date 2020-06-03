@@ -652,12 +652,12 @@ namespace BL
             for (int k = 0; k < periodo_Modalidad_Temp.GetLength(0); k++) //FILAS
             {
                 CodigoModalidad = periodo_Modalidad_Temp[k, 0].ToString();
-                for (int i = 0; i < Codigo_Nombres_Categoria.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
+                for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
-                    if (CodigoModalidad == Codigo_Nombres_Categoria[i, 0])
+                    if (CodigoModalidad == Codigo_Nombres_Modalidad[i, 0])
                     {
-                        V1_ = Codigo_Nombres_Categoria[i, 1].Substring(3, Codigo_Nombres_Categoria[i, 1].Length - 3); ;
-                        Mercado = Codigo_Nombres_Categoria[i, 1];
+                        V1_ = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3); ;
+                        Mercado = Codigo_Nombres_Modalidad[i, 1];
                     }
                 }
                 Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Modalidad_Temp[k, 1], periodo_Modalidad_Temp[k, 2], periodo_Modalidad_Temp[k, 3], periodo_Modalidad_Temp[k, 4], periodo_Modalidad_Temp[k, 5], periodo_Modalidad_Temp[k, 6], periodo_Modalidad_Temp[k, 7], periodo_Modalidad_Temp[k, 8], periodo_Modalidad_Temp[k, 9], periodo_Modalidad_Temp[k, 10], periodo_Modalidad_Temp[k, 11], periodo_Modalidad_Temp[0, 12], periodo_Modalidad_Temp[k, 13]);
