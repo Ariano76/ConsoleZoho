@@ -45,6 +45,7 @@ namespace BL
         public double[,] periodo_Total_Lima_Unidad = new double[1, 13];  // LIMA POR  UNIDADES
         public double[,] periodo_Total_Ciudades_Unidad = new double[1, 13];  // CIUDAD POR  UNIDADES
         public double[,] periodo_Temp_Valor = new double[1, 13];  // TEMPORAL POR  VALORES
+        public double[,] periodo_Temp_Unidad = new double[1, 13];  // TEMPORAL POR  UNIDAD
 
         public double[,] periodo_Total_Mercado_Tipo_Valor = new double[15, 14];  // LIMA POR  VALORES
         public double[,] periodo_Total_Lima_Tipo_Valor = new double[15, 14];  // 
@@ -52,7 +53,8 @@ namespace BL
         public double[,] periodo_Total_Mercado_Tipo_Unidad = new double[15, 14];  // LIMA POR  UNIDAD
         public double[,] periodo_Total_Lima_Tipo_Unidad = new double[15, 14];  // 
         public double[,] periodo_Total_Ciudades_Tipo_Unidad = new double[15, 14];  // 
-        public double[,] periodo_Total_Temp = new double[15, 14];  // 
+        public double[,] periodo_Tipo_Temp = new double[15, 14];  // 
+        public double[,] periodo_Tipo_Temp_Unid = new double[15, 14];  // 
 
         public double[,] periodo_Total_Mercado_NSE_Valor = new double[15, 14];  // NSE Valor
         public double[,] periodo_Total_Lima_NSE_Valor = new double[15, 14];  // NSE Valor
@@ -61,6 +63,7 @@ namespace BL
         public double[,] periodo_Total_Lima_NSE_Unidad = new double[15, 14];  // NSE Unidad
         public double[,] periodo_Total_Ciudades_NSE_Unidad = new double[15, 14];  // NSE Unidad
         public double[,] periodo_NSE_Temp = new double[5, 14];  // NSE 
+        public double[,] periodo_NSE_Temp_Unidad = new double[5, 14];  // NSE 
 
         public double[,] periodo_Total_Mercado_Categoria_Valor = new double[5, 14];  // 
         public double[,] periodo_Total_Lima_Categoria_Valor = new double[5, 14];  // 
@@ -68,6 +71,8 @@ namespace BL
         public double[,] periodo_Total_Mercado_Categoria_Unidad = new double[5, 14];  // Unidad
         public double[,] periodo_Total_Lima_Categoria_Unidad = new double[5, 14];  // Unidad
         public double[,] periodo_Total_Ciudades_Categoria_Unidad = new double[5, 14];  // Unidad
+        public double[,] periodo_Cat_Temp = new double[5, 14];
+        public double[,] periodo_Cat_Temp_Unid = new double[5, 14];        
 
         public double[,] periodo_Total_Mercado_Modalidad_Valor = new double[2, 14];  // 
         public double[,] periodo_Total_Lima_Modalidad_Valor = new double[2, 14];  // 
@@ -75,14 +80,15 @@ namespace BL
         public double[,] periodo_Total_Mercado_Modalidad_Unidad = new double[2, 14];  // Unidad
         public double[,] periodo_Total_Lima_Modalidad_Unidad = new double[2, 14];  // Unidad
         public double[,] periodo_Total_Ciudades_Modalidad_Unidad = new double[2, 14];  // Unidad
-        public double[,] periodo_Modalidad_Temp = new double[2, 14];  //  
+        public double[,] periodo_Canal_Temp = new double[2, 14];  //  
+        public double[,] periodo_Canal_Temp_Unid = new double[2, 14];  //  
 
 
 
 
 
         private readonly DateTime[] Periodos = new DateTime[7];
-        string V1, V1_, V2, Ciudad_, Mercado, Variable, Variable_Promedio, Periodo, xTipos_;
+        string V1, V1_, V2, Ciudad_, Mercado, Variable, Variable_Promedio, Unidad, xTipos_;
         public string resultadoBD;
         double valor_1;
 
@@ -259,12 +265,14 @@ namespace BL
                 Variable = "MONEDA LOCAL";
                 Variable_Promedio = "MONEDA LOCAL MES";
                 V2 = "";
+                Unidad = "PPU (ML)";
             }
             else
             {
                 Variable = "DOLARES";
                 Variable_Promedio = "DOLARES MES";
                 V2 = "";
+                Unidad = "PPU (DOL.)";
             }
 
             if (xCiudad == "1")
@@ -341,12 +349,17 @@ namespace BL
                     }
 
                     Actualizar_BD(V1, "Suma", Variable, "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                    // PPU
+                    Actualizar_BD(V1, "Suma", Unidad, "0. Consolidado", "0. Cosmeticos", Unidad, "MENSUAL", periodo_Temp_Valor[0, 0] / periodo_Temp_Unidad[0, 0], periodo_Temp_Valor[0, 1] / periodo_Temp_Unidad[0, 1], periodo_Temp_Valor[0, 2] / periodo_Temp_Unidad[0, 2], periodo_Temp_Valor[0, 3] / periodo_Temp_Unidad[0, 3], periodo_Temp_Valor[0, 4] / periodo_Temp_Unidad[0, 4], periodo_Temp_Valor[0, 5] / periodo_Temp_Unidad[0, 5], periodo_Temp_Valor[0, 6] / periodo_Temp_Unidad[0, 6], periodo_Temp_Valor[0, 7] / periodo_Temp_Unidad[0, 7], periodo_Temp_Valor[0, 8] / periodo_Temp_Unidad[0, 8], periodo_Temp_Valor[0, 9] / periodo_Temp_Unidad[0, 9], periodo_Temp_Valor[0, 10] / periodo_Temp_Unidad[0, 10], periodo_Temp_Valor[0, 11] / periodo_Temp_Unidad[0, 11], periodo_Temp_Valor[0, 12] / periodo_Temp_Unidad[0, 12]);
+
                     // PROMEDIO MENSUAL
                     Actualizar_BD(V1, "Suma", Variable_Promedio, "0. Consolidado", "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
 
                     if (xCiudad != "1,2,5") //SOLO PARA CREAR LOS REGISTROS V1 = COSMETICOS
                     {
                         Actualizar_BD("Cosmeticos", "Suma", Variable, Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                        //PPU
+                        Actualizar_BD("Cosmeticos", "Suma", Unidad, Ciudad_, "0. Cosmeticos", Unidad, "MENSUAL", periodo_Temp_Valor[0, 0] / periodo_Temp_Unidad[0, 0], periodo_Temp_Valor[0, 1] / periodo_Temp_Unidad[0, 1], periodo_Temp_Valor[0, 2] / periodo_Temp_Unidad[0, 2], periodo_Temp_Valor[0, 3] / periodo_Temp_Unidad[0, 3], periodo_Temp_Valor[0, 4] / periodo_Temp_Unidad[0, 4], periodo_Temp_Valor[0, 5] / periodo_Temp_Unidad[0, 5], periodo_Temp_Valor[0, 6] / periodo_Temp_Unidad[0, 6], periodo_Temp_Valor[0, 7] / periodo_Temp_Unidad[0, 7], periodo_Temp_Valor[0, 8] / periodo_Temp_Unidad[0, 8], periodo_Temp_Valor[0, 9] / periodo_Temp_Unidad[0, 9], periodo_Temp_Valor[0, 10] / periodo_Temp_Unidad[0, 10], periodo_Temp_Valor[0, 11] / periodo_Temp_Unidad[0, 11], periodo_Temp_Valor[0, 12] / periodo_Temp_Unidad[0, 12]);
                         // PROMEDIO MENSUAL
                         Actualizar_BD("Cosmeticos", "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
                     }
@@ -434,12 +447,28 @@ namespace BL
                     }
                 }
                 Actualizar_BD(V1_, "Suma", Variable, Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_NSE_Temp[k, 1], periodo_NSE_Temp[k, 2], periodo_NSE_Temp[k, 3], periodo_NSE_Temp[k, 4], periodo_NSE_Temp[k, 5], periodo_NSE_Temp[k, 6], periodo_NSE_Temp[k, 7], periodo_NSE_Temp[k, 8], periodo_NSE_Temp[k, 9], periodo_NSE_Temp[k, 10], periodo_NSE_Temp[k, 11], periodo_NSE_Temp[0, 12], periodo_NSE_Temp[k, 13]);
+                //PPU
+                double ppu_1, ppu_2, ppu_3, ppu_4, ppu_5, ppu_6, ppu_7, ppu_8, ppu_9, ppu_10, ppu_11, ppu_12, ppu_13;
+                ppu_1 = (periodo_NSE_Temp_Unidad[k, 1] == 0 ? 0 : periodo_NSE_Temp[k, 1] / periodo_NSE_Temp_Unidad[k, 1]);
+                ppu_2 = (periodo_NSE_Temp_Unidad[k, 2] == 0 ? 0 : periodo_NSE_Temp[k, 2] / periodo_NSE_Temp_Unidad[k, 2]);
+                ppu_3 = (periodo_NSE_Temp_Unidad[k, 3] == 0 ? 0 : periodo_NSE_Temp[k, 3] / periodo_NSE_Temp_Unidad[k, 3]);
+                ppu_4 = (periodo_NSE_Temp_Unidad[k, 4] == 0 ? 0 : periodo_NSE_Temp[k, 4] / periodo_NSE_Temp_Unidad[k, 4]);
+                ppu_5 = (periodo_NSE_Temp_Unidad[k, 5] == 0 ? 0 : periodo_NSE_Temp[k, 5] / periodo_NSE_Temp_Unidad[k, 5]);
+                ppu_6 = (periodo_NSE_Temp_Unidad[k, 6] == 0 ? 0 : periodo_NSE_Temp[k, 6] / periodo_NSE_Temp_Unidad[k, 6]);
+                ppu_7 = (periodo_NSE_Temp_Unidad[k, 7] == 0 ? 0 : periodo_NSE_Temp[k, 7] / periodo_NSE_Temp_Unidad[k, 7]);
+                ppu_8 = (periodo_NSE_Temp_Unidad[k, 8] == 0 ? 0 : periodo_NSE_Temp[k, 8] / periodo_NSE_Temp_Unidad[k, 8]);
+                ppu_9 = (periodo_NSE_Temp_Unidad[k, 9] == 0 ? 0 : periodo_NSE_Temp[k, 9] / periodo_NSE_Temp_Unidad[k, 9]);
+                ppu_10 = (periodo_NSE_Temp_Unidad[k, 10] == 0 ? 0 : periodo_NSE_Temp[k, 10] / periodo_NSE_Temp_Unidad[k, 10]);
+                ppu_11 = (periodo_NSE_Temp_Unidad[k, 11] == 0 ? 0 : periodo_NSE_Temp[k, 11] / periodo_NSE_Temp_Unidad[k, 11]);
+                ppu_12 = (periodo_NSE_Temp_Unidad[k, 12] == 0 ? 0 : periodo_NSE_Temp[k, 12] / periodo_NSE_Temp_Unidad[k, 12]);
+                ppu_13 = (periodo_NSE_Temp_Unidad[k, 13] == 0 ? 0 : periodo_NSE_Temp[k, 13] / periodo_NSE_Temp_Unidad[k, 13]);
+       
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0. Cosmeticos", Unidad, "MENSUAL", ppu_1, ppu_2, ppu_3, ppu_4, ppu_5, ppu_6, ppu_7, ppu_8, ppu_9, ppu_10, ppu_11, ppu_12, ppu_13);
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", periodo_NSE_Temp[k, 1] / 12, periodo_NSE_Temp[k, 2] / 12, periodo_NSE_Temp[k, 3] / 12, periodo_NSE_Temp[k, 4] / 12, periodo_NSE_Temp[k, 5] / 12, periodo_NSE_Temp[k, 6] / 6, periodo_NSE_Temp[k, 7] / 6, periodo_NSE_Temp[k, 8] / 3, periodo_NSE_Temp[k, 9] / 3, periodo_NSE_Temp[k, 10] / 1, periodo_NSE_Temp[k, 11] / 1, periodo_NSE_Temp[k, 12], periodo_NSE_Temp[k, 13]);
             }
 
-            // CODIGO RECORRIDO POR CATEGORIAS   
-            double[,] periodo_Categoria_Temp = new double[5, 14];
+            // CODIGO RECORRIDO POR CATEGORIAS               
             string CodigoCategoria;
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_CATEGORIA"))
             {
@@ -480,26 +509,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Categoria_Valor[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Categoria_Valor[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Categoria_Valor[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }            
-            for (int k = 0; k < periodo_Categoria_Temp.GetLength(0); k++) //FILAS
+            for (int k = 0; k < periodo_Cat_Temp.GetLength(0); k++) //FILAS
             {
-                CodigoCategoria = periodo_Categoria_Temp[k, 0].ToString();
+                CodigoCategoria = periodo_Cat_Temp[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Categoria.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoCategoria == Codigo_Nombres_Categoria[i, 0])
@@ -508,9 +537,27 @@ namespace BL
                         Mercado = Codigo_Nombres_Categoria[i, 1];
                     }
                 }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Categoria_Temp[k, 1], periodo_Categoria_Temp[k, 2], periodo_Categoria_Temp[k, 3], periodo_Categoria_Temp[k, 4], periodo_Categoria_Temp[k, 5], periodo_Categoria_Temp[k, 6], periodo_Categoria_Temp[k, 7], periodo_Categoria_Temp[k, 8], periodo_Categoria_Temp[k, 9], periodo_Categoria_Temp[k, 10], periodo_Categoria_Temp[k, 11], periodo_Categoria_Temp[0, 12], periodo_Categoria_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Cat_Temp[k, 1], periodo_Cat_Temp[k, 2], periodo_Cat_Temp[k, 3], periodo_Cat_Temp[k, 4], periodo_Cat_Temp[k, 5], periodo_Cat_Temp[k, 6], periodo_Cat_Temp[k, 7], periodo_Cat_Temp[k, 8], periodo_Cat_Temp[k, 9], periodo_Cat_Temp[k, 10], periodo_Cat_Temp[k, 11], periodo_Cat_Temp[0, 12], periodo_Cat_Temp[k, 13]);
+                //PPU
+                double cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13;
+                cat_1 = (periodo_Cat_Temp_Unid[k, 1] == 0 ? 0 : periodo_Cat_Temp[k, 1] / periodo_Cat_Temp_Unid[k, 1]);
+                cat_2 = (periodo_Cat_Temp_Unid[k, 2] == 0 ? 0 : periodo_Cat_Temp[k, 2] / periodo_Cat_Temp_Unid[k, 2]);
+                cat_3 = (periodo_Cat_Temp_Unid[k, 3] == 0 ? 0 : periodo_Cat_Temp[k, 3] / periodo_Cat_Temp_Unid[k, 3]);
+                cat_4 = (periodo_Cat_Temp_Unid[k, 4] == 0 ? 0 : periodo_Cat_Temp[k, 4] / periodo_Cat_Temp_Unid[k, 4]);
+                cat_5 = (periodo_Cat_Temp_Unid[k, 5] == 0 ? 0 : periodo_Cat_Temp[k, 5] / periodo_Cat_Temp_Unid[k, 5]);
+                cat_6 = (periodo_Cat_Temp_Unid[k, 6] == 0 ? 0 : periodo_Cat_Temp[k, 6] / periodo_Cat_Temp_Unid[k, 6]);
+                cat_7 = (periodo_Cat_Temp_Unid[k, 7] == 0 ? 0 : periodo_Cat_Temp[k, 7] / periodo_Cat_Temp_Unid[k, 7]);
+                cat_8 = (periodo_Cat_Temp_Unid[k, 8] == 0 ? 0 : periodo_Cat_Temp[k, 8] / periodo_Cat_Temp_Unid[k, 8]);
+                cat_9 = (periodo_Cat_Temp_Unid[k, 9] == 0 ? 0 : periodo_Cat_Temp[k, 9] / periodo_Cat_Temp_Unid[k, 9]);
+                cat_10 = (periodo_Cat_Temp_Unid[k, 10] == 0 ? 0 : periodo_Cat_Temp[k, 10] / periodo_Cat_Temp_Unid[k, 10]);
+                cat_11 = (periodo_Cat_Temp_Unid[k, 11] == 0 ? 0 : periodo_Cat_Temp[k, 11] / periodo_Cat_Temp_Unid[k, 11]);
+                cat_12 = (periodo_Cat_Temp_Unid[k, 12] == 0 ? 0 : periodo_Cat_Temp[k, 12] / periodo_Cat_Temp_Unid[k, 12]);
+                cat_13 = (periodo_Cat_Temp_Unid[k, 13] == 0 ? 0 : periodo_Cat_Temp[k, 13] / periodo_Cat_Temp_Unid[k, 13]);
+
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13);
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0.Cosmeticos2", Unidad, "MENSUAL", cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Categoria_Temp[k, 1] / 12, periodo_Categoria_Temp[k, 2] / 12, periodo_Categoria_Temp[k, 3] / 12, periodo_Categoria_Temp[k, 4] / 12, periodo_Categoria_Temp[k, 5] / 12, periodo_Categoria_Temp[k, 6] / 6, periodo_Categoria_Temp[k, 7] / 6, periodo_Categoria_Temp[k, 8] / 3, periodo_Categoria_Temp[k, 9] / 3, periodo_Categoria_Temp[k, 10] / 1, periodo_Categoria_Temp[k, 11] / 1, periodo_Categoria_Temp[k, 12], periodo_Categoria_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Cat_Temp[k, 1] / 12, periodo_Cat_Temp[k, 2] / 12, periodo_Cat_Temp[k, 3] / 12, periodo_Cat_Temp[k, 4] / 12, periodo_Cat_Temp[k, 5] / 12, periodo_Cat_Temp[k, 6] / 6, periodo_Cat_Temp[k, 7] / 6, periodo_Cat_Temp[k, 8] / 3, periodo_Cat_Temp[k, 9] / 3, periodo_Cat_Temp[k, 10] / 1, periodo_Cat_Temp[k, 11] / 1, periodo_Cat_Temp[k, 12], periodo_Cat_Temp[k, 13]);
             }
 
             // CODIGO RECORRIDO POR TIPOS      
@@ -557,26 +604,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Tipo_Valor[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Tipo_Valor[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Tipo_Valor[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }
-            for (int ii = 0; ii < periodo_Total_Temp.GetLength(0); ii++) // FILAS
+            for (int k = 0; k < periodo_Tipo_Temp.GetLength(0); k++) // FILAS
             {
-                CodigoTipo = periodo_Total_Temp[ii, 0].ToString();
+                CodigoTipo = periodo_Tipo_Temp[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Tipo.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoTipo == Codigo_Nombres_Tipo[i, 0])
@@ -586,14 +633,32 @@ namespace BL
                     }
                 }
 
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Total_Temp[ii, 1], periodo_Total_Temp[ii, 2], periodo_Total_Temp[ii, 3], periodo_Total_Temp[ii, 4], periodo_Total_Temp[ii, 5], periodo_Total_Temp[ii, 6], periodo_Total_Temp[ii, 7], periodo_Total_Temp[ii, 8], periodo_Total_Temp[ii, 9], periodo_Total_Temp[ii, 10], periodo_Total_Temp[ii, 11], periodo_Total_Temp[ii, 12], periodo_Total_Temp[ii, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Tipo_Temp[k, 1], periodo_Tipo_Temp[k, 2], periodo_Tipo_Temp[k, 3], periodo_Tipo_Temp[k, 4], periodo_Tipo_Temp[k, 5], periodo_Tipo_Temp[k, 6], periodo_Tipo_Temp[k, 7], periodo_Tipo_Temp[k, 8], periodo_Tipo_Temp[k, 9], periodo_Tipo_Temp[k, 10], periodo_Tipo_Temp[k, 11], periodo_Tipo_Temp[k, 12], periodo_Tipo_Temp[k, 13]);
+                // PPU
+                double tip_1, tip_2, tip_3, tip_4, tip_5, tip_6, tip_7, tip_8, tip_9, tip_10, tip_11, tip_12, tip_13;
+                tip_1 = (periodo_Tipo_Temp_Unid[k, 1] == 0 ? 0 : periodo_Tipo_Temp[k, 1] / periodo_Tipo_Temp_Unid[k, 1]);
+                tip_2 = (periodo_Tipo_Temp_Unid[k, 2] == 0 ? 0 : periodo_Tipo_Temp[k, 2] / periodo_Tipo_Temp_Unid[k, 2]);
+                tip_3 = (periodo_Tipo_Temp_Unid[k, 3] == 0 ? 0 : periodo_Tipo_Temp[k, 3] / periodo_Tipo_Temp_Unid[k, 3]);
+                tip_4 = (periodo_Tipo_Temp_Unid[k, 4] == 0 ? 0 : periodo_Tipo_Temp[k, 4] / periodo_Tipo_Temp_Unid[k, 4]);
+                tip_5 = (periodo_Tipo_Temp_Unid[k, 5] == 0 ? 0 : periodo_Tipo_Temp[k, 5] / periodo_Tipo_Temp_Unid[k, 5]);
+                tip_6 = (periodo_Tipo_Temp_Unid[k, 6] == 0 ? 0 : periodo_Tipo_Temp[k, 6] / periodo_Tipo_Temp_Unid[k, 6]);
+                tip_7 = (periodo_Tipo_Temp_Unid[k, 7] == 0 ? 0 : periodo_Tipo_Temp[k, 7] / periodo_Tipo_Temp_Unid[k, 7]);
+                tip_8 = (periodo_Tipo_Temp_Unid[k, 8] == 0 ? 0 : periodo_Tipo_Temp[k, 8] / periodo_Tipo_Temp_Unid[k, 8]);
+                tip_9 = (periodo_Tipo_Temp_Unid[k, 9] == 0 ? 0 : periodo_Tipo_Temp[k, 9] / periodo_Tipo_Temp_Unid[k, 9]);
+                tip_10 = (periodo_Tipo_Temp_Unid[k, 10] == 0 ? 0 : periodo_Tipo_Temp[k, 10] / periodo_Tipo_Temp_Unid[k, 10]);
+                tip_11 = (periodo_Tipo_Temp_Unid[k, 11] == 0 ? 0 : periodo_Tipo_Temp[k, 11] / periodo_Tipo_Temp_Unid[k, 11]);
+                tip_12 = (periodo_Tipo_Temp_Unid[k, 12] == 0 ? 0 : periodo_Tipo_Temp[k, 12] / periodo_Tipo_Temp_Unid[k, 12]);
+                tip_13 = (periodo_Tipo_Temp_Unid[k, 13] == 0 ? 0 : periodo_Tipo_Temp[k, 13] / periodo_Tipo_Temp_Unid[k, 13]);
+                
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", tip_1, tip_2, tip_3, tip_4, tip_5, tip_6, tip_7, tip_8, tip_9, tip_10, tip_11, tip_12, tip_13);
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0. Cosmeticos2", Unidad, "MENSUAL", tip_1, tip_2, tip_3, tip_4, tip_5, tip_6, tip_7, tip_8, tip_9, tip_10, tip_11, tip_12, tip_13);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Total_Temp[ii, 1] / 12, periodo_Total_Temp[ii, 2] / 12, periodo_Total_Temp[ii, 3] / 12, periodo_Total_Temp[ii, 4] / 12, periodo_Total_Temp[ii, 5] / 12, periodo_Total_Temp[ii, 6] / 6, periodo_Total_Temp[ii, 7] / 6, periodo_Total_Temp[ii, 8] / 3, periodo_Total_Temp[ii, 9] / 3, periodo_Total_Temp[ii, 10] / 1, periodo_Total_Temp[ii, 11] / 1, periodo_Total_Temp[ii, 12], periodo_Total_Temp[ii, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Tipo_Temp[k, 1] / 12, periodo_Tipo_Temp[k, 2] / 12, periodo_Tipo_Temp[k, 3] / 12, periodo_Tipo_Temp[k, 4] / 12, periodo_Tipo_Temp[k, 5] / 12, periodo_Tipo_Temp[k, 6] / 6, periodo_Tipo_Temp[k, 7] / 6, periodo_Tipo_Temp[k, 8] / 3, periodo_Tipo_Temp[k, 9] / 3, periodo_Tipo_Temp[k, 10] / 1, periodo_Tipo_Temp[k, 11] / 1, periodo_Tipo_Temp[k, 12], periodo_Tipo_Temp[k, 13]);
             }
 
             // CODIGO RECORRIDO POR MODALIDAD      
             string CodigoModalidad;
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MODALIDAD_V1"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MODALIDAD"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_MODALIDAD", DbType.String, Codigo_cadena_Modalidad);
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
@@ -632,26 +697,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Modalidad_Valor[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Modalidad_Valor[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Modalidad_Valor[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }
-            for (int k = 0; k < periodo_Modalidad_Temp.GetLength(0); k++) //FILAS
+            for (int k = 0; k < periodo_Canal_Temp.GetLength(0); k++) //FILAS
             {
-                CodigoModalidad = periodo_Modalidad_Temp[k, 0].ToString();
+                CodigoModalidad = periodo_Canal_Temp[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoModalidad == Codigo_Nombres_Modalidad[i, 0])
@@ -660,9 +725,26 @@ namespace BL
                         Mercado = Codigo_Nombres_Modalidad[i, 1];
                     }
                 }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Modalidad_Temp[k, 1], periodo_Modalidad_Temp[k, 2], periodo_Modalidad_Temp[k, 3], periodo_Modalidad_Temp[k, 4], periodo_Modalidad_Temp[k, 5], periodo_Modalidad_Temp[k, 6], periodo_Modalidad_Temp[k, 7], periodo_Modalidad_Temp[k, 8], periodo_Modalidad_Temp[k, 9], periodo_Modalidad_Temp[k, 10], periodo_Modalidad_Temp[k, 11], periodo_Modalidad_Temp[0, 12], periodo_Modalidad_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Canal_Temp[k, 1], periodo_Canal_Temp[k, 2], periodo_Canal_Temp[k, 3], periodo_Canal_Temp[k, 4], periodo_Canal_Temp[k, 5], periodo_Canal_Temp[k, 6], periodo_Canal_Temp[k, 7], periodo_Canal_Temp[k, 8], periodo_Canal_Temp[k, 9], periodo_Canal_Temp[k, 10], periodo_Canal_Temp[k, 11], periodo_Canal_Temp[0, 12], periodo_Canal_Temp[k, 13]);
+                //PPU
+                double mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13;
+                mod_1 = (periodo_Canal_Temp_Unid[k, 1] == 0 ? 0 : periodo_Canal_Temp[k, 1] / periodo_Canal_Temp_Unid[k, 1]);
+                mod_2 = (periodo_Canal_Temp_Unid[k, 2] == 0 ? 0 : periodo_Canal_Temp[k, 2] / periodo_Canal_Temp_Unid[k, 2]);
+                mod_3 = (periodo_Canal_Temp_Unid[k, 3] == 0 ? 0 : periodo_Canal_Temp[k, 3] / periodo_Canal_Temp_Unid[k, 3]);
+                mod_4 = (periodo_Canal_Temp_Unid[k, 4] == 0 ? 0 : periodo_Canal_Temp[k, 4] / periodo_Canal_Temp_Unid[k, 4]);
+                mod_5 = (periodo_Canal_Temp_Unid[k, 5] == 0 ? 0 : periodo_Canal_Temp[k, 5] / periodo_Canal_Temp_Unid[k, 5]);
+                mod_6 = (periodo_Canal_Temp_Unid[k, 6] == 0 ? 0 : periodo_Canal_Temp[k, 6] / periodo_Canal_Temp_Unid[k, 6]);
+                mod_7 = (periodo_Canal_Temp_Unid[k, 7] == 0 ? 0 : periodo_Canal_Temp[k, 7] / periodo_Canal_Temp_Unid[k, 7]);
+                mod_8 = (periodo_Canal_Temp_Unid[k, 8] == 0 ? 0 : periodo_Canal_Temp[k, 8] / periodo_Canal_Temp_Unid[k, 8]);
+                mod_9 = (periodo_Canal_Temp_Unid[k, 9] == 0 ? 0 : periodo_Canal_Temp[k, 9] / periodo_Canal_Temp_Unid[k, 9]);
+                mod_10 = (periodo_Canal_Temp_Unid[k, 10] == 0 ? 0 : periodo_Canal_Temp[k, 10] / periodo_Canal_Temp_Unid[k, 10]);
+                mod_11 = (periodo_Canal_Temp_Unid[k, 11] == 0 ? 0 : periodo_Canal_Temp[k, 11] / periodo_Canal_Temp_Unid[k, 11]);
+                mod_12 = (periodo_Canal_Temp_Unid[k, 12] == 0 ? 0 : periodo_Canal_Temp[k, 12] / periodo_Canal_Temp_Unid[k, 12]);
+                mod_13 = (periodo_Canal_Temp_Unid[k, 13] == 0 ? 0 : periodo_Canal_Temp[k, 13] / periodo_Canal_Temp_Unid[k, 13]);
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0. Cosmeticos", Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Modalidad_Temp[k, 1] / 12, periodo_Modalidad_Temp[k, 2] / 12, periodo_Modalidad_Temp[k, 3] / 12, periodo_Modalidad_Temp[k, 4] / 12, periodo_Modalidad_Temp[k, 5] / 12, periodo_Modalidad_Temp[k, 6] / 6, periodo_Modalidad_Temp[k, 7] / 6, periodo_Modalidad_Temp[k, 8] / 3, periodo_Modalidad_Temp[k, 9] / 3, periodo_Modalidad_Temp[k, 10] / 1, periodo_Modalidad_Temp[k, 11] / 1, periodo_Modalidad_Temp[k, 12], periodo_Modalidad_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Canal_Temp[k, 1] / 12, periodo_Canal_Temp[k, 2] / 12, periodo_Canal_Temp[k, 3] / 12, periodo_Canal_Temp[k, 4] / 12, periodo_Canal_Temp[k, 5] / 12, periodo_Canal_Temp[k, 6] / 6, periodo_Canal_Temp[k, 7] / 6, periodo_Canal_Temp[k, 8] / 3, periodo_Canal_Temp[k, 9] / 3, periodo_Canal_Temp[k, 10] / 1, periodo_Canal_Temp[k, 11] / 1, periodo_Canal_Temp[k, 12], periodo_Canal_Temp[k, 13]);
             }         
         }
 
@@ -731,31 +813,31 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Unidad[rows, i - 1] = valor_1;
-                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Unidad[rows, i - 1] = valor_1;
-                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Unidad[rows, i - 1] = valor_1;
-                                periodo_Temp_Valor[rows, i - 1] = valor_1;
+                                periodo_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
 
-                    Actualizar_BD(V1, "Suma", Variable, "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                    Actualizar_BD(V1, "Suma", Variable, "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Unidad[0, 0], periodo_Temp_Unidad[0, 1], periodo_Temp_Unidad[0, 2], periodo_Temp_Unidad[0, 3], periodo_Temp_Unidad[0, 4], periodo_Temp_Unidad[0, 5], periodo_Temp_Unidad[0, 6], periodo_Temp_Unidad[0, 7], periodo_Temp_Unidad[0, 8], periodo_Temp_Unidad[0, 9], periodo_Temp_Unidad[0, 10], periodo_Temp_Unidad[0, 11], periodo_Temp_Unidad[0, 12]);
                     // PROMEDIO MENSUAL
-                    Actualizar_BD(V1, "Suma", Variable_Promedio, "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                    Actualizar_BD(V1, "Suma", Variable_Promedio, "0. Consolidado", "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Unidad[0, 0] / 12, periodo_Temp_Unidad[0, 1] / 12, periodo_Temp_Unidad[0, 2] / 12, periodo_Temp_Unidad[0, 3] / 12, periodo_Temp_Unidad[0, 4] / 12, periodo_Temp_Unidad[0, 5] / 6, periodo_Temp_Unidad[0, 6] / 6, periodo_Temp_Unidad[0, 7] / 3, periodo_Temp_Unidad[0, 8] / 3, periodo_Temp_Unidad[0, 9] / 1, periodo_Temp_Unidad[0, 10] / 1, periodo_Temp_Unidad[0, 11], periodo_Temp_Unidad[0, 12]);
 
                     if (xCiudad != "1,2,5") //SOLO PARA CREAR LOS REGISTROS V1 = COSMETICOS
                     {
-                        Actualizar_BD("Cosmeticos", "Suma", Variable, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Valor[0, 0], periodo_Temp_Valor[0, 1], periodo_Temp_Valor[0, 2], periodo_Temp_Valor[0, 3], periodo_Temp_Valor[0, 4], periodo_Temp_Valor[0, 5], periodo_Temp_Valor[0, 6], periodo_Temp_Valor[0, 7], periodo_Temp_Valor[0, 8], periodo_Temp_Valor[0, 9], periodo_Temp_Valor[0, 10], periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                        Actualizar_BD("Cosmeticos", "Suma", Variable, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Unidad[0, 0], periodo_Temp_Unidad[0, 1], periodo_Temp_Unidad[0, 2], periodo_Temp_Unidad[0, 3], periodo_Temp_Unidad[0, 4], periodo_Temp_Unidad[0, 5], periodo_Temp_Unidad[0, 6], periodo_Temp_Unidad[0, 7], periodo_Temp_Unidad[0, 8], periodo_Temp_Unidad[0, 9], periodo_Temp_Unidad[0, 10], periodo_Temp_Unidad[0, 11], periodo_Temp_Unidad[0, 12]);
                         // PROMEDIO MENSUAL
-                        Actualizar_BD("Cosmeticos", "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Valor[0, 0] / 12, periodo_Temp_Valor[0, 1] / 12, periodo_Temp_Valor[0, 2] / 12, periodo_Temp_Valor[0, 3] / 12, periodo_Temp_Valor[0, 4] / 12, periodo_Temp_Valor[0, 5] / 6, periodo_Temp_Valor[0, 6] / 6, periodo_Temp_Valor[0, 7] / 3, periodo_Temp_Valor[0, 8] / 3, periodo_Temp_Valor[0, 9] / 1, periodo_Temp_Valor[0, 10] / 1, periodo_Temp_Valor[0, 11], periodo_Temp_Valor[0, 12]);
+                        Actualizar_BD("Cosmeticos", "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_Temp_Unidad[0, 0] / 12, periodo_Temp_Unidad[0, 1] / 12, periodo_Temp_Unidad[0, 2] / 12, periodo_Temp_Unidad[0, 3] / 12, periodo_Temp_Unidad[0, 4] / 12, periodo_Temp_Unidad[0, 5] / 6, periodo_Temp_Unidad[0, 6] / 6, periodo_Temp_Unidad[0, 7] / 3, periodo_Temp_Unidad[0, 8] / 3, periodo_Temp_Unidad[0, 9] / 1, periodo_Temp_Unidad[0, 10] / 1, periodo_Temp_Unidad[0, 11], periodo_Temp_Unidad[0, 12]);
                     }
                 }
             }
@@ -800,17 +882,17 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_NSE_Unidad[rows, i - 1] = valor_1;
-                                periodo_NSE_Temp[rows, i - 1] = valor_1;
+                                periodo_NSE_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_NSE_Unidad[rows, i - 1] = valor_1;
-                                periodo_NSE_Temp[rows, i - 1] = valor_1;
+                                periodo_NSE_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_NSE_Unidad[rows, i - 1] = valor_1;
-                                periodo_NSE_Temp[rows, i - 1] = valor_1;
+                                periodo_NSE_Temp_Unidad[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
@@ -818,20 +900,20 @@ namespace BL
 
                     if (rows == 4)
                     {
-                        periodo_NSE_Temp[rows, 0] = 489; periodo_NSE_Temp[rows, 1] = 0;
-                        periodo_NSE_Temp[rows, 2] = 0; periodo_NSE_Temp[rows, 3] = 0;
-                        periodo_NSE_Temp[rows, 4] = 0; periodo_NSE_Temp[rows, 5] = 0;
-                        periodo_NSE_Temp[rows, 6] = 0; periodo_NSE_Temp[rows, 7] = 0;
-                        periodo_NSE_Temp[rows, 8] = 0; periodo_NSE_Temp[rows, 9] = 0;
-                        periodo_NSE_Temp[rows, 10] = 0; periodo_NSE_Temp[rows, 11] = 0;
-                        periodo_NSE_Temp[rows, 12] = 0; periodo_NSE_Temp[rows, 13] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 0] = 489; periodo_NSE_Temp_Unidad[rows, 1] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 2] = 0; periodo_NSE_Temp_Unidad[rows, 3] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 4] = 0; periodo_NSE_Temp_Unidad[rows, 5] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 6] = 0; periodo_NSE_Temp_Unidad[rows, 7] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 8] = 0; periodo_NSE_Temp_Unidad[rows, 9] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 10] = 0; periodo_NSE_Temp_Unidad[rows, 11] = 0;
+                        periodo_NSE_Temp_Unidad[rows, 12] = 0; periodo_NSE_Temp_Unidad[rows, 13] = 0;
                     }
                 }
             }
             string CodigoNSE;
-            for (int k = 0; k < periodo_NSE_Temp.GetLength(0); k++) //FILAS
+            for (int k = 0; k < periodo_NSE_Temp_Unidad.GetLength(0); k++) //FILAS
             {
-                CodigoNSE = periodo_NSE_Temp[k, 0].ToString();
+                CodigoNSE = periodo_NSE_Temp_Unidad[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_NSE.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoNSE == Codigo_Nombres_NSE[i, 0])
@@ -840,13 +922,12 @@ namespace BL
                         Mercado = Codigo_Nombres_NSE[i, 1];
                     }
                 }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_NSE_Temp[k, 1], periodo_NSE_Temp[k, 2], periodo_NSE_Temp[k, 3], periodo_NSE_Temp[k, 4], periodo_NSE_Temp[k, 5], periodo_NSE_Temp[k, 6], periodo_NSE_Temp[k, 7], periodo_NSE_Temp[k, 8], periodo_NSE_Temp[k, 9], periodo_NSE_Temp[k, 10], periodo_NSE_Temp[k, 11], periodo_NSE_Temp[0, 12], periodo_NSE_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_NSE_Temp_Unidad[k, 1], periodo_NSE_Temp_Unidad[k, 2], periodo_NSE_Temp_Unidad[k, 3], periodo_NSE_Temp_Unidad[k, 4], periodo_NSE_Temp_Unidad[k, 5], periodo_NSE_Temp_Unidad[k, 6], periodo_NSE_Temp_Unidad[k, 7], periodo_NSE_Temp_Unidad[k, 8], periodo_NSE_Temp_Unidad[k, 9], periodo_NSE_Temp_Unidad[k, 10], periodo_NSE_Temp_Unidad[k, 11], periodo_NSE_Temp_Unidad[0, 12], periodo_NSE_Temp_Unidad[k, 13]);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_NSE_Temp[k, 1] / 12, periodo_NSE_Temp[k, 2] / 12, periodo_NSE_Temp[k, 3] / 12, periodo_NSE_Temp[k, 4] / 12, periodo_NSE_Temp[k, 5] / 12, periodo_NSE_Temp[k, 6] / 6, periodo_NSE_Temp[k, 7] / 6, periodo_NSE_Temp[k, 8] / 3, periodo_NSE_Temp[k, 9] / 3, periodo_NSE_Temp[k, 10] / 1, periodo_NSE_Temp[k, 11] / 1, periodo_NSE_Temp[k, 12], periodo_NSE_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_NSE_Temp_Unidad[k, 1] / 12, periodo_NSE_Temp_Unidad[k, 2] / 12, periodo_NSE_Temp_Unidad[k, 3] / 12, periodo_NSE_Temp_Unidad[k, 4] / 12, periodo_NSE_Temp_Unidad[k, 5] / 12, periodo_NSE_Temp_Unidad[k, 6] / 6, periodo_NSE_Temp_Unidad[k, 7] / 6, periodo_NSE_Temp_Unidad[k, 8] / 3, periodo_NSE_Temp_Unidad[k, 9] / 3, periodo_NSE_Temp_Unidad[k, 10] / 1, periodo_NSE_Temp_Unidad[k, 11] / 1, periodo_NSE_Temp_Unidad[k, 12], periodo_NSE_Temp_Unidad[k, 13]);
             }
 
-            // CODIGO RECORRIDO POR CATEGORIAS   
-            double[,] periodo_Categoria_Temp = new double[5, 14];
+            // CODIGO RECORRIDO POR CATEGORIAS           
             string CodigoCategoria;
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_CATEGORIA"))
             {
@@ -887,26 +968,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Categoria_Unidad[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Categoria_Unidad[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Categoria_Unidad[rows, i - 1] = valor_1;
-                                periodo_Categoria_Temp[rows, i - 1] = valor_1;
+                                periodo_Cat_Temp_Unid[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }           
-            for (int k = 0; k < periodo_Categoria_Temp.GetLength(0); k++) //FILAS
+            for (int k = 0; k < periodo_Cat_Temp_Unid.GetLength(0); k++) //FILAS
             {
-                CodigoCategoria = periodo_Categoria_Temp[k, 0].ToString();
+                CodigoCategoria = periodo_Cat_Temp_Unid[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Categoria.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoCategoria == Codigo_Nombres_Categoria[i, 0])
@@ -915,9 +996,9 @@ namespace BL
                         Mercado = Codigo_Nombres_Categoria[i, 1];
                     }
                 }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Categoria_Temp[k, 1], periodo_Categoria_Temp[k, 2], periodo_Categoria_Temp[k, 3], periodo_Categoria_Temp[k, 4], periodo_Categoria_Temp[k, 5], periodo_Categoria_Temp[k, 6], periodo_Categoria_Temp[k, 7], periodo_Categoria_Temp[k, 8], periodo_Categoria_Temp[k, 9], periodo_Categoria_Temp[k, 10], periodo_Categoria_Temp[k, 11], periodo_Categoria_Temp[0, 12], periodo_Categoria_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Cat_Temp_Unid[k, 1], periodo_Cat_Temp_Unid[k, 2], periodo_Cat_Temp_Unid[k, 3], periodo_Cat_Temp_Unid[k, 4], periodo_Cat_Temp_Unid[k, 5], periodo_Cat_Temp_Unid[k, 6], periodo_Cat_Temp_Unid[k, 7], periodo_Cat_Temp_Unid[k, 8], periodo_Cat_Temp_Unid[k, 9], periodo_Cat_Temp_Unid[k, 10], periodo_Cat_Temp_Unid[k, 11], periodo_Cat_Temp_Unid[0, 12], periodo_Cat_Temp_Unid[k, 13]);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Categoria_Temp[k, 1] / 12, periodo_Categoria_Temp[k, 2] / 12, periodo_Categoria_Temp[k, 3] / 12, periodo_Categoria_Temp[k, 4] / 12, periodo_Categoria_Temp[k, 5] / 12, periodo_Categoria_Temp[k, 6] / 6, periodo_Categoria_Temp[k, 7] / 6, periodo_Categoria_Temp[k, 8] / 3, periodo_Categoria_Temp[k, 9] / 3, periodo_Categoria_Temp[k, 10] / 1, periodo_Categoria_Temp[k, 11] / 1, periodo_Categoria_Temp[k, 12], periodo_Categoria_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Cat_Temp_Unid[k, 1] / 12, periodo_Cat_Temp_Unid[k, 2] / 12, periodo_Cat_Temp_Unid[k, 3] / 12, periodo_Cat_Temp_Unid[k, 4] / 12, periodo_Cat_Temp_Unid[k, 5] / 12, periodo_Cat_Temp_Unid[k, 6] / 6, periodo_Cat_Temp_Unid[k, 7] / 6, periodo_Cat_Temp_Unid[k, 8] / 3, periodo_Cat_Temp_Unid[k, 9] / 3, periodo_Cat_Temp_Unid[k, 10] / 1, periodo_Cat_Temp_Unid[k, 11] / 1, periodo_Cat_Temp_Unid[k, 12], periodo_Cat_Temp_Unid[k, 13]);
             }
 
             // CODIGO RECORRIDO POR TIPOS      
@@ -964,26 +1045,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Tipo_Unidad[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Tipo_Unidad[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Tipo_Unidad[rows, i - 1] = valor_1;
-                                periodo_Total_Temp[rows, i - 1] = valor_1;
+                                periodo_Tipo_Temp_Unid[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }
-            for (int ii = 0; ii < periodo_Total_Temp.GetLength(0); ii++) // FILAS
+            for (int ii = 0; ii < periodo_Tipo_Temp_Unid.GetLength(0); ii++) // FILAS
             {
-                CodigoTipo = periodo_Total_Temp[ii, 0].ToString();
+                CodigoTipo = periodo_Tipo_Temp_Unid[ii, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Tipo.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoTipo == Codigo_Nombres_Tipo[i, 0])
@@ -993,14 +1074,14 @@ namespace BL
                     }
                 }
 
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Total_Temp[ii, 1], periodo_Total_Temp[ii, 2], periodo_Total_Temp[ii, 3], periodo_Total_Temp[ii, 4], periodo_Total_Temp[ii, 5], periodo_Total_Temp[ii, 6], periodo_Total_Temp[ii, 7], periodo_Total_Temp[ii, 8], periodo_Total_Temp[ii, 9], periodo_Total_Temp[ii, 10], periodo_Total_Temp[ii, 11], periodo_Total_Temp[ii, 12], periodo_Total_Temp[ii, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Tipo_Temp_Unid[ii, 1], periodo_Tipo_Temp_Unid[ii, 2], periodo_Tipo_Temp_Unid[ii, 3], periodo_Tipo_Temp_Unid[ii, 4], periodo_Tipo_Temp_Unid[ii, 5], periodo_Tipo_Temp_Unid[ii, 6], periodo_Tipo_Temp_Unid[ii, 7], periodo_Tipo_Temp_Unid[ii, 8], periodo_Tipo_Temp_Unid[ii, 9], periodo_Tipo_Temp_Unid[ii, 10], periodo_Tipo_Temp_Unid[ii, 11], periodo_Tipo_Temp_Unid[ii, 12], periodo_Tipo_Temp_Unid[ii, 13]);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Total_Temp[ii, 1] / 12, periodo_Total_Temp[ii, 2] / 12, periodo_Total_Temp[ii, 3] / 12, periodo_Total_Temp[ii, 4] / 12, periodo_Total_Temp[ii, 5] / 12, periodo_Total_Temp[ii, 6] / 6, periodo_Total_Temp[ii, 7] / 6, periodo_Total_Temp[ii, 8] / 3, periodo_Total_Temp[ii, 9] / 3, periodo_Total_Temp[ii, 10] / 1, periodo_Total_Temp[ii, 11] / 1, periodo_Total_Temp[ii, 12], periodo_Total_Temp[ii, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Tipo_Temp_Unid[ii, 1] / 12, periodo_Tipo_Temp_Unid[ii, 2] / 12, periodo_Tipo_Temp_Unid[ii, 3] / 12, periodo_Tipo_Temp_Unid[ii, 4] / 12, periodo_Tipo_Temp_Unid[ii, 5] / 12, periodo_Tipo_Temp_Unid[ii, 6] / 6, periodo_Tipo_Temp_Unid[ii, 7] / 6, periodo_Tipo_Temp_Unid[ii, 8] / 3, periodo_Tipo_Temp_Unid[ii, 9] / 3, periodo_Tipo_Temp_Unid[ii, 10] / 1, periodo_Tipo_Temp_Unid[ii, 11] / 1, periodo_Tipo_Temp_Unid[ii, 12], periodo_Tipo_Temp_Unid[ii, 13]);
             }
 
             // CODIGO RECORRIDO POR MODALIDAD      
             string CodigoModalidad;
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_MODALIDAD_V1"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_MODALIDAD"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_MODALIDAD", DbType.String, Codigo_cadena_Modalidad);
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
@@ -1039,26 +1120,26 @@ namespace BL
                             if (V1 == "Consolidado")
                             {
                                 periodo_Total_Mercado_Modalidad_Unidad[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else if (V1 == "Lima")
                             {
                                 periodo_Total_Lima_Modalidad_Unidad[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp_Unid[rows, i - 1] = valor_1;
                             }
                             else
                             {
                                 periodo_Total_Ciudades_Modalidad_Unidad[rows, i - 1] = valor_1;
-                                periodo_Modalidad_Temp[rows, i - 1] = valor_1;
+                                periodo_Canal_Temp_Unid[rows, i - 1] = valor_1;
                             }
                         }
                         rows++;
                     }
                 }
             }
-            for (int k = 0; k < periodo_Modalidad_Temp.GetLength(0); k++) //FILAS
+            for (int k = 0; k < periodo_Canal_Temp_Unid.GetLength(0); k++) //FILAS
             {
-                CodigoModalidad = periodo_Modalidad_Temp[k, 0].ToString();
+                CodigoModalidad = periodo_Canal_Temp_Unid[k, 0].ToString();
                 for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
                 {
                     if (CodigoModalidad == Codigo_Nombres_Modalidad[i, 0])
@@ -1067,9 +1148,9 @@ namespace BL
                         Mercado = Codigo_Nombres_Modalidad[i, 1];
                     }
                 }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Modalidad_Temp[k, 1], periodo_Modalidad_Temp[k, 2], periodo_Modalidad_Temp[k, 3], periodo_Modalidad_Temp[k, 4], periodo_Modalidad_Temp[k, 5], periodo_Modalidad_Temp[k, 6], periodo_Modalidad_Temp[k, 7], periodo_Modalidad_Temp[k, 8], periodo_Modalidad_Temp[k, 9], periodo_Modalidad_Temp[k, 10], periodo_Modalidad_Temp[k, 11], periodo_Modalidad_Temp[0, 12], periodo_Modalidad_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Canal_Temp_Unid[k, 1], periodo_Canal_Temp_Unid[k, 2], periodo_Canal_Temp_Unid[k, 3], periodo_Canal_Temp_Unid[k, 4], periodo_Canal_Temp_Unid[k, 5], periodo_Canal_Temp_Unid[k, 6], periodo_Canal_Temp_Unid[k, 7], periodo_Canal_Temp_Unid[k, 8], periodo_Canal_Temp_Unid[k, 9], periodo_Canal_Temp_Unid[k, 10], periodo_Canal_Temp_Unid[k, 11], periodo_Canal_Temp_Unid[0, 12], periodo_Canal_Temp_Unid[k, 13]);
                 // PROMEDIO MENSUAL
-                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Modalidad_Temp[k, 1] / 12, periodo_Modalidad_Temp[k, 2] / 12, periodo_Modalidad_Temp[k, 3] / 12, periodo_Modalidad_Temp[k, 4] / 12, periodo_Modalidad_Temp[k, 5] / 12, periodo_Modalidad_Temp[k, 6] / 6, periodo_Modalidad_Temp[k, 7] / 6, periodo_Modalidad_Temp[k, 8] / 3, periodo_Modalidad_Temp[k, 9] / 3, periodo_Modalidad_Temp[k, 10] / 1, periodo_Modalidad_Temp[k, 11] / 1, periodo_Modalidad_Temp[k, 12], periodo_Modalidad_Temp[k, 13]);
+                Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Canal_Temp_Unid[k, 1] / 12, periodo_Canal_Temp_Unid[k, 2] / 12, periodo_Canal_Temp_Unid[k, 3] / 12, periodo_Canal_Temp_Unid[k, 4] / 12, periodo_Canal_Temp_Unid[k, 5] / 12, periodo_Canal_Temp_Unid[k, 6] / 6, periodo_Canal_Temp_Unid[k, 7] / 6, periodo_Canal_Temp_Unid[k, 8] / 3, periodo_Canal_Temp_Unid[k, 9] / 3, periodo_Canal_Temp_Unid[k, 10] / 1, periodo_Canal_Temp_Unid[k, 11] / 1, periodo_Canal_Temp_Unid[k, 12], periodo_Canal_Temp_Unid[k, 13]);
             }          
         }
 
