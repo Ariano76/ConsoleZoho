@@ -1,10 +1,7 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
-using System.Diagnostics;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace BL
 {
@@ -20,6 +17,9 @@ namespace BL
 
         private int[] Codigos_NSE = { 488, 489, 490, 491, 492 }; // NSE
         private int[] Codigo_Tipos = { 229,238,164,158,161,174,215,178,202,237,226,228,173,235,175 }; // TIPOS 
+        int[] Cod_NSE_Temp = new int[5]; // NSE
+        int[,] Cod_Tipo_Temp = new int[75,2]; 
+
         string[,] Codigo_Nombres_Tipo = new string[15, 2] { {"229","12. Acondic.Adultos-Niños-Bb"},{"238","15. Aerosol"},{"164","03. Colonia Baño"},{"158","01. Colonia Femeninas"},{"161","02. Colonia Masculinas"},{"175","06. Delineador Ojos"},{"174","05. Embellecedor-Rimmel"},{"215","09. Humectante/Nutritiva Corporal"},{"178","07. Labiales"},{"202","08. Nutritiva Revit. Facial"},{"237","14. Roll-On"},{"226","10. Shampoo Adultos"},{"228","11. Shampoo Bebes"},{"173","04. Sombras"},{"235","13. Trat.Capilar Adultos/Niños"}};  // codigos y nombre de tipos
         string[,] Codigo_Nombres_NSE = new string[5, 2] {{ "488", "Alto" }, { "489", "Medio" }, { "490", "Medio Bajo" }, { "491", "Bajo" }, { "492", "Muy Bajo" }};  // Codigos y Nombre de NSE
         string[,] Codigo_Nombres_Categoria = new string[5, 2] { { "123", "1. Fragancias" }, { "124", "2. Maquillaje" }, { "125", "3. Tratamiento Facial" }, { "126", "4. Tratamiento Corporal" }, { "127", "5. Cuidado Personal" } };  // Codigos y Nombre de Categoria
@@ -85,6 +85,12 @@ namespace BL
 
         public double[,] periodo_NSE_CAT_UU = new double[25, 14];  //  
         public double[,] periodo_NSE_CAT_VAL = new double[25, 14];  //  
+        public double[,] periodo_NSE_TIPO_UU = new double[75, 14];  //  
+        public double[,] periodo_NSE_TIPO_VAL = new double[75, 14];  //  
+        public double[,] periodo_TIPO_MOD_UU = new double[30, 14];  //  
+        public double[,] periodo_TIPO_MOD_VAL = new double[30, 14];  // 
+        public double[,] periodo_CAT_MOD_UU = new double[10, 14];  //  
+        public double[,] periodo_CAT_MOD_VAL = new double[10, 14];  //
 
 
 
@@ -92,7 +98,7 @@ namespace BL
 
 
         private readonly DateTime[] Periodos = new DateTime[7];
-        string V1, V1_, V2, Ciudad_, Mercado, Variable, Variable_Promedio, Unidad, xTipos_;
+        string V1, V1_, V2, Ciudad_, Mercado, Mercado_, Variable, Variable_Promedio, Unidad, xTipos_;
         public string resultadoBD;
         double valor_1;
 
@@ -537,7 +543,7 @@ namespace BL
                 {
                     if (CodigoCategoria == Codigo_Nombres_Categoria[i, 0])
                     {
-                        V1_ = Codigo_Nombres_Categoria[i, 1].Substring(3, Codigo_Nombres_Categoria[i, 1].Length - 3); ;
+                        V1_ = Codigo_Nombres_Categoria[i, 1].Substring(3, Codigo_Nombres_Categoria[i, 1].Length - 3); 
                         Mercado = Codigo_Nombres_Categoria[i, 1];
                     }
                 }
@@ -559,7 +565,7 @@ namespace BL
                 cat_13 = (periodo_Cat_Temp_Unid[k, 13] == 0 ? 0 : periodo_Cat_Temp[k, 13] / periodo_Cat_Temp_Unid[k, 13]);
 
                 Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13);
-                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0.Cosmeticos2", Unidad, "MENSUAL", cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13);
+                Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, "0. Cosmeticos2", Unidad, "MENSUAL", cat_1, cat_2, cat_3, cat_4, cat_5, cat_6, cat_7, cat_8, cat_9, cat_10, cat_11, cat_12, cat_13);
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Cat_Temp[k, 1] / 12, periodo_Cat_Temp[k, 2] / 12, periodo_Cat_Temp[k, 3] / 12, periodo_Cat_Temp[k, 4] / 12, periodo_Cat_Temp[k, 5] / 12, periodo_Cat_Temp[k, 6] / 6, periodo_Cat_Temp[k, 7] / 6, periodo_Cat_Temp[k, 8] / 3, periodo_Cat_Temp[k, 9] / 3, periodo_Cat_Temp[k, 10] / 1, periodo_Cat_Temp[k, 11] / 1, periodo_Cat_Temp[k, 12], periodo_Cat_Temp[k, 13]);
             }
@@ -725,7 +731,7 @@ namespace BL
                 {
                     if (CodigoModalidad == Codigo_Nombres_Modalidad[i, 0])
                     {
-                        V1_ = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3); ;
+                        V1_ = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3); 
                         Mercado = Codigo_Nombres_Modalidad[i, 1];
                     }
                 }
@@ -751,8 +757,7 @@ namespace BL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", periodo_Canal_Temp[k, 1] / 12, periodo_Canal_Temp[k, 2] / 12, periodo_Canal_Temp[k, 3] / 12, periodo_Canal_Temp[k, 4] / 12, periodo_Canal_Temp[k, 5] / 12, periodo_Canal_Temp[k, 6] / 6, periodo_Canal_Temp[k, 7] / 6, periodo_Canal_Temp[k, 8] / 3, periodo_Canal_Temp[k, 9] / 3, periodo_Canal_Temp[k, 10] / 1, periodo_Canal_Temp[k, 11] / 1, periodo_Canal_Temp[k, 12], periodo_Canal_Temp[k, 13]);
             }
 
-            // CODIGO RECORRIDO POR CATEGORIA Y NSE      
-            //string CodigoModalidad;            
+            // CODIGO RECORRIDO POR CATEGORIAS Y NSE                              
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_CATEGORIA_NSE"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);                
@@ -870,6 +875,414 @@ namespace BL
                     }
                 }
             }
+
+            // CODIGO RECORRIDO POR TIPOS Y NSE                             
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_TIPO_NSE"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+                int columnas = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            periodo_NSE_TIPO_VAL[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+
+            }
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_TIPO_NSE"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0; int columnas = 0;
+                double mod_1 = 0, mod_2 = 0, mod_3 = 0, mod_4 = 0, mod_5 = 0, mod_6 = 0, mod_7 = 0, mod_8 = 0, mod_9 = 0, mod_10 = 0, mod_11 = 0, mod_12 = 0, mod_13 = 0;
+                int CodNSE = 0, CodTip = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    int xCodNSE = 0, xCodTIPO = 0;
+                    int xFilaNSE = 0, xFilaTIPO = 0;
+                    while (reader_1.Read())
+                    {
+                        CodNSE = int.Parse(reader_1[0].ToString());
+                        CodTip = int.Parse(reader_1[1].ToString());
+                        ////poblando array para validar si falta algun NSE de los 5.
+                        //if (xCodNSE != CodNSE)
+                        //{
+                        //    Cod_NSE_Temp[xFilaNSE] = CodNSE;
+                        //    xCodNSE = CodNSE;
+                        //    xFilaNSE++;                           
+                        //}
+                        ////poblando array para validar si falta algun tipo de los 15.
+                        //if (xCodTIPO != CodTip) 
+                        //{
+                        //    Cod_Tipo_Temp[xFilaTIPO, 0] = CodNSE;
+                        //    Cod_Tipo_Temp[xFilaTIPO, 1] = CodTip;
+                        //    xCodTIPO = CodTip;
+                        //    xFilaTIPO++;
+                        //}
+
+                        for (int i = 0; i < Codigo_Nombres_NSE.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENSIONES
+                        {
+                            if (CodNSE == int.Parse(Codigo_Nombres_NSE[i, 0]))
+                            {
+                                V1_ = Codigo_Nombres_NSE[i, 1];
+                            }     
+                        }
+                                               
+                        for (int i = 0; i < Codigo_Nombres_Tipo.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENSIONES
+                        {
+                            if (CodTip == int.Parse(Codigo_Nombres_Tipo[i, 0]))
+                            {
+                                Mercado = Codigo_Nombres_Tipo[i, 1];
+                            }
+                        }
+
+                        for (int i = 2; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = periodo_NSE_TIPO_VAL[rows, i] / double.Parse(reader_1[i].ToString());
+                            }
+                            switch (i)
+                            {
+                                case 2: mod_1 = valor_1; break;
+                                case 3: mod_2 = valor_1; break;
+                                case 4: mod_3 = valor_1; break;
+                                case 5: mod_4 = valor_1; break;
+                                case 6: mod_5 = valor_1; break;
+                                case 7: mod_6 = valor_1; break;
+                                case 8: mod_7 = valor_1; break;
+                                case 9: mod_8 = valor_1; break;
+                                case 10: mod_9 = valor_1; break;
+                                case 11: mod_10 = valor_1; break;
+                                case 12: mod_11 = valor_1; break;
+                                case 13: mod_12 = valor_1; break;
+                                case 14: mod_13 = valor_1; break;
+                            }
+                        }
+                        Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+                        rows++;
+                    }
+                }
+                //int[] xArray;
+                //xArray = CompararArray(Codigo_Tipos, Cod_Tipo_Temp);
+                //Debug.Print(Cod_NSE_Temp[1].ToString());
+                //Debug.Print(Cod_Tipo_Temp[1,1].ToString());
+            }
+
+            // CODIGO RECORRIDO POR TIPOS Y MODALIDAD                             
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_TIPO_MODALIDAD"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+                int columnas = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            periodo_TIPO_MOD_VAL[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_TIPO_MODALIDAD"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0; int columnas = 0;
+                double mod_1 = 0, mod_2 = 0, mod_3 = 0, mod_4 = 0, mod_5 = 0, mod_6 = 0, mod_7 = 0, mod_8 = 0, mod_9 = 0, mod_10 = 0, mod_11 = 0, mod_12 = 0, mod_13 = 0;
+                int CodMod = 0, CodTip = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
+                    {
+                        CodMod = int.Parse(reader_1[0].ToString());
+                        CodTip = int.Parse(reader_1[1].ToString());
+                        for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENSIONES
+                        {
+                            if (CodMod == int.Parse(Codigo_Nombres_Modalidad[i, 0]))
+                            {                               
+                                V1 = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3);
+                                Mercado_ = Codigo_Nombres_Modalidad[i, 1];
+                            }
+                        }
+
+                        for (int i = 0; i < Codigo_Nombres_Tipo.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENSIONES
+                        {
+                            if (CodTip == int.Parse(Codigo_Nombres_Tipo[i, 0]))
+                            {
+                                Mercado = Codigo_Nombres_Tipo[i, 1];    
+                                V1_ = Codigo_Nombres_Tipo[i, 1].Substring(4, Codigo_Nombres_Tipo[i, 1].Length - 4);
+                            }
+                        }
+
+                        for (int i = 2; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = periodo_TIPO_MOD_VAL[rows, i] / double.Parse(reader_1[i].ToString());
+                            }
+                            switch (i)
+                            {
+                                case 2: mod_1 = valor_1; break;
+                                case 3: mod_2 = valor_1; break;
+                                case 4: mod_3 = valor_1; break;
+                                case 5: mod_4 = valor_1; break;
+                                case 6: mod_5 = valor_1; break;
+                                case 7: mod_6 = valor_1; break;
+                                case 8: mod_7 = valor_1; break;
+                                case 9: mod_8 = valor_1; break;
+                                case 10: mod_9 = valor_1; break;
+                                case 11: mod_10 = valor_1; break;
+                                case 12: mod_11 = valor_1; break;
+                                case 13: mod_12 = valor_1; break;
+                                case 14: mod_13 = valor_1; break;
+                            }
+                        }
+                        Actualizar_BD(V1, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+                        Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado_, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+
+                        rows++;
+                    }
+                }
+            }
+
+            // CODIGO RECORRIDO POR CATEGORIA Y MODALIDAD                             
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_CATEGORIA_MODALIDAD"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+                int columnas = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            periodo_CAT_MOD_VAL[rows, i] = valor_1;
+                        }
+                        rows++;
+                    }
+                }
+            }
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_CATEGORIA_MODALIDAD"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0; int columnas = 0;
+                double mod_1 = 0, mod_2 = 0, mod_3 = 0, mod_4 = 0, mod_5 = 0, mod_6 = 0, mod_7 = 0, mod_8 = 0, mod_9 = 0, mod_10 = 0, mod_11 = 0, mod_12 = 0, mod_13 = 0;
+                int CodMod = 0, CodCat = 0;
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    columnas = cols;
+                    while (reader_1.Read())
+                    {
+                        CodMod = int.Parse(reader_1[0].ToString());
+                        CodCat = int.Parse(reader_1[1].ToString());
+                        for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENSIONES
+                        {
+                            if (CodMod == int.Parse(Codigo_Nombres_Modalidad[i, 0]))
+                            {
+                                V1 = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3);
+                                Mercado_ = Codigo_Nombres_Modalidad[i, 1];
+                            }
+                        }
+
+                        for (int i = 0; i < Codigo_Nombres_Categoria.Length / 2; i++) // SE DIVIDE / 2 PQ TIENE 2 DIMENS
+                        {
+                            if (CodCat == int.Parse(Codigo_Nombres_Categoria[i, 0]))
+                            {
+                                Mercado = Codigo_Nombres_Categoria[i, 1];
+                                V1_ = Codigo_Nombres_Categoria[i, 1].Substring(3, Codigo_Nombres_Categoria[i, 1].Length - 3);
+                            }
+                        }
+
+                        for (int i = 2; i < cols - 1; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = periodo_CAT_MOD_VAL[rows, i] / double.Parse(reader_1[i].ToString());
+                            }
+                            switch (i)
+                            {
+                                case 2: mod_1 = valor_1; break;
+                                case 3: mod_2 = valor_1; break;
+                                case 4: mod_3 = valor_1; break;
+                                case 5: mod_4 = valor_1; break;
+                                case 6: mod_5 = valor_1; break;
+                                case 7: mod_6 = valor_1; break;
+                                case 8: mod_7 = valor_1; break;
+                                case 9: mod_8 = valor_1; break;
+                                case 10: mod_9 = valor_1; break;
+                                case 11: mod_10 = valor_1; break;
+                                case 12: mod_11 = valor_1; break;
+                                case 13: mod_12 = valor_1; break;
+                                case 14: mod_13 = valor_1; break;
+                            }
+                        }
+                        Actualizar_BD(V1, "Suma", Unidad, Ciudad_, Mercado, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+                        Actualizar_BD(V1_, "Suma", Unidad, Ciudad_, Mercado_, Unidad, "MENSUAL", mod_1, mod_2, mod_3, mod_4, mod_5, mod_6, mod_7, mod_8, mod_9, mod_10, mod_11, mod_12, mod_13);
+
+                        rows++;
+                    }
+                }
+            }
+        }
+        
+        private int[] CompararArray(int[] x1, int[,] x2) 
+        {
+            //Procedimiento para validar si dos arreglos tienen los mismos valores.
+            Boolean isArrayEqual = true;
+            isArrayEqual = x1.Equals(x2);
+            int[] faltantes = new int[15];
+            int row = 0;
+            if (x1.Length != (x2.Length/2)/5)
+            {
+                for (int i = 0; i < x1.Length - 1; i++)
+                {
+                    for (int u = 0; u < (x2.Length / 2) - 1; u++)
+                    {
+                        faltantes[row] = x2[u, 1];
+                    }
+                }                
+            }
+            return faltantes;
         }
 
         // VALORES UNIDADES

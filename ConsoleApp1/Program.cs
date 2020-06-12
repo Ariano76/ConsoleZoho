@@ -43,6 +43,7 @@ namespace ConsoleApp1
             var objGastoMedioML_Marca = new BL_Gasto_Medio_ML_Marcas();
             var objPentraciones_Marca = new BL_Penetraciones_Marcas();
             var objPeridos_Share_Valor = new Share_Moneda_Local();
+            var obj_Crear_BD_Peridos = new Poblar_Tabla_Factores();
 
 
             Console.WriteLine("Por favor Ingrese el Año de Proceso :");
@@ -149,7 +150,7 @@ namespace ConsoleApp1
             Tiempo_Proceso("DOLARES CIUDAD Y TIPOS . . .", HoraStart);
             Record_Progreso();
 
-            //#region HOGARES            
+            #region HOGARES            
 
             //HoraStart = DateTime.Now;
             //objHogar.Leer_Ultimos_48_Meses_Ciudad_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS HOGAR POR NSE
@@ -196,9 +197,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("HOGARES CIUDAD Y TIPOS . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region UNIDADES
+            #region UNIDADES
 
             //HoraStart = DateTime.Now;
             //objUnidades.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
@@ -220,9 +221,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("UNIDADES CIUDAD Y TIPOS . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU DOLARES
+            #region PPU DOLARES
 
             //HoraStart = DateTime.Now;
             //objPPUDol.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
@@ -294,9 +295,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU (DOL) TIPO . . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU SOLES            
+            #region PPU SOLES            
 
             //HoraStart = DateTime.Now;
             //objPPUML.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE
@@ -368,9 +369,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU (ML) TIPO . . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE VALOR
+            #region SHARE VALOR
 
             //HoraStart = DateTime.Now;
             //objShareValor.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD Y NSE
@@ -457,9 +458,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE VALOR MODALIDAD . . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE UNIDADES
+            #region SHARE UNIDADES
 
             //HoraStart = DateTime.Now;
             //objShareUnidad.Leer_Ultimos_48_Meses_CIUDAD_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR CIUDAD Y NSE
@@ -546,9 +547,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE UNIDAD MODALIDAD . . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO DOLARES
+            #region GASTO MEDIO DOLARES
 
             //HoraStart = DateTime.Now;
             //objGastoMedioDol.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
@@ -635,9 +636,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO DOLARES MODALIDAD . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO MONEDA LOCAL
+            #region GASTO MEDIO MONEDA LOCAL
 
             //HoraStart = DateTime.Now;
             //objGastoMedioML.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
@@ -724,9 +725,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO MONEDALOCAL MODALIDAD . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region UNIDADES PROMEDIO HOGAR
+            #region UNIDADES PROMEDIO HOGAR
 
             //HoraStart = DateTime.Now;
             //objUnidadesPromedioHogar.Leer_Ultimos_48_Meses_NSE_CIUDAD(xPeriodos48Meses[0], xPeriodos48Meses[1]); // RESULTADOS POR NSE Y TIPOS
@@ -813,9 +814,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("UNIDADES PROMEDIO HOGAR MODALIDAD . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PENETRACIONES HOGAR
+            #region PENETRACIONES HOGAR
 
             //HoraStart = DateTime.Now;
             //objPenetraciones.Leer_Ultimos_48_Meses_NSE(xPeriodos48Meses[0], xPeriodos48Meses[1], xPeriodos_Inicio_Fin[0], xPeriodos_Inicio_Fin[1]); // RESULTADOS POR NSE Y TIPOS
@@ -922,9 +923,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PENETRACION CONSOLIDADO HOGAR PAIS . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS VALOR TOTAL PAIS
+            #region SHARE MARCAS VALOR TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -953,9 +954,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE VALORES MARCA TOTAL COSMETICOS . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS UNIDADES TOTAL PAIS
+            #region SHARE MARCAS UNIDADES TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -984,9 +985,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE UNIDADES MARCA TOTAL COSMETICOS . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS VALOR TOTAL CAPITAL
+            #region SHARE MARCAS VALOR TOTAL CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1015,9 +1016,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE VALORES MARCA TOTAL COSMETICOS CAPITAL .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS UNIDADES TOTAL CAPITAL
+            #region SHARE MARCAS UNIDADES TOTAL CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1046,9 +1047,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE UNIDADES MARCA TOTAL COSMETICOS CAPITAL .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS VALOR TOTAL CIUDADES
+            #region SHARE MARCAS VALOR TOTAL CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1077,9 +1078,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE VALORES MARCA TOTAL COSMETICOS CIUDADES .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region SHARE MARCAS UNIDADES TOTAL CIUDADES
+            #region SHARE MARCAS UNIDADES TOTAL CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1108,9 +1109,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("SHARE UNIDADES MARCA TOTAL COSMETICOS CIUDADES .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU MONEDA LOCAL MARCAS VALOR TOTAL PAIS
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1139,9 +1140,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL COSMETICOS .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU MONEDA LOCAL MARCAS VALOR TOTAL CAPITAL
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1170,9 +1171,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL CAPITAL .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU MONEDA LOCAL MARCAS VALOR TOTAL CIUDADES
+            #region PPU MONEDA LOCAL MARCAS VALOR TOTAL CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1201,9 +1202,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU VALORES LOCAL MARCA TOTAL REGION .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU DOLARES MARCAS VALOR TOTAL PAIS
+            #region PPU DOLARES MARCAS VALOR TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1232,9 +1233,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU DOLARES MARCA TOTAL COSMETICOS . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU DOLARES MARCAS VALOR TOTAL CAPITAL
+            #region PPU DOLARES MARCAS VALOR TOTAL CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1260,9 +1261,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU DOLARES MARCA TOTAL CAPITAL . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PPU DOLARES MARCAS VALOR TOTAL CIUDADES
+            #region PPU DOLARES MARCAS VALOR TOTAL CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1288,9 +1289,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PPU DOLARES MARCA TOTAL REGION . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region HOGARES MARCAS TOTAL PAIS
+            #region HOGARES MARCAS TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1319,9 +1320,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("HOGARES MARCA TOTAL COSMETICOS . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region HOGARES MARCAS TOTAL CAPITAL
+            #region HOGARES MARCAS TOTAL CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1350,9 +1351,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("HOGARES MARCA TOTAL COSMETICOS CAPITAL . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region HOGARES MARCAS TOTAL CIUDADES
+            #region HOGARES MARCAS TOTAL CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1381,9 +1382,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("HOGARES MARCA TOTAL COSMETICOS CIUDADES . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region UNIDAD PROMEDIO POR HOGAR - MARCAS TOTAL PAIS
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1412,9 +1413,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region UNIDAD PROMEDIO POR HOGAR - MARCAS CAPITAL
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1443,9 +1444,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS CAPITAL", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region UNIDAD PROMEDIO POR HOGAR - MARCAS CIUDADES
+            #region UNIDAD PROMEDIO POR HOGAR - MARCAS CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1474,9 +1475,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("UNIDAD PROMEDIO HOGAR MARCA TOTAL COSMETICOS REGION", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO DOLARES - MARCAS TOTAL PAIS
+            #region GASTO MEDIO DOLARES - MARCAS TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1505,9 +1506,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO DOLARES MARCA TOTAL COSMETICOS .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO DOLARES - MARCAS CAPITAL
+            #region GASTO MEDIO DOLARES - MARCAS CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1536,9 +1537,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO DOLARES MARCA TOTAL COSMETICOS CAPITAL", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO DOLARES - MARCAS CIUDADES
+            #region GASTO MEDIO DOLARES - MARCAS CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1567,9 +1568,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO DOLARES MARCA TOTAL COSMETICOS REGION", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO MONEDA LOCAL - MARCAS TOTAL PAIS
+            #region GASTO MEDIO MONEDA LOCAL - MARCAS TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1598,9 +1599,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO SOLES MARCA TOTAL COSMETICOS .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO MONEDA LOCAL - MARCAS CAPITAL
+            #region GASTO MEDIO MONEDA LOCAL - MARCAS CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1629,9 +1630,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO SOLES MARCA TOTAL COSMETICOS CAPITAL", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region GASTO MEDIO MONEDA LOCAL - MARCAS CIUDADES
+            #region GASTO MEDIO MONEDA LOCAL - MARCAS CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1660,9 +1661,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("GASTO MEDIO SOLES MARCA TOTAL COSMETICOS REGION", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PENETRACIONES - MARCAS TOTAL PAIS
+            #region PENETRACIONES - MARCAS TOTAL PAIS
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1691,9 +1692,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PENETRACIONES MARCA TOTAL . . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PENETRACIONES - MARCAS CAPITAL
+            #region PENETRACIONES - MARCAS CAPITAL
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1722,9 +1723,9 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PENETRACIONES MARCA TOTAL CAPITAL . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
 
-            //#region PENETRACIONES - MARCAS CIUDADES
+            #region PENETRACIONES - MARCAS CIUDADES
 
             //HoraStart = DateTime.Now;
             //foreach (var item in Codigo_TIPOS)
@@ -1753,49 +1754,53 @@ namespace ConsoleApp1
             //Tiempo_Proceso("PENETRACIONES MARCA TOTAL REGION . . .", HoraStart);
             //Record_Progreso();
 
-            //#endregion
+            #endregion
+
+            #region PERIODOS
+
+            //// UNIDADES PAIS
+            //HoraStart = DateTime.Now;
+            //objPeridos_Share_Valor.Recuperar_Codigos_NSE();
+            //objPeridos_Share_Valor.Recuperar_Codigos_Categoria();
+            //objPeridos_Share_Valor.Recuperar_Codigos_Modalidad();
+            //objPeridos_Share_Valor.Recuperar_Codigos_Tipos();
+
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //// MONEDA LOCAL            
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            ////DOLARES
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //Tiempo_Proceso("PERIODOS SHARE VALOR UNIDADES . . .", HoraStart);
+            //Record_Progreso();
+
+            //// UNIDADES CAPITAL
+            //HoraStart = DateTime.Now;
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //// MONEDA LOCAL
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            ////DOLARES
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //Tiempo_Proceso("PERIODOS SHARE VALOR SOLES . . .", HoraStart);
+            //Record_Progreso();
+
+            //// UNIDADES CIUDADES
+            //HoraStart = DateTime.Now;
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //// MONEDA LOCAL
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);           
+            ////DOLARES
+            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //Tiempo_Proceso("PERIODOS SHARE VALOR DOLARES . . .", HoraStart);
+            //Record_Progreso();
+
+            #endregion
 
 
-            // UNIDADES
+            // CREACION DE FACTORES PARA LOS DIFERENTES PERIODOS 
             HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Recuperar_Codigos_NSE();
-            objPeridos_Share_Valor.Recuperar_Codigos_Categoria();
-            objPeridos_Share_Valor.Recuperar_Codigos_Modalidad();
-            objPeridos_Share_Valor.Recuperar_Codigos_Tipos();
-
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            // MONEDA LOCAL            
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //DOLARES
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            Tiempo_Proceso("PERIODOS SHARE VALOR UNIDADES . . .", HoraStart);
+            obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1],  xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            Tiempo_Proceso("CREACION BD FACTORES PERIODOS . . .", HoraStart);
             Record_Progreso();
-
-            // UNIDADES
-            HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            // MONEDA LOCAL
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //DOLARES
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            Tiempo_Proceso("PERIODOS SHARE VALOR SOLES . . .", HoraStart);
-            Record_Progreso();
-
-            // UNIDADES
-            HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            // MONEDA LOCAL
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);           
-            //DOLARES
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            Tiempo_Proceso("PERIODOS SHARE VALOR DOLARES . . .", HoraStart);
-            Record_Progreso();
-
-
-
-
-
-
 
 
 
