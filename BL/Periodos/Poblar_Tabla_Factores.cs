@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace BL
 {
@@ -25,23 +26,25 @@ namespace BL
         Database db = factory.Create("SQL_BD_BIP");
         Database db_Zoho = factory.Create("ZOHO");
         
-        public void Periodos_Cosmeticos_Total_Valores(string xCiudad, string xCab, string xAños, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2)
-        {            
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_AÑOS"))
+        public void Periodos_Cosmeticos_Total_Valores(string xCiudad, string xCab, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
+        {
+            DbCommand cmdDelete;
+            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.FACTORES_HOGAR_PERIODOS");
+            db.ExecuteNonQuery(cmdDelete);
+            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_PERIODOS");
+            db.ExecuteNonQuery(cmdDelete);
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_A_POBLAR_TABLA"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, _PER12M_1);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
-                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
-                //db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
-                //db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
-                //db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
-                //db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
-                //db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
-                //db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
-                //db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
-                //db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
-                //db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
-                //db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODOS", DbType.String, _PER12M_1);
                 int rows = 0;
 
                 using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
@@ -49,50 +52,46 @@ namespace BL
                     int cols = reader_1.FieldCount;
                     while (reader_1.Read())
                     {
-                        V1 = int.Parse(reader_1[0].ToString());
-                        V2 = int.Parse(reader_1[1].ToString());
-                        for (int i = 2; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        V2 = int.Parse(reader_1[0].ToString());
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                         {
-                            if (reader_1[i] == DBNull.Value)
+                            valor_1 = reader_1[i] == DBNull.Value ? 0 : double.Parse(reader_1[i].ToString());
+
+                            switch (i)
                             {
-                                switch (reader_1[i])
-                                {
-                                    case 2:
-                                        valor_1 = 0;
-                                        break;
-                                    case 3:
-                                        valor_2 = 0;
-                                        break;
-                                    case 4:
-                                        valor_3 = 0;
-                                        break;
-                                }
+                                case 1:
+                                    V1 = 1;
+                                    break;
+                                case 2:
+                                    V1 = 2;
+                                    break;
+                                case 3:
+                                    V1 = 5;
+                                    break;
                             }
-                            else
-                            {
-                                switch (i)
-                                {
-                                    case 2:
-                                        valor_1 = double.Parse(reader_1[i].ToString());
-                                        break;
-                                    case 3:
-                                        valor_2 = double.Parse(reader_1[i].ToString());
-                                        break;
-                                    case 4:
-                                        valor_3 = double.Parse(reader_1[i].ToString());
-                                        break;
-                                }
-                                //valor_1 = double.Parse(reader_1[i].ToString()) == 2.0 ? 0 : 1;
-                            }
+                            Insertar_Registros(V1, V2, 0, 0, 0, valor_1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                         }
                         rows++;
-                        Actualizar_BD(V1, V2, valor_1, valor_2, valor_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-                    }                    
+                    }
                 }
             }
+
+            Update_Periodos(xCiudad, xCab, _PER12M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_12M_2]");
+            Update_Periodos(xCiudad, xCab, _PER6M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_1]");
+            Update_Periodos(xCiudad, xCab, _PER6M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_2]");
+            Update_Periodos(xCiudad, xCab, _PER3M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_1]");
+            Update_Periodos(xCiudad, xCab, _PER3M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_2]");
+            Update_Periodos(xCiudad, xCab, _PER1M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_1]");
+            Update_Periodos(xCiudad, xCab, _PER1M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_2]");
+            Update_Periodos(xCiudad, xCab, _PER1M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_2]");
+            Update_Periodos(xCiudad, xCab, _PERYTDM_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_1]");
+            Update_Periodos(xCiudad, xCab, _PERYTDM_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_2]");
+            Update_Periodos(xCiudad, xCab, _PER_AÑO_0, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_0]");
+            Update_Periodos(xCiudad, xCab, _PER_AÑO_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_1]");
+            Update_Periodos(xCiudad, xCab, _PER_AÑO_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_2]");           
         }          
 
-        private void Actualizar_BD(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
+        private void Insertar_Registros(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
         {
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_INSERT"))
             {
@@ -114,6 +113,58 @@ namespace BL
                 db_Zoho.ExecuteNonQuery(cmd_1);
             }
         }
+        private void Update_Factor_SP_FACTOR_12M(int _V1, int _V2, double valor, string procedimiento)
+        {
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_V1", DbType.String, _V1);
+                db_Zoho.AddInParameter(cmd_1, "_V2", DbType.String, _V2);
+                db_Zoho.AddInParameter(cmd_1, "_VALOR", DbType.Double, valor);         
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+        }
+        private void Update_Periodos(string xCiudad, string xCab, string xPer, string procedimiento)
+        {
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_PERIODOS", DbType.String, xPer);
 
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        V2 = int.Parse(reader_1[0].ToString());
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            switch (i)
+                            {
+                                case 1:
+                                    V1 = 1;
+                                    break;
+                                case 2:
+                                    V1 = 2;
+                                    break;
+                                case 3:
+                                    V1 = 5;
+                                    break;
+                            }
+                            Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, procedimiento);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

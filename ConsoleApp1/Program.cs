@@ -84,6 +84,10 @@ namespace ConsoleApp1
 
             Console.WriteLine("********** GENERACION DE ULTIMOS 48 MESES ************");
 
+            string[] xPeriodos_Año_0 = obj.Obtener_periodos_año_0(xAño - 3);
+            string[] xPeriodos_Año_1 = obj.Obtener_periodos_año_1(xAño - 2);
+            string[] xPeriodos_Año_2 = obj.Obtener_periodos_año_2(xAño - 1);
+
             string[] x3UltimosAños = obj.Obtener_3_Ultimos_años(xAño);
             string[] xPeriodos1Meses = obj.Obtener_Ultimos_1_mes(xAño, xMes);
             string[] xPeriodos1MesesAgo = obj.Obtener_Ultimos_1_mes_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
@@ -99,6 +103,12 @@ namespace ConsoleApp1
             string[] xPeriodos48Meses = obj.Obtener_Ultimos_48_meses(xFecha[6].Year, xFecha[6].Month);
             string[] xPeriodos_Inicio_Fin = obj.Obtener_Ultimos_48_meses_Factores_Capital(xFecha[6].Year, xFecha[6].Month, xAño, xMes);
 
+            Console.WriteLine($"Periodos Año 0 : {xPeriodos_Año_0[0]}");
+            Console.WriteLine($"Periodos Año 0 : {xPeriodos_Año_0[1]}\n");
+            Console.WriteLine($"Periodos Año 1 : {xPeriodos_Año_1[0]}");
+            Console.WriteLine($"Periodos Año 1 : {xPeriodos_Año_1[1]}\n");
+            Console.WriteLine($"Periodos Año 2 : {xPeriodos_Año_2[0]}");
+            Console.WriteLine($"Periodos Año 2 : {xPeriodos_Año_2[1]}\n");
 
             Console.WriteLine($"3 Ultimos Años : {x3UltimosAños[0]}");
             Console.WriteLine($"3 Ultimos Años : {x3UltimosAños[1]}\n");
@@ -1798,7 +1808,10 @@ namespace ConsoleApp1
 
             // CREACION DE FACTORES PARA LOS DIFERENTES PERIODOS 
             HoraStart = DateTime.Now;
-            obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1],  xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", "[1],[2],[5]", xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+
+            //obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+
             Tiempo_Proceso("CREACION BD FACTORES PERIODOS . . .", HoraStart);
             Record_Progreso();
 
