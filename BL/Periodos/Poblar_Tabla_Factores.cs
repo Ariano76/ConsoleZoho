@@ -26,19 +26,56 @@ namespace BL
         Database db = factory.Create("SQL_BD_BIP");
         Database db_Zoho = factory.Create("ZOHO");
         
-        public void Periodos_Cosmeticos_Total_Valores(string xCiudad, string xCab, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
+        public void Crear_Tabla_Datos_Periodos(string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
+        {
+            //DbCommand cmdTruncate;
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_12M_1");
+            //db.ExecuteNonQuery(cmdTruncate);            
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_12M_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_1M_1");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_1M_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_3M_1");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_3M_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_6M_1");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_6M_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_0");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_1");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_YTD_1");
+            //db.ExecuteNonQuery(cmdTruncate);
+            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_YTD_2");
+            //db.ExecuteNonQuery(cmdTruncate);
+
+            Insertar_Datos_Tabla_Periodos(_PER12M_1, "PERIODOS._SP_A_POBLAR_HOGAR_12M_1");
+            Insertar_Datos_Tabla_Periodos(_PER12M_2, "PERIODOS._SP_A_POBLAR_HOGAR_12M_2");
+            Insertar_Datos_Tabla_Periodos(_PER6M_2, "PERIODOS._SP_A_POBLAR_HOGAR_6M_1");
+            Insertar_Datos_Tabla_Periodos(_PER6M_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_2");
+            Insertar_Datos_Tabla_Periodos(_PER3M_2, "PERIODOS._SP_A_POBLAR_HOGAR_3M_1");
+            Insertar_Datos_Tabla_Periodos(_PER3M_1, "PERIODOS._SP_A_POBLAR_HOGAR_3M_2");
+            Insertar_Datos_Tabla_Periodos(_PER1M_1, "PERIODOS._SP_A_POBLAR_HOGAR_1M_1");
+            Insertar_Datos_Tabla_Periodos(_PER1M_2, "PERIODOS._SP_A_POBLAR_HOGAR_1M_2");
+            Insertar_Datos_Tabla_Periodos(_PERYTDM_1, "PERIODOS._SP_A_POBLAR_HOGAR_YTD_1");
+            Insertar_Datos_Tabla_Periodos(_PERYTDM_2, "PERIODOS._SP_A_POBLAR_HOGAR_YTD_2");
+            Insertar_Datos_Tabla_Periodos(_PER_AÑO_0, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_0");
+            Insertar_Datos_Tabla_Periodos(_PER_AÑO_1, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_1");
+            Insertar_Datos_Tabla_Periodos(_PER_AÑO_2, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_2");
+        }
+
+        public void Crear_Tabla_Factores(string xCiudad, string xCab, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
         {
             DbCommand cmdDelete;
             cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.FACTORES_HOGAR_PERIODOS");
-            db.ExecuteNonQuery(cmdDelete);
-            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_PERIODOS");
-            db.ExecuteNonQuery(cmdDelete);
-
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_A_POBLAR_TABLA"))
-            {
-                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, _PER12M_1);
-                db_Zoho.ExecuteNonQuery(cmd_1);
-            }
+            db.ExecuteNonQuery(cmdDelete);            
 
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))
             {
@@ -69,7 +106,7 @@ namespace BL
                                     V1 = 5;
                                     break;
                             }
-                            Insertar_Registros(V1, V2, 0, 0, 0, valor_1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                            Insertar_Factores(V1, V2, 0, 0, 0, valor_1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                         }
                         rows++;
                     }
@@ -91,7 +128,7 @@ namespace BL
             Update_Periodos(xCiudad, xCab, _PER_AÑO_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_2]");           
         }          
 
-        private void Insertar_Registros(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
+        private void Insertar_Factores(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
         {
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_INSERT"))
             {
@@ -110,6 +147,14 @@ namespace BL
                 db_Zoho.AddInParameter(cmd_1, "_PER_1M_2", DbType.Double, _PER_1M_2);
                 db_Zoho.AddInParameter(cmd_1, "_PER_YTD_1", DbType.Double, _PER_YTD_1);
                 db_Zoho.AddInParameter(cmd_1, "_PER_YTD_2", DbType.Double, _PER_YTD_2);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+        }
+        private void Insertar_Datos_Tabla_Periodos(string periodo, string procedimiento)
+        {
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, periodo);
                 db_Zoho.ExecuteNonQuery(cmd_1);
             }
         }

@@ -88,6 +88,8 @@ namespace ConsoleApp1
             string[] xPeriodos_Año_1 = obj.Obtener_periodos_año_1(xAño - 2);
             string[] xPeriodos_Año_2 = obj.Obtener_periodos_año_2(xAño - 1);
 
+            string[] xPeriodos_all_Años = obj.Obtener_periodos_all_años(xAño);
+
             string[] x3UltimosAños = obj.Obtener_3_Ultimos_años(xAño);
             string[] xPeriodos1Meses = obj.Obtener_Ultimos_1_mes(xAño, xMes);
             string[] xPeriodos1MesesAgo = obj.Obtener_Ultimos_1_mes_One_Year_Ago(xFecha[0].Year, xFecha[0].Month);
@@ -1808,7 +1810,10 @@ namespace ConsoleApp1
 
             // CREACION DE FACTORES PARA LOS DIFERENTES PERIODOS 
             HoraStart = DateTime.Now;
-            obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", "[1],[2],[5]", xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+
+            obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+
+            obj_Crear_BD_Peridos.Crear_Tabla_Factores("1,2,5", "[1],[2],[5]", xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
 
             //obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
 
