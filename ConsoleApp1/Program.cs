@@ -16,6 +16,8 @@ namespace ConsoleApp1
             int[] Codigo_Tipos_Importantes = { 158, 161, 215, 202, 237, 226 };
             int[] Codigo_TIPOS = { 158, 161, 215, 202, 237, 226 }; // TIPOS 
             int[] Codigo_Categoria = { 123, 124, 127 }; // Categorias
+            string Ciudades_Codigos = "1,2,5"; // Ciudades
+            string Ciudades_Cabecera = "[1],[2],[5]"; // Ciudades Cabecera
 
             TimeSpan HoraFin;
             int xAño, xMes;
@@ -1811,9 +1813,10 @@ namespace ConsoleApp1
             // CREACION DE FACTORES PARA LOS DIFERENTES PERIODOS 
             HoraStart = DateTime.Now;
 
-            obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+            obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);   
 
-            obj_Crear_BD_Peridos.Crear_Tabla_Factores("1,2,5", "[1],[2],[5]", xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+            //obj_Crear_BD_Peridos.Crear_Tabla_Factores(Ciudades_Codigos, Ciudades_Cabecera, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+            obj_Crear_BD_Peridos.Crear_Tabla_Factores(Ciudades_Codigos, Ciudades_Cabecera, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
 
             //obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
 

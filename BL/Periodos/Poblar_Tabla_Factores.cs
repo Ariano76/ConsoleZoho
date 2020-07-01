@@ -19,7 +19,7 @@ namespace BL
         private double[,] periodo_CAT_MOD_VAL = new double[10, 14];  //
         
         int V1, V2;        
-        double valor_1, valor_2, valor_3;
+        double valor_1;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
@@ -27,41 +27,14 @@ namespace BL
         Database db_Zoho = factory.Create("ZOHO");
         
         public void Crear_Tabla_Datos_Periodos(string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
-        {
-            //DbCommand cmdTruncate;
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_12M_1");
-            //db.ExecuteNonQuery(cmdTruncate);            
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_12M_2");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_1M_1");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_1M_2");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_3M_1");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_3M_2");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_6M_1");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_6M_2");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_0");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_1");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_AÑO_2");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_YTD_1");
-            //db.ExecuteNonQuery(cmdTruncate);
-            //cmdTruncate = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.BASE_RESULT_HOGAR_YTD_2");
-            //db.ExecuteNonQuery(cmdTruncate);
+        {           
 
             Insertar_Datos_Tabla_Periodos(_PER12M_1, "PERIODOS._SP_A_POBLAR_HOGAR_12M_1");
             Insertar_Datos_Tabla_Periodos(_PER12M_2, "PERIODOS._SP_A_POBLAR_HOGAR_12M_2");
-            Insertar_Datos_Tabla_Periodos(_PER6M_2, "PERIODOS._SP_A_POBLAR_HOGAR_6M_1");
-            Insertar_Datos_Tabla_Periodos(_PER6M_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_2");
-            Insertar_Datos_Tabla_Periodos(_PER3M_2, "PERIODOS._SP_A_POBLAR_HOGAR_3M_1");
-            Insertar_Datos_Tabla_Periodos(_PER3M_1, "PERIODOS._SP_A_POBLAR_HOGAR_3M_2");
+            Insertar_Datos_Tabla_Periodos(_PER6M_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_1");
+            Insertar_Datos_Tabla_Periodos(_PER6M_2, "PERIODOS._SP_A_POBLAR_HOGAR_6M_2");
+            Insertar_Datos_Tabla_Periodos(_PER3M_1, "PERIODOS._SP_A_POBLAR_HOGAR_3M_1");
+            Insertar_Datos_Tabla_Periodos(_PER3M_2, "PERIODOS._SP_A_POBLAR_HOGAR_3M_2");
             Insertar_Datos_Tabla_Periodos(_PER1M_1, "PERIODOS._SP_A_POBLAR_HOGAR_1M_1");
             Insertar_Datos_Tabla_Periodos(_PER1M_2, "PERIODOS._SP_A_POBLAR_HOGAR_1M_2");
             Insertar_Datos_Tabla_Periodos(_PERYTDM_1, "PERIODOS._SP_A_POBLAR_HOGAR_YTD_1");
@@ -74,10 +47,10 @@ namespace BL
         public void Crear_Tabla_Factores(string xCiudad, string xCab, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
         {
             DbCommand cmdDelete;
-            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE BIP.dbo.FACTORES_HOGAR_PERIODOS");
-            db.ExecuteNonQuery(cmdDelete);            
+            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE ZOHO.dbo.FACTORES_HOGAR_PERIODOS");
+            db.ExecuteNonQuery(cmdDelete);
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))  
             {
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
@@ -113,20 +86,25 @@ namespace BL
                 }
             }
 
-            Update_Periodos(xCiudad, xCab, _PER12M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_12M_2]");
-            Update_Periodos(xCiudad, xCab, _PER6M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_1]");
-            Update_Periodos(xCiudad, xCab, _PER6M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_2]");
-            Update_Periodos(xCiudad, xCab, _PER3M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_1]");
-            Update_Periodos(xCiudad, xCab, _PER3M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_2]");
-            Update_Periodos(xCiudad, xCab, _PER1M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_1]");
-            Update_Periodos(xCiudad, xCab, _PER1M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_2]");
-            Update_Periodos(xCiudad, xCab, _PER1M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_2]");
-            Update_Periodos(xCiudad, xCab, _PERYTDM_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_1]");
-            Update_Periodos(xCiudad, xCab, _PERYTDM_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_2]");
-            Update_Periodos(xCiudad, xCab, _PER_AÑO_0, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_0]");
-            Update_Periodos(xCiudad, xCab, _PER_AÑO_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_1]");
-            Update_Periodos(xCiudad, xCab, _PER_AÑO_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_2]");           
-        }          
+            Update_Factor_Periodos(xCiudad, xCab, _PER12M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_12M_2]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER6M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_1]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER6M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_6M_2]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER3M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_1]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER3M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_3M_2]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER1M_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_1]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER1M_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_1M_2]");
+            Update_Factor_Periodos(xCiudad, xCab, _PERYTDM_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_1]");
+            Update_Factor_Periodos(xCiudad, xCab, _PERYTDM_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_YTD_2]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER_AÑO_0, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_0]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER_AÑO_1, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_1]");
+            Update_Factor_Periodos(xCiudad, xCab, _PER_AÑO_2, "[PERIODOS].[_SP_FACTOR_UPDATE_PER_AÑO_2]");
+
+            Update_Base_Result_Hogar_Periodos();
+
+            DbCommand cmdTabla;
+            cmdTabla = db_Zoho.GetStoredProcCommand("PERIODOS._SP_BD_Resultados_Periodos");
+            db_Zoho.ExecuteNonQuery(cmdTabla);
+        }
 
         private void Insertar_Factores(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
         {
@@ -150,25 +128,7 @@ namespace BL
                 db_Zoho.ExecuteNonQuery(cmd_1);
             }
         }
-        private void Insertar_Datos_Tabla_Periodos(string periodo, string procedimiento)
-        {
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
-            {
-                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, periodo);
-                db_Zoho.ExecuteNonQuery(cmd_1);
-            }
-        }
-        private void Update_Factor_SP_FACTOR_12M(int _V1, int _V2, double valor, string procedimiento)
-        {
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
-            {
-                db_Zoho.AddInParameter(cmd_1, "_V1", DbType.String, _V1);
-                db_Zoho.AddInParameter(cmd_1, "_V2", DbType.String, _V2);
-                db_Zoho.AddInParameter(cmd_1, "_VALOR", DbType.Double, valor);         
-                db_Zoho.ExecuteNonQuery(cmd_1);
-            }
-        }
-        private void Update_Periodos(string xCiudad, string xCab, string xPer, string procedimiento)
+        private void Update_Factor_Periodos(string xCiudad, string xCab, string xPer, string procedimiento)
         {
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))
             {
@@ -211,5 +171,67 @@ namespace BL
                 }
             }
         }
+        private void Update_Base_Result_Hogar_Periodos()
+        {
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_SELECT"))
+            {
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        V1 = int.Parse(reader_1[0].ToString());
+                        V2 = int.Parse(reader_1[1].ToString());
+                        for (int i = 2; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+                            switch (i)
+                            {
+                                case 2: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_0_UPDATE_FACTOR"); break;
+                                case 3: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_1_UPDATE_FACTOR"); break;
+                                case 4: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_AÑO_2_UPDATE_FACTOR"); break;
+                                case 5: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_12M_1_UPDATE_FACTOR"); break;
+                                case 6: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_12M_2_UPDATE_FACTOR"); break;
+                                case 7: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_1_UPDATE_FACTOR"); break;
+                                case 8: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_2_UPDATE_FACTOR"); break;
+                                case 9: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_3M_1_UPDATE_FACTOR"); break;
+                                case 10: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_3M_2_UPDATE_FACTOR"); break;
+                                case 11: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_1M_1_UPDATE_FACTOR"); break;
+                                case 12: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_1M_2_UPDATE_FACTOR"); break;
+                                case 13: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_YTD_1_UPDATE_FACTOR"); break;
+                                case 14: Update_Factor_SP_FACTOR_12M(V1, V2, valor_1, "PERIODOS._SP_A_POBLAR_HOGAR_YTD_2_UPDATE_FACTOR"); break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void Insertar_Datos_Tabla_Periodos(string periodo, string procedimiento)
+        {
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_PERIODO", DbType.String, periodo);
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+        }
+        private void Update_Factor_SP_FACTOR_12M(int _V1, int _V2, double valor, string procedimiento)
+        {
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand(procedimiento))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_V1", DbType.Int32, _V1);
+                db_Zoho.AddInParameter(cmd_1, "_V2", DbType.Int32, _V2);
+                db_Zoho.AddInParameter(cmd_1, "_VALOR", DbType.Double, valor);         
+                db_Zoho.ExecuteNonQuery(cmd_1);
+            }
+        }        
+        
     }
 }
