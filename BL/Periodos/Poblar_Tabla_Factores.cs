@@ -27,8 +27,8 @@ namespace BL
         Database db_Zoho = factory.Create("ZOHO");
         
         public void Crear_Tabla_Datos_Periodos(string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
-        {           
-
+        {
+           
             Insertar_Datos_Tabla_Periodos(_PER12M_1, "PERIODOS._SP_A_POBLAR_HOGAR_12M_1");
             Insertar_Datos_Tabla_Periodos(_PER12M_2, "PERIODOS._SP_A_POBLAR_HOGAR_12M_2");
             Insertar_Datos_Tabla_Periodos(_PER6M_1, "PERIODOS._SP_A_POBLAR_HOGAR_6M_1");
@@ -101,9 +101,10 @@ namespace BL
 
             Update_Base_Result_Hogar_Periodos();
 
-            DbCommand cmdTabla;
-            cmdTabla = db_Zoho.GetStoredProcCommand("PERIODOS._SP_BD_Resultados_Periodos");
-            db_Zoho.ExecuteNonQuery(cmdTabla);
+            // ACUMULANDO LOS DATOS DE LOS DIFERENTES PERIODOS EN UNA SOLA TABLA.
+            DbCommand cmdTruncate;
+            cmdTruncate = db_Zoho.GetStoredProcCommand("PERIODOS._SP_BD_Resultados_Periodos");
+            db_Zoho.ExecuteNonQuery(cmdTruncate);
         }
 
         private void Insertar_Factores(int _V1, int _V2, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)

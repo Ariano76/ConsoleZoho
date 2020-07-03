@@ -13,7 +13,7 @@ namespace BL
         public int[] sPeriodoActual = new int[2];
         //public double[] sShareValor = new double[2000];
 
-        public double[] sShareValor ;
+        public double[] sShareValor;
         //public static readonly string[] sPeriodosYTDMeses = new string[2];     
         public static readonly string[] s3AñosAnteriores = new string[2];
         public static readonly string[] sPeriodos1Meses = new string[2];
@@ -45,9 +45,9 @@ namespace BL
         public double[,] sdata48Meses_x_Region_Modalidad_Mes = new double[4, 48];
         public double[,] sdata48Meses_x_Region_Tipos_Mes = new double[12, 48];
 
-        
+
         private readonly DateTime[] Periodos = new DateTime[17];
-        string sSource = "Dashboard ZOHO";        
+        string sSource = "Dashboard ZOHO";
         string NSE_, Ciudad_, Mercado_, Periodo;
         int xMesFin_0, xMesFin, xMesFin_1, xMesFin_3, xMesFin_6, xMesFin_12, xMesFin_YTD;
         int xMesInicio, xMesInicial, xMesInicial_1, xMesInicial_3, xMesInicial_6, xMesInicial_12, xMesInicial_YTD;
@@ -68,7 +68,7 @@ namespace BL
         public void Periodo_Actual(int pAño, int pMes)
         {
             //'RECUPERA EL ID DEL PERIODO CORRESPONDIENTE AL AÑO Y MES ANTERIOR
-            
+
             using (SqlConnection con = new SqlConnection(GetConnectionString()))
             {
                 string Sql;
@@ -92,8 +92,8 @@ namespace BL
                 }
                 catch (Exception ex)
                 {
-                    EventLog.WriteEntry(sSource, ex.Message, EventLogEntryType.Error,666);
-                }                               
+                    EventLog.WriteEntry(sSource, ex.Message, EventLogEntryType.Error, 666);
+                }
             }
         }
 
@@ -112,14 +112,14 @@ namespace BL
                 "WHERE IDPERIODO >= " + xPeriodo + "AND IDMONEDA = 1 GROUP BY IDMARCA, MARCA, RANKING ORDER BY RANKING ASC, MONEDA DESC");
 
             using (IDataReader reader = db.ExecuteReader(cmd))
-            {                
+            {
                 DataTable dt = new DataTable();
                 dt.Load(reader);
                 sShareValor = new double[dt.Rows.Count];
                 int index = 0;
                 foreach (DataRow item in dt.Rows)
                 {
-                    sShareValor[index] = Double.Parse(item[3].ToString()) / Cosmeticos * 100; 
+                    sShareValor[index] = Double.Parse(item[3].ToString()) / Cosmeticos * 100;
                     index++;
                 }
                 //while (reader.Read())
@@ -210,7 +210,7 @@ namespace BL
             StringBuilder xPeriodos = new StringBuilder();
             StringBuilder xPeriodosInt = new StringBuilder();
             DbCommand cmd;
-            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + (pAñoActual-3) + " ORDER BY IDPERIODO ASC");
+            cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + (pAñoActual - 3) + " ORDER BY IDPERIODO ASC");
             xMesInicio = (Int32)(db.ExecuteScalar(cmd));
 
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAñoActual + " ORDER BY IDPERIODO DESC");
@@ -543,7 +543,7 @@ namespace BL
             DbCommand cmd;
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + Periodos[14].Year + " AND MES = " + Periodos[14].Month + " ORDER BY IDPERIODO ASC");
             xMesInicial_6 = (Int32)(db.ExecuteScalar(cmd));
-            
+
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO DESC");
             xMesFin_6 = (Int32)(db.ExecuteScalar(cmd));
 
@@ -721,21 +721,21 @@ namespace BL
             return sPeriodosYTDMesesOneYearAgo;
         }
         public string[] Obtener_Ultimos_48_meses(int pAño, int pMes)
-        {            
+        {
             StringBuilder xPeriodos = new StringBuilder();
             StringBuilder xPeriodosInt = new StringBuilder();
             DbCommand cmd;
             cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
             xMesInicial = (Int32)(db.ExecuteScalar(cmd));
 
-            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial + " AND IDPERIODO <= " + xMesFin );
-            
+            cmd = db.GetSqlStringCommand("SELECT DISTINCT PERIODO FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial + " AND IDPERIODO <= " + xMesFin);
+
             using (IDataReader reader = db.ExecuteReader(cmd))
             {
-                int indice=0;
+                int indice = 0;
                 while (reader.Read())
                 {
-                    xPeriodos.Append("["+reader[0].ToString()+"],");
+                    xPeriodos.Append("[" + reader[0].ToString() + "],");
                     sCabecera48Meses[indice] = reader[0].ToString();
                     indice++;
                 }
@@ -851,6 +851,13 @@ namespace BL
 
         //    }
         //}
+
+        public void Limpiar_BD_Resultados()
+        {
+            DbCommand cmdTabla;
+            cmdTabla = db_Zoho.GetSqlStringCommand("TRUNCATE TABLE ZOHO.dbo.[Base De Datos Zoho]");
+            db_Zoho.ExecuteNonQuery(cmdTabla);
+        }
 
         public void Leer_Ultimos_48_Meses_CIUDAD_NSE(string Cab, string xPeriodos)
         {

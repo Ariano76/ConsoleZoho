@@ -1,5 +1,6 @@
 ﻿using BL;
 using System;
+using System.Data.Common;
 
 namespace ConsoleApp1
 {
@@ -142,6 +143,13 @@ namespace ConsoleApp1
             Console.WriteLine($"Tabla Factor Periodos : {xPeriodos_Inicio_Fin[1]}\n");
 
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
+            
+            
+            HoraStart = DateTime.Now;
+            obj.Limpiar_BD_Resultados(); // RESULTADOS POR NSE
+            Tiempo_Proceso("LIMPIANDO BASE DE DATOS ZOHO . .", HoraStart);
+            Record_Progreso();
+
 
             //*** INICIO - ESTE BLOQUE CORRESPONDE A CODIGO VALIDO PARA DESBLOQUEAR ***//
             HoraStart = DateTime.Now;
@@ -1770,58 +1778,64 @@ namespace ConsoleApp1
 
             #endregion
 
-            #region PERIODOS
-
-            //// UNIDADES PAIS
-            //HoraStart = DateTime.Now;
-            //objPeridos_Share_Valor.Recuperar_Codigos_NSE();
-            //objPeridos_Share_Valor.Recuperar_Codigos_Categoria();
-            //objPeridos_Share_Valor.Recuperar_Codigos_Modalidad();
-            //objPeridos_Share_Valor.Recuperar_Codigos_Tipos();
-
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //// MONEDA LOCAL            
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            ////DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //Tiempo_Proceso("PERIODOS SHARE VALOR UNIDADES . . .", HoraStart);
-            //Record_Progreso();
-
-            //// UNIDADES CAPITAL
-            //HoraStart = DateTime.Now;
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //// MONEDA LOCAL
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            ////DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //Tiempo_Proceso("PERIODOS SHARE VALOR SOLES . . .", HoraStart);
-            //Record_Progreso();
-
-            //// UNIDADES CIUDADES
-            //HoraStart = DateTime.Now;
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //// MONEDA LOCAL
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);           
-            ////DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-            //Tiempo_Proceso("PERIODOS SHARE VALOR DOLARES . . .", HoraStart);
-            //Record_Progreso();
-
-            #endregion
-
-
+            #region CREA TABLA RESULTADOS POR PERIODOS HOGARES
             // CREACION DE FACTORES PARA LOS DIFERENTES PERIODOS 
             HoraStart = DateTime.Now;
 
-            obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);   
-
-            //obj_Crear_BD_Peridos.Crear_Tabla_Factores(Ciudades_Codigos, Ciudades_Cabecera, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+            obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
+   
             obj_Crear_BD_Peridos.Crear_Tabla_Factores(Ciudades_Codigos, Ciudades_Cabecera, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
 
-            //obj_Crear_BD_Peridos.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
-
-            Tiempo_Proceso("CREACION BD FACTORES PERIODOS . . .", HoraStart);
+            Tiempo_Proceso("CREACION TABLA RESULTADOS PERIODOS HOGARES . .", HoraStart);
             Record_Progreso();
+            #endregion
+
+            #region PERIODOS
+            
+            HoraStart = DateTime.Now;
+            objPeridos_Share_Valor.Recuperar_Codigos_NSE();
+            objPeridos_Share_Valor.Recuperar_Codigos_Categoria();
+            objPeridos_Share_Valor.Recuperar_Codigos_Modalidad();
+            objPeridos_Share_Valor.Recuperar_Codigos_Tipos();
+
+            // HOGAR PAIS
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Hogares("1,2,5");
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Hogares("1");
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Hogares("2,5");
+            Tiempo_Proceso("PERIODOS HOGARES . . . . .", HoraStart);
+            Record_Progreso();
+
+
+            // UNIDADES PAIS
+            HoraStart = DateTime.Now;
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            // MONEDA LOCAL            
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //DOLARES
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            Tiempo_Proceso("PERIODOS SHARE VALOR UNIDADES . . .", HoraStart);
+            Record_Progreso();
+
+            // UNIDADES CAPITAL
+            HoraStart = DateTime.Now;
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            // MONEDA LOCAL
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //DOLARES
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            Tiempo_Proceso("PERIODOS SHARE VALOR SOLES . . .", HoraStart);
+            Record_Progreso();
+
+            // UNIDADES CIUDADES
+            HoraStart = DateTime.Now;
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            // MONEDA LOCAL
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            //DOLARES
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            Tiempo_Proceso("PERIODOS SHARE VALOR DOLARES . . .", HoraStart);
+            Record_Progreso();
+            #endregion
 
 
 
