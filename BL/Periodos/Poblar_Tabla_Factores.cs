@@ -25,7 +25,33 @@ namespace BL
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
         Database db = factory.Create("SQL_BD_BIP");
         Database db_Zoho = factory.Create("ZOHO");
-        
+
+        private void Crear_Tabla_Universos_Periodos(string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
+        {
+
+            using (DbCommand cmd_0 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIVERSOS_PERIODOS_CIUDADES"))
+            {
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_0", DbType.String, _PER_AÑO_0);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_1", DbType.String, _PER_AÑO_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_2", DbType.String, _PER_AÑO_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_YTD_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_YTD_2", DbType.String, _PERYTDM_2);
+                db_Zoho.ExecuteNonQuery(cmd_0);
+            }
+
+            using (DbCommand cmd_0 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIVERSOS_PERIODOS_PAIS"))
+            {                
+                db_Zoho.ExecuteNonQuery(cmd_0);
+            }
+        }
         public void Crear_Tabla_Datos_Periodos(string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
         {
            
@@ -45,10 +71,31 @@ namespace BL
         }
 
         public void Crear_Tabla_Factores(string xCiudad, string xCab, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string _PER_AÑO_0, string _PER_AÑO_1, string _PER_AÑO_2)
-        {
-            DbCommand cmdDelete;
-            cmdDelete = db.GetSqlStringCommand("TRUNCATE TABLE ZOHO.dbo.FACTORES_HOGAR_PERIODOS");
-            db.ExecuteNonQuery(cmdDelete);
+        {           
+            using (DbCommand cmdDelete = db_Zoho.GetSqlStringCommand("TRUNCATE TABLE dbo.FACTORES_HOGAR_PERIODOS"))
+            { db_Zoho.ExecuteNonQuery(cmdDelete); }
+
+            using (DbCommand cmdDelete = db_Zoho.GetSqlStringCommand("TRUNCATE TABLE dbo.UNIVERSOS_HOGAR_PERIODOS"))
+            { db_Zoho.ExecuteNonQuery(cmdDelete); }
+
+            using (DbCommand cmd_0 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIVERSOS_PERIODOS"))
+            {                
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_0", DbType.String, _PER_AÑO_0);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_1", DbType.String, _PER_AÑO_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_AÑO_2", DbType.String, _PER_AÑO_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_YTD_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_0, "_PERIODO_YTD_2", DbType.String, _PERYTDM_2);
+                db_Zoho.ExecuteNonQuery(cmd_0);
+            }
+            Crear_Tabla_Universos_Periodos(_PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER1M_2, _PERYTDM_1, _PERYTDM_2, _PER_AÑO_0, _PER_AÑO_1, _PER_AÑO_2);
 
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_FACTOR_PERIODOS"))  
             {
