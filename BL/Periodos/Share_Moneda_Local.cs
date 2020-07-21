@@ -1548,6 +1548,37 @@ namespace BL
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", periodo_NSE_Temp_Unidad[k, 1] / 12, periodo_NSE_Temp_Unidad[k, 2] / 12, periodo_NSE_Temp_Unidad[k, 3] / 12, periodo_NSE_Temp_Unidad[k, 4] / 12, periodo_NSE_Temp_Unidad[k, 5] / 12, periodo_NSE_Temp_Unidad[k, 6] / 6, periodo_NSE_Temp_Unidad[k, 7] / 6, periodo_NSE_Temp_Unidad[k, 8] / 3, periodo_NSE_Temp_Unidad[k, 9] / 3, periodo_NSE_Temp_Unidad[k, 10] / 1, periodo_NSE_Temp_Unidad[k, 11] / 1, periodo_NSE_Temp_Unidad[k, 12], periodo_NSE_Temp_Unidad[k, 13]);
 
+                // CALCULAR UNIDADES SHARE (%)"
+                if (V1 == "Consolidado")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Mercado_Unidad.Clone();
+                }
+                else if (V1 == "Lima")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Lima_Unidad.Clone();
+                }
+                else
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Ciudades_Unidad.Clone();
+                }
+
+                double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                t1 = double.Parse(periodo_Total_Temporal[0, 0].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 1] / periodo_Total_Temporal[0, 0] * 100: 0;
+                t2 = double.Parse(periodo_Total_Temporal[0, 1].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 2] / periodo_Total_Temporal[0, 1] * 100 : 0;
+                t3 = double.Parse(periodo_Total_Temporal[0, 2].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 3] / periodo_Total_Temporal[0, 2] * 100 : 0;
+                t4 = double.Parse(periodo_Total_Temporal[0, 3].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 4] / periodo_Total_Temporal[0, 3] * 100 : 0;
+                t5 = double.Parse(periodo_Total_Temporal[0, 4].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 5] / periodo_Total_Temporal[0, 4] * 100 : 0;
+                t6 = double.Parse(periodo_Total_Temporal[0, 5].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 6] / periodo_Total_Temporal[0, 5] * 100 : 0;
+                t7 = double.Parse(periodo_Total_Temporal[0, 6].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 7] / periodo_Total_Temporal[0, 6] * 100 : 0;
+                t8 = double.Parse(periodo_Total_Temporal[0, 7].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 8] / periodo_Total_Temporal[0, 7] * 100 : 0;
+                t9 = double.Parse(periodo_Total_Temporal[0, 8].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 9] / periodo_Total_Temporal[0, 8] * 100 : 0;
+                t10 = double.Parse(periodo_Total_Temporal[0, 9].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 10] / periodo_Total_Temporal[0, 9] * 100 : 0;
+                t11 = double.Parse(periodo_Total_Temporal[0, 10].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 11] / periodo_Total_Temporal[0, 10] * 100 : 0;
+                t12 = double.Parse(periodo_Total_Temporal[0, 11].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 12] / periodo_Total_Temporal[0, 11] * 100 : 0;
+                t13 = double.Parse(periodo_Total_Temporal[0, 12].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 13] / periodo_Total_Temporal[0, 12] * 100 : 0;
+
+                Actualizar_BD_Penetracion(V1_, "%", "UNIDADES", Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
                 // CALCULAR UNIDADES PROMEDIO (HOG.)"
                 if (V1 == "Consolidado")
                 {
@@ -1561,12 +1592,11 @@ namespace BL
                 {
                     periodo_NSE_Temporal = (double[,])periodo_Total_Ciudades_NSE_Hogar.Clone();
                 }
-
                 for (int i = 0; i < periodo_NSE_Temporal.GetLength(0); i++) // GetLength(0) lee numero de filas array
                 {
                     if (CodigoNSE == periodo_NSE_Temporal[i, 0].ToString())
                     {
-                        double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                        //double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
                         t1 = double.Parse(periodo_NSE_Temporal[i, 1].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 1] / periodo_NSE_Temporal[i, 1] : 0;
                         t2 = double.Parse(periodo_NSE_Temporal[i, 2].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 2] / periodo_NSE_Temporal[i, 2] : 0;
                         t3 = double.Parse(periodo_NSE_Temporal[i, 3].ToString()) != 0 ? periodo_NSE_Temp_Unidad[k, 3] / periodo_NSE_Temporal[i, 3] : 0;
@@ -1662,6 +1692,38 @@ namespace BL
                 Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Cat_Temp_Unid[k, 1], periodo_Cat_Temp_Unid[k, 2], periodo_Cat_Temp_Unid[k, 3], periodo_Cat_Temp_Unid[k, 4], periodo_Cat_Temp_Unid[k, 5], periodo_Cat_Temp_Unid[k, 6], periodo_Cat_Temp_Unid[k, 7], periodo_Cat_Temp_Unid[k, 8], periodo_Cat_Temp_Unid[k, 9], periodo_Cat_Temp_Unid[k, 10], periodo_Cat_Temp_Unid[k, 11], periodo_Cat_Temp_Unid[k, 12], periodo_Cat_Temp_Unid[k, 13]);
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Cat_Temp_Unid[k, 1] / 12, periodo_Cat_Temp_Unid[k, 2] / 12, periodo_Cat_Temp_Unid[k, 3] / 12, periodo_Cat_Temp_Unid[k, 4] / 12, periodo_Cat_Temp_Unid[k, 5] / 12, periodo_Cat_Temp_Unid[k, 6] / 6, periodo_Cat_Temp_Unid[k, 7] / 6, periodo_Cat_Temp_Unid[k, 8] / 3, periodo_Cat_Temp_Unid[k, 9] / 3, periodo_Cat_Temp_Unid[k, 10] / 1, periodo_Cat_Temp_Unid[k, 11] / 1, periodo_Cat_Temp_Unid[k, 12], periodo_Cat_Temp_Unid[k, 13]);
+
+                // CALCULAR UNIDADES SHARE (%)"
+                if (V1 == "Consolidado")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Mercado_Unidad.Clone();
+                }
+                else if (V1 == "Lima")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Lima_Unidad.Clone();
+                }
+                else
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Ciudades_Unidad.Clone();
+                }
+
+                double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                t1 = double.Parse(periodo_Total_Temporal[0, 0].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 1] / periodo_Total_Temporal[0, 0] * 100 : 0;
+                t2 = double.Parse(periodo_Total_Temporal[0, 1].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 2] / periodo_Total_Temporal[0, 1] * 100 : 0;
+                t3 = double.Parse(periodo_Total_Temporal[0, 2].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 3] / periodo_Total_Temporal[0, 2] * 100 : 0;
+                t4 = double.Parse(periodo_Total_Temporal[0, 3].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 4] / periodo_Total_Temporal[0, 3] * 100 : 0;
+                t5 = double.Parse(periodo_Total_Temporal[0, 4].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 5] / periodo_Total_Temporal[0, 4] * 100 : 0;
+                t6 = double.Parse(periodo_Total_Temporal[0, 5].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 6] / periodo_Total_Temporal[0, 5] * 100 : 0;
+                t7 = double.Parse(periodo_Total_Temporal[0, 6].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 7] / periodo_Total_Temporal[0, 6] * 100 : 0;
+                t8 = double.Parse(periodo_Total_Temporal[0, 7].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 8] / periodo_Total_Temporal[0, 7] * 100 : 0;
+                t9 = double.Parse(periodo_Total_Temporal[0, 8].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 9] / periodo_Total_Temporal[0, 8] * 100 : 0;
+                t10 = double.Parse(periodo_Total_Temporal[0, 9].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 10] / periodo_Total_Temporal[0, 9] * 100 : 0;
+                t11 = double.Parse(periodo_Total_Temporal[0, 10].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 11] / periodo_Total_Temporal[0, 10] * 100 : 0;
+                t12 = double.Parse(periodo_Total_Temporal[0, 11].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 12] / periodo_Total_Temporal[0, 11] * 100 : 0;
+                t13 = double.Parse(periodo_Total_Temporal[0, 12].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 13] / periodo_Total_Temporal[0, 12] * 100 : 0;
+
+                Actualizar_BD_Penetracion(V1_, "%", "UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
                 // CALCULAR UNIDADES PROMEDIO (HOG.)"
                 if (V1 == "Consolidado")
                 {
@@ -1680,7 +1742,7 @@ namespace BL
                 {
                     if (CodigoCategoria == periodo_Cat_Temporal[i, 0].ToString())
                     {
-                        double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                        //double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
                         t1 = double.Parse(periodo_Cat_Temporal[i, 1].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 1] / periodo_Cat_Temporal[i, 1] : 0;
                         t2 = double.Parse(periodo_Cat_Temporal[i, 2].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 2] / periodo_Cat_Temporal[i, 2] : 0;
                         t3 = double.Parse(periodo_Cat_Temporal[i, 3].ToString()) != 0 ? periodo_Cat_Temp_Unid[k, 3] / periodo_Cat_Temporal[i, 3] : 0;
@@ -1781,6 +1843,37 @@ namespace BL
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Tipo_Temp_Unid[ii, 1] / 12, periodo_Tipo_Temp_Unid[ii, 2] / 12, periodo_Tipo_Temp_Unid[ii, 3] / 12, periodo_Tipo_Temp_Unid[ii, 4] / 12, periodo_Tipo_Temp_Unid[ii, 5] / 12, periodo_Tipo_Temp_Unid[ii, 6] / 6, periodo_Tipo_Temp_Unid[ii, 7] / 6, periodo_Tipo_Temp_Unid[ii, 8] / 3, periodo_Tipo_Temp_Unid[ii, 9] / 3, periodo_Tipo_Temp_Unid[ii, 10] / 1, periodo_Tipo_Temp_Unid[ii, 11] / 1, periodo_Tipo_Temp_Unid[ii, 12], periodo_Tipo_Temp_Unid[ii, 13]);
 
+                // CALCULAR UNIDADES SHARE (%)"
+                if (V1 == "Consolidado")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Mercado_Unidad.Clone();
+                }
+                else if (V1 == "Lima")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Lima_Unidad.Clone();
+                }
+                else
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Ciudades_Unidad.Clone();
+                }
+
+                double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                t1 = double.Parse(periodo_Total_Temporal[0, 0].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 1] / periodo_Total_Temporal[0, 0] * 100 : 0;
+                t2 = double.Parse(periodo_Total_Temporal[0, 1].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 2] / periodo_Total_Temporal[0, 1] * 100 : 0;
+                t3 = double.Parse(periodo_Total_Temporal[0, 2].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 3] / periodo_Total_Temporal[0, 2] * 100 : 0;
+                t4 = double.Parse(periodo_Total_Temporal[0, 3].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 4] / periodo_Total_Temporal[0, 3] * 100 : 0;
+                t5 = double.Parse(periodo_Total_Temporal[0, 4].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 5] / periodo_Total_Temporal[0, 4] * 100 : 0;
+                t6 = double.Parse(periodo_Total_Temporal[0, 5].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 6] / periodo_Total_Temporal[0, 5] * 100 : 0;
+                t7 = double.Parse(periodo_Total_Temporal[0, 6].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 7] / periodo_Total_Temporal[0, 6] * 100 : 0;
+                t8 = double.Parse(periodo_Total_Temporal[0, 7].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 8] / periodo_Total_Temporal[0, 7] * 100 : 0;
+                t9 = double.Parse(periodo_Total_Temporal[0, 8].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 9] / periodo_Total_Temporal[0, 8] * 100 : 0;
+                t10 = double.Parse(periodo_Total_Temporal[0, 9].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 10] / periodo_Total_Temporal[0, 9] * 100 : 0;
+                t11 = double.Parse(periodo_Total_Temporal[0, 10].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 11] / periodo_Total_Temporal[0, 10] * 100 : 0;
+                t12 = double.Parse(periodo_Total_Temporal[0, 11].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 12] / periodo_Total_Temporal[0, 11] * 100 : 0;
+                t13 = double.Parse(periodo_Total_Temporal[0, 12].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 13] / periodo_Total_Temporal[0, 12] * 100 : 0;
+
+                Actualizar_BD_Penetracion(V1_, "%", "UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
                 // CALCULAR UNIDADES PROMEDIO (HOG.)"
                 if (V1 == "Consolidado")
                 {
@@ -1799,7 +1892,7 @@ namespace BL
                 {
                     if (CodigoTipo == periodo_Tipo_Temporal[i, 0].ToString())
                     {
-                        double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                        //double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
                         t1 = double.Parse(periodo_Tipo_Temporal[i, 1].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 1] / periodo_Tipo_Temporal[i, 1] : 0;
                         t2 = double.Parse(periodo_Tipo_Temporal[i, 2].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 2] / periodo_Tipo_Temporal[i, 2] : 0;
                         t3 = double.Parse(periodo_Tipo_Temporal[i, 3].ToString()) != 0 ? periodo_Tipo_Temp_Unid[ii, 3] / periodo_Tipo_Temporal[i, 3] : 0;
@@ -1898,6 +1991,37 @@ namespace BL
                 // PROMEDIO MENSUAL
                 Actualizar_BD(V1_, "Suma", Variable_Promedio, Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", periodo_Canal_Temp_Unid[k, 1] / 12, periodo_Canal_Temp_Unid[k, 2] / 12, periodo_Canal_Temp_Unid[k, 3] / 12, periodo_Canal_Temp_Unid[k, 4] / 12, periodo_Canal_Temp_Unid[k, 5] / 12, periodo_Canal_Temp_Unid[k, 6] / 6, periodo_Canal_Temp_Unid[k, 7] / 6, periodo_Canal_Temp_Unid[k, 8] / 3, periodo_Canal_Temp_Unid[k, 9] / 3, periodo_Canal_Temp_Unid[k, 10] / 1, periodo_Canal_Temp_Unid[k, 11] / 1, periodo_Canal_Temp_Unid[k, 12], periodo_Canal_Temp_Unid[k, 13]);
 
+                // CALCULAR UNIDADES SHARE (%)"
+                if (V1 == "Consolidado")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Mercado_Unidad.Clone();
+                }
+                else if (V1 == "Lima")
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Lima_Unidad.Clone();
+                }
+                else
+                {
+                    periodo_Total_Temporal = (double[,])periodo_Total_Ciudades_Unidad.Clone();
+                }
+
+                double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                t1 = double.Parse(periodo_Total_Temporal[0, 0].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 1] / periodo_Total_Temporal[0, 0] * 100 : 0;
+                t2 = double.Parse(periodo_Total_Temporal[0, 1].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 2] / periodo_Total_Temporal[0, 1] * 100 : 0;
+                t3 = double.Parse(periodo_Total_Temporal[0, 2].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 3] / periodo_Total_Temporal[0, 2] * 100 : 0;
+                t4 = double.Parse(periodo_Total_Temporal[0, 3].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 4] / periodo_Total_Temporal[0, 3] * 100 : 0;
+                t5 = double.Parse(periodo_Total_Temporal[0, 4].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 5] / periodo_Total_Temporal[0, 4] * 100 : 0;
+                t6 = double.Parse(periodo_Total_Temporal[0, 5].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 6] / periodo_Total_Temporal[0, 5] * 100 : 0;
+                t7 = double.Parse(periodo_Total_Temporal[0, 6].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 7] / periodo_Total_Temporal[0, 6] * 100 : 0;
+                t8 = double.Parse(periodo_Total_Temporal[0, 7].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 8] / periodo_Total_Temporal[0, 7] * 100 : 0;
+                t9 = double.Parse(periodo_Total_Temporal[0, 8].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 9] / periodo_Total_Temporal[0, 8] * 100 : 0;
+                t10 = double.Parse(periodo_Total_Temporal[0, 9].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 10] / periodo_Total_Temporal[0, 9] * 100 : 0;
+                t11 = double.Parse(periodo_Total_Temporal[0, 10].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 11] / periodo_Total_Temporal[0, 10] * 100 : 0;
+                t12 = double.Parse(periodo_Total_Temporal[0, 11].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 12] / periodo_Total_Temporal[0, 11] * 100 : 0;
+                t13 = double.Parse(periodo_Total_Temporal[0, 12].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 13] / periodo_Total_Temporal[0, 12] * 100 : 0;
+
+                Actualizar_BD_Penetracion(V1_, "%", "UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
                 // CALCULAR UNIDADES PROMEDIO (HOG.)"
                 if (V1 == "Consolidado")
                 {
@@ -1916,7 +2040,7 @@ namespace BL
                 {
                     if (CodigoModalidad == periodo_Modalidad_Temporal[i, 0].ToString())
                     {
-                        double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                        //double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
                         t1 = double.Parse(periodo_Modalidad_Temporal[i, 1].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 1] / periodo_Modalidad_Temporal[i, 1] : 0;
                         t2 = double.Parse(periodo_Modalidad_Temporal[i, 2].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 2] / periodo_Modalidad_Temporal[i, 2] : 0;
                         t3 = double.Parse(periodo_Modalidad_Temporal[i, 3].ToString()) != 0 ? periodo_Canal_Temp_Unid[k, 3] / periodo_Modalidad_Temporal[i, 3] : 0;
