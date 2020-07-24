@@ -52,6 +52,7 @@ namespace BL
         int xMesFin_0, xMesFin, xMesFin_1, xMesFin_3, xMesFin_6, xMesFin_12, xMesFin_YTD;
         int xMesInicio, xMesInicial, xMesInicial_1, xMesInicial_3, xMesInicial_6, xMesInicial_12, xMesInicial_YTD;
         public string resultadoBD;
+        public int Numero_Meses_en_YTD;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
@@ -647,6 +648,17 @@ namespace BL
             sPeriodos12MesesOneYearAgo[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
             return sPeriodos12MesesOneYearAgo;
         }
+        //public int Numero_Meses_YTD(int pAño, int pMes)
+        //{            
+        //    int numeroMeses;
+        //    DbCommand cmd;
+        //    cmd = db.GetSqlStringCommand("SELECT IDPERIODO FROM PERIODOS WHERE AÑO = " + pAño + " AND MES = " + pMes + " ORDER BY IDPERIODO ASC");
+        //    xMesInicial = (Int32)(db.ExecuteScalar(cmd));
+
+        //    cmd = db.GetSqlStringCommand("SELECT COUNT(distinct(periodo)) FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial + " AND IDPERIODO <= " + xMesFin);
+        //    numeroMeses = (Int32)db.ExecuteScalar(cmd);
+        //    return numeroMeses;
+        //}
         public string[] Obtener_YTD_meses(int pAño, int pMes)
         {
             StringBuilder xPeriodos = new StringBuilder();
@@ -680,6 +692,10 @@ namespace BL
 
             sPeriodosYTDMeses[0] = xPeriodos.ToString().Substring(0, xPeriodos.Length - 1);
             sPeriodosYTDMeses[1] = xPeriodosInt.ToString().Substring(0, xPeriodosInt.Length - 1);
+
+            cmd = db.GetSqlStringCommand("SELECT COUNT(distinct(periodo)) FROM PERIODOS WHERE IDPERIODO >= " + xMesInicial + " AND IDPERIODO <= " + xMesFin);
+            Numero_Meses_en_YTD = (Int32)db.ExecuteScalar(cmd);
+
             return sPeriodosYTDMeses;
         }
         public string[] Obtener_YTD_meses_One_Year_Ago(int pAño, int pMes)

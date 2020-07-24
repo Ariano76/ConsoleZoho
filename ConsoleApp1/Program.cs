@@ -17,6 +17,7 @@ namespace ConsoleApp1
             int[] Codigo_Tipos_Importantes = { 158, 161, 215, 202, 237, 226 };
             int[] Codigo_TIPOS = { 158, 161, 215, 202, 237, 226 }; // TIPOS 
             int[] Codigo_Categoria = { 123, 124, 127 }; // Categorias
+            int Numero_Meses_YTD;
             string Ciudades_Codigos = "1,2,5"; // Ciudades
             string Ciudades_Cabecera = "[1],[2],[5]"; // Ciudades Cabecera
 
@@ -58,7 +59,7 @@ namespace ConsoleApp1
             DateTime[] xFecha = obj.Restar_Meses_Fechas(xAño, xMes);
            
             obj.Periodo_Actual(xAño, xMes);
-            Console.WriteLine(obj.sPeriodoActual[0]);
+            Console.WriteLine(obj.sPeriodoActual[0]);            
 
             Console.WriteLine($"La fecha de inicio un año atras es: {xFecha[0].ToShortDateString()}\n" +
                 $"La fecha de inicio dos años atras: {xFecha[1].ToShortDateString()}\n" +
@@ -137,14 +138,16 @@ namespace ConsoleApp1
             Console.WriteLine($"Periodos YTD Meses : {xPeriodosYTDMeses[1]}\n");
             Console.WriteLine($"Periodos YTD Meses un año atras : {xPeriodosYTDMesesAgo[0]}");
             Console.WriteLine($"Periodos YTD Meses un año atras : {xPeriodosYTDMesesAgo[1]}\n");
-            Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[0]}");
+            Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[0]}");            
             Console.WriteLine($"Periodos 48 Meses : {xPeriodos48Meses[1]}\n");
             Console.WriteLine($"Tabla Factor Cabecera : {xPeriodos_Inicio_Fin[0]}");
             Console.WriteLine($"Tabla Factor Periodos : {xPeriodos_Inicio_Fin[1]}\n");
 
+            Numero_Meses_YTD = obj.Numero_Meses_en_YTD;
+            Console.WriteLine($"Numero de meses en el YTD : {Numero_Meses_YTD}");
             //IDataReader x48Meses = obj48.Leer_Ultimos_48_Meses(xPeriodos48Meses[0], xPeriodos48Meses[1]);
-            
-            
+
+
             HoraStart = DateTime.Now;
             obj.Limpiar_BD_Resultados(); // RESULTADOS POR NSE
             Tiempo_Proceso("LIMPIANDO BASE DE DATOS ZOHO . .", HoraStart);
@@ -1808,31 +1811,31 @@ namespace ConsoleApp1
 
             // UNIDADES PAIS
             HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1],Numero_Meses_YTD);
             // MONEDA LOCAL            
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             Tiempo_Proceso("PERIODOS DATOS VALOR PAIS . . .", HoraStart);
             Record_Progreso();
 
             // UNIDADES CAPITAL
             HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1],Numero_Meses_YTD);
             // MONEDA LOCAL
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             Tiempo_Proceso("PERIODOS DATOS VALOR CAPITAL . . .", HoraStart);
             Record_Progreso();
 
             // UNIDADES CIUDADES
             HoraStart = DateTime.Now;
-            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             // MONEDA LOCAL
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //DOLARES
-            //objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1]);
+            objPeridos_Share_Valor.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             Tiempo_Proceso("PERIODOS DATOS VALOR CIUDADES . . .", HoraStart);
             Record_Progreso();
             #endregion
