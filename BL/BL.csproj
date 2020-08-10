@@ -74,6 +74,7 @@
     <Compile Include="cls_BD_Zoho.cs" />
     <Compile Include="Marcas\BL_Unidad_Promedio_Hogar_Marcas.cs" />
     <Compile Include="Output_48_Meses.cs" />
+    <Compile Include="Periodos\marcas_Periodos.cs" />
     <Compile Include="Periodos\Poblar_Tabla_Factores.cs" />
     <Compile Include="Periodos\Share_Moneda_Local.cs" />
     <Compile Include="Procesos_Genericos.cs" />
