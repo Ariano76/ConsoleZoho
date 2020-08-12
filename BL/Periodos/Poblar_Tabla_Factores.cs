@@ -151,6 +151,7 @@ namespace BL
             // ACUMULANDO LOS DATOS DE LOS DIFERENTES PERIODOS EN UNA SOLA TABLA.
             DbCommand cmdTruncate;
             cmdTruncate = db_Zoho.GetStoredProcCommand("PERIODOS._SP_BD_Resultados_Periodos");
+            cmdTruncate.CommandTimeout = 90;
             db_Zoho.ExecuteNonQuery(cmdTruncate);
         }
 
