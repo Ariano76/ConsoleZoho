@@ -1752,7 +1752,7 @@ namespace ConsoleApp1
 
             //HoraStart = DateTime.Now;
             //obj_Crear_BD_Peridos.Crear_Tabla_Datos_Periodos(xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
-   
+
             //obj_Crear_BD_Peridos.Crear_Tabla_Factores(Ciudades_Codigos, Ciudades_Cabecera, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], xPeriodos_Año_0[1], xPeriodos_Año_1[1], xPeriodos_Año_2[1]);
 
             //Tiempo_Proceso("CREACION TABLA RESULTADOS PERIODOS HOGARES . .", HoraStart);
@@ -1760,7 +1760,7 @@ namespace ConsoleApp1
             #endregion
 
             #region PERIODOS
-            
+
             //HoraStart = DateTime.Now;
             //objPeridos_Share_Valor.Recuperar_Codigos_NSE();
             //objPeridos_Share_Valor.Recuperar_Codigos_Categoria();
@@ -1814,12 +1814,17 @@ namespace ConsoleApp1
 
             #region PERIODOS POR MARCAS
 
-            //HoraStart = DateTime.Now;
-            //objPeriodos_Marcas.Recuperar_Codigos_NSE();
-            //objPeriodos_Marcas.Recuperar_Codigos_Categoria();
+            HoraStart = DateTime.Now;
+            objPeriodos_Marcas.Recuperar_Codigos_NSE();
+            objPeriodos_Marcas.Recuperar_Codigos_Categoria();
             //objPeriodos_Marcas.Recuperar_Codigos_Modalidad();
-            //objPeriodos_Marcas.Recuperar_Codigos_Tipos();
+            objPeriodos_Marcas.Recuperar_Codigos_Tipos();
             //objPeriodos_Marcas.Universo_Periodos();
+            //objPeriodos_Marcas.Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(1);
+            objPeriodos_Marcas.Recuperar_Marcas_Grupo_Belcorp(); // 
+            objPeriodos_Marcas.Recuperar_Marcas_Grupo_Lauder(); // 
+            objPeriodos_Marcas.Recuperar_Marcas_Grupo_Loreal(); // 
+
 
             //// HOGAR PAIS
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Hogares("1,2,5");
@@ -1832,7 +1837,7 @@ namespace ConsoleApp1
             //HoraStart = DateTime.Now;
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //// MONEDA LOCAL            
-            //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
+            objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             ////DOLARES
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //Tiempo_Proceso("PERIODOS DATOS VALOR PAIS . . .", HoraStart);
@@ -1842,7 +1847,7 @@ namespace ConsoleApp1
             //HoraStart = DateTime.Now;
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Unidades("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //// MONEDA LOCAL
-            //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
+            objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             ////DOLARES
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //Tiempo_Proceso("PERIODOS DATOS VALOR CAPITAL . . .", HoraStart);
@@ -1852,11 +1857,12 @@ namespace ConsoleApp1
             //HoraStart = DateTime.Now;
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Unidades("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //// MONEDA LOCAL
-            //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
+            objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             ////DOLARES
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
-            //Tiempo_Proceso("PERIODOS DATOS VALOR CIUDADES . . .", HoraStart);
-            //Record_Progreso();
+
+            Tiempo_Proceso("PERIODOS DATOS VALOR CIUDADES . . .", HoraStart);
+            Record_Progreso();
 
             #endregion
 
