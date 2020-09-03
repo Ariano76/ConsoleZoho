@@ -2,7 +2,9 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 
 namespace BL.Periodos
 {
@@ -14,8 +16,8 @@ namespace BL.Periodos
 
         private int[] Codigo_Belcorp = { 540, 1163, 5914 }; // GRUPO BELCORP
         private int[] Codigo_Loreal = { 5193, 696, 63, 1415, 3983, 1620, 3132, 176, 189, 1102, 2968, 6595, 1271, 293, 279, 282, 322, 583, 5434, 424, 423, 4225, 506, 1350, 8493, 513, 537, 209 }; // GRUPO LOREAL
-        private int[] Codigo_Lauder = { 9266, 89, 1063, 1031, 174, 1299, 1588, 3181, 1009, 371, 987, 1398, 1128, 1068, 524 }; // GRUPO ESTEE LAUDER
-
+        private int[] Codigo_Lauder = { 4825,10391,6881,8698,81,6305,4779,6197,2605,8535,4200,284,4522,10647,8009 }; // GRUPO ESTEE LAUDER
+            
         private int[] Codigos_NSE = { 488, 489, 490, 491, 492 }; // NSE
         private int[] Codigo_Tipos = { 229, 238, 164, 158, 161, 174, 215, 178, 202, 237, 226, 228, 173, 235, 175 }; // TIPOS 
         int[] Cod_NSE_Temp = new int[5]; // NSE
@@ -50,22 +52,56 @@ namespace BL.Periodos
         public double[,] periodo_Total_Lima_Tipo_Valor = new double[15, 14];  // TIPO LIMA NSE Valor
         public double[,] periodo_Total_Ciudades_Tipo_Valor = new double[15, 14];  // TIPO CIUDADES NSE Valor
 
-        public double[,] Total_Mercado_Marca_Valor = new double[15, 14];  // TOTAL MARCA VALORES
-        public double[,] Total_Lima_Marca_Valor = new double[15, 14];  // LIMA MARCA VALORES
-        public double[,] Total_Ciudades_Marca_Valor = new double[15, 14];  // CIUDADES MARCA VALORES
-        public double[,] Categ_Mercado_Marca_Valor = new double[15, 15];  // CATEG TOTAL MARCA VALORES
-        public double[,] Categ_Lima_Marca_Valor = new double[15, 15];  // CATEG LIMA MARCA VALORES
-        public double[,] Categ_Ciudades_Marca_Valor = new double[15, 15];  // CATEG CIUDADES MARCA VALORES
-        public double[,] Tipo_Mercado_Marca_Valor = new double[225, 15];  // TIPO TOTAL MARCA VALORES
-        public double[,] Tipo_Lima_Marca_Valor = new double[225, 15];  // TIPO LIMA MARCA VALORES
-        public double[,] Tipo_Ciudades_Marca_Valor = new double[225, 15];  // TIPO CIUDADES MARCA VALORES
+        public double[,] periodo_Total_Mercado_UU = new double[1, 13];  // TOTAL UU
+        public double[,] periodo_Total_Lima_UU = new double[1, 13];  // LIMA  UU
+        public double[,] periodo_Total_Ciudades_UU = new double[1, 13];  // CIUDAD UU
+        public double[,] periodo_Total_Mercado_Categoria_UU = new double[5, 14];  // CATEG TOTAL NSE UU
+        public double[,] periodo_Total_Lima_Categoria_UU = new double[5, 14];  // CATEG LIMA NSE UU
+        public double[,] periodo_Total_Ciudades_Categoria_UU = new double[5, 14];  // CATEG CIUDADES NSE UU
+        public double[,] periodo_Total_Mercado_Tipo_UU = new double[15, 14];  // TIPO TOTAL NSE UU
+        public double[,] periodo_Total_Lima_Tipo_UU = new double[15, 14];  // TIPO LIMA NSE UU
+        public double[,] periodo_Total_Ciudades_Tipo_UU = new double[15, 14];  // TIPO CIUDADES NSE UU
 
-        public double[,] Temp_Total_Valor = new double[1, 13];  // TEMPORAL TOTAL VALORES
+
+        public double[,] Total_Mercado_Marca_Valor = new double[15, 14];  // TOTAL MARCA VALOR
+        public double[,] Total_Lima_Marca_Valor = new double[15, 14];  // LIMA MARCA VALOR
+        public double[,] Total_Ciudades_Marca_Valor = new double[15, 14];  // CIUDADES MARCA VALOR
+        public double[,] Categ_Mercado_Marca_Valor = new double[15, 15];  // CATEG TOTAL MARCA VALOR
+        public double[,] Categ_Lima_Marca_Valor = new double[15, 15];  // CATEG LIMA MARCA VALOR
+        public double[,] Categ_Ciudades_Marca_Valor = new double[15, 15];  // CATEG CIUDADES MARCA VALOR
+        public double[,] Tipo_Mercado_Marca_Valor = new double[15, 15];  // TIPO TOTAL MARCA VALOR
+        public double[,] Tipo_Lima_Marca_Valor = new double[15, 15];  // TIPO LIMA MARCA VALOR
+        public double[,] Tipo_Ciudades_Marca_Valor = new double[15, 15];  // TIPO CIUDADES MARCA VALOR
+
+        public double[,] Total_Mercado_Marca_UU = new double[15, 14];  // TOTAL MARCA UU
+        public double[,] Total_Lima_Marca_UU = new double[15, 14];  // LIMA MARCA UU
+        public double[,] Total_Ciudades_Marca_UU = new double[15, 14];  // CIUDADES MARCA UU
+        public double[,] Categ_Mercado_Marca_UU = new double[15, 15];  // CATEG TOTAL MARCA UU
+        public double[,] Categ_Lima_Marca_UU = new double[15, 15];  // CATEG LIMA MARCA UU
+        public double[,] Categ_Ciudades_Marca_UU = new double[15, 15];  // CATEG CIUDADES MARCA UU
+        public double[,] Tipo_Mercado_Marca_UU = new double[15, 15];  // TIPO TOTAL MARCA UU
+        public double[,] Tipo_Lima_Marca_UU = new double[15, 15];  // TIPO LIMA MARCA UU
+        public double[,] Tipo_Ciudades_Marca_UU = new double[15, 15];  // TIPO CIUDADES MARCA UU
+
+
+        public double[,] Temp_Total_Valor = new double[1, 13];  // TEMPORAL TOTAL VALOR
         public double[,] Temp_Categoria_Valor = new double[5, 14];  // CATEGORIA VALOR
         public double[,] Temp_Tipo_Valor = new double[15, 14];  // TIPO VALOR
-        public double[,] Temp_Total_Marca_Valor = new double[15, 14];  // TOTAL MARCA VALORES
-        public double[,] Temp_Categ_Marca_Valor = new double[15, 15];  // CATEGORIA MARCA VALORES
-        public double[,] Temp_Tipo_Marca_Valor = new double[225, 15];  // TIPO MARCA VALORES
+        public double[,] Temp_Total_Marca_Valor = new double[15, 14];  // TOTAL MARCA VALOR
+        public double[,] Temp_Categ_Marca_Valor = new double[15, 15];  // CATEGORIA MARCA VALOR
+        public double[,] Temp_Tipo_Marca_Valor = new double[15, 15];  // TIPO MARCA VALOR
+
+        public double[,] Temp_Total_UU = new double[1, 13];  // TEMPORAL TOTAL UU
+        public double[,] Temp_Categoria_UU = new double[5, 14];  // CATEGORIA UU
+        public double[,] Temp_Tipo_UU = new double[15, 14];  // TIPO UU
+        public double[,] Temp_Total_Marca_UU = new double[15, 14];  // TOTAL MARCA UU
+        public double[,] Temp_Categ_Marca_UU = new double[15, 15];  // CATEGORIA MARCA UU
+        public double[,] Temp_Tipo_Marca_UU = new double[15, 15];  // TIPO MARCA UU
+
+
+
+
+
 
 
 
@@ -129,10 +165,6 @@ namespace BL.Periodos
         public double[,] periodo_NSE_Temp_Unidad = new double[5, 14];  // NSE 
         public double[,] periodo_NSE_Temporal = new double[5, 14];  // PENETRACION 
 
-
-        //public double[,] periodo_Total_Mercado_Categoria_Valor = new double[5, 14];  // 
-        //public double[,] periodo_Total_Lima_Categoria_Valor = new double[5, 14];  // 
-        //public double[,] periodo_Total_Ciudades_Categoria_Valor = new double[5, 14];  // 
         public double[,] periodo_Total_Mercado_Categoria_Unidad = new double[5, 14];  // Unidad
         public double[,] periodo_Total_Lima_Categoria_Unidad = new double[5, 14];  // Unidad
         public double[,] periodo_Total_Ciudades_Categoria_Unidad = new double[5, 14];  // Unidad
@@ -177,6 +209,9 @@ namespace BL.Periodos
         string V1, V1_, V1__, V1_M, V2, V2_, Ciudad_, Mercado, Mercado_, Variable, VariableGM, Variable_Promedio, Unidad;
         public string resultadoBD;
         double valor_1;
+        double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+        public static DateTime HoraStart;
+        TimeSpan HoraFin;
 
         //Database db = DatabaseFactory.CreateDatabase("SQL_BD_BIP");
         static DatabaseProviderFactory factory = new DatabaseProviderFactory();
@@ -247,7 +282,7 @@ namespace BL.Periodos
             Codigo_Grupo_Lauder_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
         }
 
-        public void Recuperar_Marcas_Top_5_Retail_x_Tipo(int xTipo, int xMoneda)
+        public void Recuperar_Marcas_Top_5_Retail_x_Tipo(string xCiudad, int xTipo, int xMoneda)
         {
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
@@ -257,12 +292,13 @@ namespace BL.Periodos
             //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
             Codigo_Marcas_3M_Tipo = xIdMarca.ToString();
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_MARCAS_TOP_5_TIPO_3M"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_TIPO_3M"))
             {
                 int cont = 0;
                 string xIdMarcaOtros = "";
                 db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipo);
                 db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
                 using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
                 {
@@ -278,7 +314,7 @@ namespace BL.Periodos
                 Codigo_Marcas_3M_Tipo += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
-        public void Recuperar_Marcas_Top_5_Retail_x_Categoria(int xCateg, int xMoneda)
+        public void Recuperar_Marcas_Top_5_Retail_x_Categoria(string xCiudad, int xCateg, int xMoneda)
         {
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
@@ -288,10 +324,11 @@ namespace BL.Periodos
             //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
             Codigo_Marcas_3M_Categoria = xIdMarca.ToString();
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_MARCAS_TOP_5_CATEG_3M"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_CATEG_3M"))
             {
                 int cont = 0;
                 string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, xCateg);
                 db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
                 db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
@@ -309,7 +346,7 @@ namespace BL.Periodos
                 Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
-        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(int xMoneda)
+        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(string xCiudad, int xMoneda)
         {
             string xIdMarca = "";
             for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
@@ -318,10 +355,11 @@ namespace BL.Periodos
             }
             Codigo_Marcas_3M_Total_Cosmeticos = xIdMarca.ToString();
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_MARCAS_TOP_5_TOTAL_3M"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_TOTAL_3M"))
             {
                 int cont = 0;
                 string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                 db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
                 db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
                 using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
@@ -338,7 +376,197 @@ namespace BL.Periodos
                 Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
+        public void Recuperar_Marcas_Top_5_Retail_x_Tipo_UU(string xCiudad, int xTipo, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Tipo = xIdMarca.ToString();
 
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_TIPO_3M_UU"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipo);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Tipo += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_Retail_x_Categoria_UU(string xCiudad, int xCateg, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Categoria = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_CATEG_3M_UU"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, xCateg);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_UU(string xCiudad, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            Codigo_Marcas_3M_Total_Cosmeticos = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_TOTAL_3M_UU"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_x_PPU_Total_Cosmeticos(string xCiudad, String xPeriodo, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            Codigo_Marcas_3M_Total_Cosmeticos = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_PPU_TOTAL_3M"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, xPeriodo);
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_x_PPU_Categoria(string xCiudad, int xCateg, String xPeriodo, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Categoria = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_PPU_CATEG_3M"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, xCateg);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, xPeriodo);
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Categoria += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
+        public void Recuperar_Marcas_Top_5_x_PPU_Tipo(string xCiudad, int xTipo, String xPeriodo, int xMoneda)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            //Codigo_Marcas_3M_Tipo = xIdMarca.Substring(0, xIdMarca.Length - 1);
+            Codigo_Marcas_3M_Tipo = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOP_5_PPU_TIPO_3M"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, xTipo);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCA", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, xPeriodo);
+                db_Zoho.AddInParameter(cmd_1, "_IDMONEDA", DbType.Int32, xMoneda);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Tipo += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
         private string Validar_marca(string codigo)
         {
             string Marca;
@@ -413,7 +641,7 @@ namespace BL.Periodos
         // VALORES MONEDA LOCAL - DOLARES
         public void Periodos_Cosmeticos_Total_Valores(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, [Optional] int NumMeses)
         {
-            Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(1);
+            Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos(xCiudad, 1);
 
             if (xMoneda == 1)
             {
@@ -449,8 +677,8 @@ namespace BL.Periodos
                 Ciudad_ = "2. Ciudades";
                 V1_ = "Cosmeticos";
             }
-           
-            double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+            
+            HoraStart = DateTime.Now;
 
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_MERCADO"))
             {
@@ -529,7 +757,7 @@ namespace BL.Periodos
                 db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
                 db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
                 db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
-                int rows = 0;
+                //int rows = 0;
                 
                 using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
                 {
@@ -547,48 +775,48 @@ namespace BL.Periodos
                                 valor_1 = double.Parse(reader_1[i].ToString());
                             }
 
-                            if (V1 == "Consolidado")
+                            //if (V1 == "Consolidado")
+                            //{
+                            //    Total_Mercado_Marca_Valor[rows, i] = valor_1;
+                            //    Temp_Total_Marca_Valor[rows, i] = valor_1;
+                            //}
+                            //else if (V1 == "Lima")
+                            //{
+                            //    Total_Lima_Marca_Valor[rows, i] = valor_1;
+                            //    Temp_Total_Marca_Valor[rows, i] = valor_1;
+                            //}
+                            //else
+                            //{
+                            //    Total_Ciudades_Marca_Valor[rows, i] = valor_1;
+                            //    Temp_Total_Marca_Valor[rows, i] = valor_1;
+                            //}
+
+                            switch (i)
                             {
-                                Total_Mercado_Marca_Valor[rows, i] = valor_1;
-                                Temp_Total_Marca_Valor[rows, i] = valor_1;
+                                case 1: t1 = valor_1 / Temp_Total_Valor[0, 0] * 100; break;
+                                case 2: t2 = valor_1 / Temp_Total_Valor[0, 1] * 100; break;
+                                case 3: t3 = valor_1 / Temp_Total_Valor[0, 2] * 100; break;
+                                case 4: t4 = valor_1 / Temp_Total_Valor[0, 3] * 100; break;
+                                case 5: t5 = valor_1 / Temp_Total_Valor[0, 4] * 100; break;
+                                case 6: t6 = valor_1 / Temp_Total_Valor[0, 5] * 100; break;
+                                case 7: t7 = valor_1 / Temp_Total_Valor[0, 6] * 100; break;
+                                case 8: t8 = valor_1 / Temp_Total_Valor[0, 7] * 100; break;
+                                case 9: t9 = valor_1 / Temp_Total_Valor[0, 8] * 100; break;
+                                case 10: t10 = valor_1 / Temp_Total_Valor[0, 9] * 100; break;
+                                case 11: t11 = valor_1 / Temp_Total_Valor[0, 10] * 100; break;
+                                case 12: t12 = valor_1 / Temp_Total_Valor[0, 11] * 100; break;
+                                case 13: t13 = valor_1 / Temp_Total_Valor[0, 12] * 100; break;
                             }
-                            else if (V1 == "Lima")
-                            {
-                                Total_Lima_Marca_Valor[rows, i] = valor_1;
-                                Temp_Total_Marca_Valor[rows, i] = valor_1;
-                            }
-                            else
-                            {
-                                Total_Ciudades_Marca_Valor[rows, i] = valor_1;
-                                Temp_Total_Marca_Valor[rows, i] = valor_1;
-                            }
-                        }          
-                        rows++;
+                        }
+
+                        V1_M = Validar_marca(reader_1[0].ToString());
+                        Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
+                        //rows++;
                     }
                 }
             }
-
-            for (int i = 0; i < Temp_Total_Marca_Valor.GetLength(0); i++) // recorriendo filas
-            {
-                V1_M = Validar_marca(Temp_Total_Marca_Valor[i, 0].ToString());
-
-                t1 = Temp_Total_Marca_Valor[i, 1] / Temp_Total_Valor[0, 0] * 100;
-                t2 = Temp_Total_Marca_Valor[i, 2] / Temp_Total_Valor[0, 1] * 100;
-                t3 = Temp_Total_Marca_Valor[i, 3] / Temp_Total_Valor[0, 2] * 100;
-                t4 = Temp_Total_Marca_Valor[i, 4] / Temp_Total_Valor[0, 3] * 100;
-                t5 = Temp_Total_Marca_Valor[i, 5] / Temp_Total_Valor[0, 4] * 100;
-                t6 = Temp_Total_Marca_Valor[i, 6] / Temp_Total_Valor[0, 5] * 100;
-                t7 = Temp_Total_Marca_Valor[i, 7] / Temp_Total_Valor[0, 6] * 100;
-                t8 = Temp_Total_Marca_Valor[i, 8] / Temp_Total_Valor[0, 7] * 100;
-                t9 = Temp_Total_Marca_Valor[i, 9] / Temp_Total_Valor[0, 8] * 100;
-                t10 = Temp_Total_Marca_Valor[i, 10] / Temp_Total_Valor[0, 9] * 100;
-                t11 = Temp_Total_Marca_Valor[i, 11] / Temp_Total_Valor[0, 10] * 100;
-                t12 = Temp_Total_Marca_Valor[i, 12] / Temp_Total_Valor[0, 11] * 100;
-                t13 = Temp_Total_Marca_Valor[i, 13] / Temp_Total_Valor[0, 12] * 100;
-
-                Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, "0. Cosmeticos", "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-            }
-
+         
             // BELCORP
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO"))
             {
@@ -721,6 +949,10 @@ namespace BL.Periodos
                     }
                 }
             }
+            
+            TimeSpan HoraFin;
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Mercado : " + HoraFin.ToString());
 
             #region TOTAL
             // PPU
@@ -793,6 +1025,7 @@ namespace BL.Periodos
             #endregion TOTAL
 
             #region CATEGORIA
+            HoraStart = DateTime.Now;
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_CATEGORIA"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
@@ -852,7 +1085,7 @@ namespace BL.Periodos
             int posicion = 0;
             for (int x = 0; x < Codigo_Nombres_Categoria.GetLength(0); x++)
             {
-                Recuperar_Marcas_Top_5_Retail_x_Categoria(int.Parse(Codigo_Nombres_Categoria[x, 0].ToString()), 1);
+                Recuperar_Marcas_Top_5_Retail_x_Categoria(xCiudad, int.Parse(Codigo_Nombres_Categoria[x, 0].ToString()), 1);
 
                 for (int i = 0; i < Temp_Categoria_Valor.Length; i++)
                 {
@@ -889,7 +1122,7 @@ namespace BL.Periodos
                     {
                         int cols = reader_1.FieldCount;
                         while (reader_1.Read())
-                        {
+                        {                            
                             for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                             {
                                 if (reader_1[i] == DBNull.Value)
@@ -901,47 +1134,45 @@ namespace BL.Periodos
                                     valor_1 = double.Parse(reader_1[i].ToString());
                                 }
 
-                                if (V1 == "Consolidado")
+                                //if (V1 == "Consolidado")
+                                //{
+                                //    Categ_Mercado_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_Valor[rows, i] = valor_1;
+                                //}
+                                //else if (V1 == "Lima")
+                                //{
+                                //    Categ_Lima_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_Valor[rows, i] = valor_1;
+                                //}
+                                //else
+                                //{
+                                //    Categ_Ciudades_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_Valor[rows, i] = valor_1;
+                                //}
+                               
+                                switch (i)
                                 {
-                                    Categ_Mercado_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Categ_Marca_Valor[rows, i] = valor_1;
+                                    case 2: t1 = valor_1 / Temp_Categoria_Valor[posicion, 1] * 100; break;
+                                    case 3: t2 = valor_1 / Temp_Categoria_Valor[posicion, 2] * 100; break;
+                                    case 4: t3 = valor_1 / Temp_Categoria_Valor[posicion, 3] * 100; break;
+                                    case 5: t4 = valor_1 / Temp_Categoria_Valor[posicion, 4] * 100; break;
+                                    case 6: t5 = valor_1 / Temp_Categoria_Valor[posicion, 5] * 100; break;
+                                    case 7: t6 = valor_1 / Temp_Categoria_Valor[posicion, 6] * 100; break;
+                                    case 8: t7 = valor_1 / Temp_Categoria_Valor[posicion, 7] * 100; break;
+                                    case 9: t8 = valor_1 / Temp_Categoria_Valor[posicion, 8] * 100; break;
+                                    case 10: t9 = valor_1 / Temp_Categoria_Valor[posicion, 9] * 100; break;
+                                    case 11: t10 = valor_1 / Temp_Categoria_Valor[posicion, 10] * 100; break;
+                                    case 12: t11 = valor_1 / Temp_Categoria_Valor[posicion, 11] * 100; break;
+                                    case 13: t12 = valor_1 / Temp_Categoria_Valor[posicion, 12] * 100; break;
+                                    case 14: t13 = valor_1 / Temp_Categoria_Valor[posicion, 13] * 100; break;
                                 }
-                                else if (V1 == "Lima")
-                                {
-                                    Categ_Lima_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Categ_Marca_Valor[rows, i] = valor_1;
-                                }
-                                else
-                                {
-                                    Categ_Ciudades_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Categ_Marca_Valor[rows, i] = valor_1;
-                                }
-                            }
+                            }                            
+                            V1_M = Validar_marca(reader_1[1].ToString());
+                            Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
                             rows++;
-                        }
+                        }                      
                     }
-                }
-
-                for (int i = 0; i < Temp_Categ_Marca_Valor.GetLength(0); i++) // recorriendo filas
-                {
-                    V1_M = Validar_marca(Temp_Categ_Marca_Valor[i, 1].ToString());
-
-                    t1 = Temp_Categ_Marca_Valor[i, 2] / Temp_Categoria_Valor[posicion, 1] * 100;
-                    t2 = Temp_Categ_Marca_Valor[i, 3] / Temp_Categoria_Valor[posicion, 2] * 100;
-                    t3 = Temp_Categ_Marca_Valor[i, 4] / Temp_Categoria_Valor[posicion, 3] * 100;
-                    t4 = Temp_Categ_Marca_Valor[i, 5] / Temp_Categoria_Valor[posicion, 4] * 100;
-                    t5 = Temp_Categ_Marca_Valor[i, 6] / Temp_Categoria_Valor[posicion, 5] * 100;
-                    t6 = Temp_Categ_Marca_Valor[i, 7] / Temp_Categoria_Valor[posicion, 6] * 100;
-                    t7 = Temp_Categ_Marca_Valor[i, 8] / Temp_Categoria_Valor[posicion, 7] * 100;
-                    t8 = Temp_Categ_Marca_Valor[i, 9] / Temp_Categoria_Valor[posicion, 8] * 100;
-                    t9 = Temp_Categ_Marca_Valor[i, 10] / Temp_Categoria_Valor[posicion, 9] * 100;
-                    t10 = Temp_Categ_Marca_Valor[i, 11] / Temp_Categoria_Valor[posicion, 10] * 100;
-                    t11 = Temp_Categ_Marca_Valor[i, 12] / Temp_Categoria_Valor[posicion, 11] * 100;
-                    t12 = Temp_Categ_Marca_Valor[i, 13] / Temp_Categoria_Valor[posicion, 12] * 100;
-                    t13 = Temp_Categ_Marca_Valor[i, 14] / Temp_Categoria_Valor[posicion, 13] * 100;
-
-                    Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-                }
+                }               
 
                 // BELCORP
                 using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO"))
@@ -1057,19 +1288,19 @@ namespace BL.Periodos
                         int cols = reader_1.FieldCount;
                         while (reader_1.Read())
                         {
-                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Total_Valor[0, 0] * 100;
-                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Total_Valor[0, 1] * 100;
-                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Total_Valor[0, 2] * 100;
-                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Total_Valor[0, 3] * 100;
-                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Total_Valor[0, 4] * 100;
-                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Total_Valor[0, 5] * 100;
-                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Total_Valor[0, 6] * 100;
-                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Total_Valor[0, 7] * 100;
-                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Total_Valor[0, 8] * 100;
-                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Total_Valor[0, 9] * 100;
-                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Total_Valor[0, 10] * 100;
-                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Total_Valor[0, 11] * 100;
-                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Total_Valor[0, 12] * 100;
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Categoria_Valor[0, 0] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Categoria_Valor[0, 1] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Categoria_Valor[0, 2] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Categoria_Valor[0, 3] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Categoria_Valor[0, 4] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Categoria_Valor[0, 5] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Categoria_Valor[0, 6] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Categoria_Valor[0, 7] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Categoria_Valor[0, 8] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Categoria_Valor[0, 9] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Categoria_Valor[0, 10] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Categoria_Valor[0, 11] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Categoria_Valor[0, 12] * 100;
 
                             Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
                         }
@@ -1077,10 +1308,15 @@ namespace BL.Periodos
                 }
 
             }
+            
+            //TimeSpan HoraFin;
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Categoria : " + HoraFin.ToString());
 
             #endregion CATEGORIA
 
             #region TIPO
+            HoraStart = DateTime.Now;
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_TOTAL_TIPO"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
@@ -1142,7 +1378,7 @@ namespace BL.Periodos
             posicion = 0;
             for (int x = 0; x < Codigo_Nombres_Tipo.GetLength(0); x++)
             {
-                Recuperar_Marcas_Top_5_Retail_x_Tipo(int.Parse(Codigo_Nombres_Tipo[x, 0].ToString()), 1);
+                Recuperar_Marcas_Top_5_Retail_x_Tipo(xCiudad, int.Parse(Codigo_Nombres_Tipo[x, 0].ToString()), 1);
 
                 for (int i = 0; i < Temp_Tipo_Valor.Length; i++)
                 {
@@ -1153,10 +1389,10 @@ namespace BL.Periodos
                         break;
                     }
                 }
-
+                double[,] Temp_Tipo_Marca_Valor = new double[15, 15];  // TIPO MARCA VALORES
                 using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO"))
                 {
-                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Categoria);
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Tipo);
                     db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);                    
                     db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
                     db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
@@ -1174,12 +1410,14 @@ namespace BL.Periodos
                     db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
                     db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
                     int rows = 0;
-
+                    
                     using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
                     {
                         int cols = reader_1.FieldCount;
+                        
                         while (reader_1.Read())
                         {
+                            
                             for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
                             {
                                 if (reader_1[i] == DBNull.Value)
@@ -1191,186 +1429,325 @@ namespace BL.Periodos
                                     valor_1 = double.Parse(reader_1[i].ToString());
                                 }
 
-                                if (V1 == "Consolidado")
+                                //if (V1 == "Consolidado")
+                                //{
+                                //    //Tipo_Mercado_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
+                                //}
+                                //else if (V1 == "Lima")
+                                //{
+                                //    //Tipo_Lima_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
+                                //}
+                                //else
+                                //{
+                                //    //Tipo_Ciudades_Marca_Valor[rows, i] = valor_1;
+                                //    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
+                                //}
+
+                                switch (i)
                                 {
-                                    Tipo_Mercado_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
-                                }
-                                else if (V1 == "Lima")
-                                {
-                                    Tipo_Lima_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
-                                }
-                                else
-                                {
-                                    Tipo_Ciudades_Marca_Valor[rows, i] = valor_1;
-                                    Temp_Tipo_Marca_Valor[rows, i] = valor_1;
+                                    case 2: t1 = valor_1 / Temp_Tipo_Valor[posicion, 1] * 100; break;
+                                    case 3: t2 = valor_1 / Temp_Tipo_Valor[posicion, 2] * 100; break;
+                                    case 4: t3 = valor_1 / Temp_Tipo_Valor[posicion, 3] * 100; break;
+                                    case 5: t4 = valor_1 / Temp_Tipo_Valor[posicion, 4] * 100; break;
+                                    case 6: t5 = valor_1 / Temp_Tipo_Valor[posicion, 5] * 100; break;
+                                    case 7: t6 = valor_1 / Temp_Tipo_Valor[posicion, 6] * 100; break;
+                                    case 8: t7 = valor_1 / Temp_Tipo_Valor[posicion, 7] * 100; break;
+                                    case 9: t8 = valor_1 / Temp_Tipo_Valor[posicion, 8] * 100; break;
+                                    case 10: t9 = valor_1 / Temp_Tipo_Valor[posicion, 9] * 100; break;
+                                    case 11: t10 = valor_1 / Temp_Tipo_Valor[posicion, 10] * 100; break;
+                                    case 12: t11 = valor_1 / Temp_Tipo_Valor[posicion, 11] * 100; break;
+                                    case 13: t12 = valor_1 / Temp_Tipo_Valor[posicion, 12] * 100; break;
+                                    case 14: t13 = valor_1 / Temp_Tipo_Valor[posicion, 13] * 100; break;
                                 }
                             }
+                            V1_M = Validar_marca(reader_1[1].ToString());
+                            Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
                             rows++;
                         }
                     }
-                }
-
-                for (int i = 0; i < Temp_Tipo_Marca_Valor.GetLength(0); i++) // recorriendo filas
+                }                
+                // BELCORP
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO"))
                 {
-                    V1_M = Validar_marca(Temp_Tipo_Marca_Valor[i, 1].ToString());
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);                    
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
 
-                    t1 = Temp_Tipo_Marca_Valor[i, 2] / Temp_Tipo_Valor[posicion, 1] * 100;
-                    t2 = Temp_Tipo_Marca_Valor[i, 3] / Temp_Tipo_Valor[posicion, 2] * 100;
-                    t3 = Temp_Tipo_Marca_Valor[i, 4] / Temp_Tipo_Valor[posicion, 3] * 100;
-                    t4 = Temp_Tipo_Marca_Valor[i, 5] / Temp_Tipo_Valor[posicion, 4] * 100;
-                    t5 = Temp_Tipo_Marca_Valor[i, 6] / Temp_Tipo_Valor[posicion, 5] * 100;
-                    t6 = Temp_Tipo_Marca_Valor[i, 7] / Temp_Tipo_Valor[posicion, 6] * 100;
-                    t7 = Temp_Tipo_Marca_Valor[i, 8] / Temp_Tipo_Valor[posicion, 7] * 100;
-                    t8 = Temp_Tipo_Marca_Valor[i, 9] / Temp_Tipo_Valor[posicion, 8] * 100;
-                    t9 = Temp_Tipo_Marca_Valor[i, 10] / Temp_Tipo_Valor[posicion, 9] * 100;
-                    t10 = Temp_Tipo_Marca_Valor[i, 11] / Temp_Tipo_Valor[posicion, 10] * 100;
-                    t11 = Temp_Tipo_Marca_Valor[i, 12] / Temp_Tipo_Valor[posicion, 11] * 100;
-                    t12 = Temp_Tipo_Marca_Valor[i, 13] / Temp_Tipo_Valor[posicion, 12] * 100;
-                    t13 = Temp_Tipo_Marca_Valor[i, 14] / Temp_Tipo_Valor[posicion, 13] * 100;
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = double.Parse(reader_1[1].ToString()) / Temp_Tipo_Valor[posicion, 1] * 100;
+                            t2 = double.Parse(reader_1[2].ToString()) / Temp_Tipo_Valor[posicion, 2] * 100;
+                            t3 = double.Parse(reader_1[3].ToString()) / Temp_Tipo_Valor[posicion, 3] * 100;
+                            t4 = double.Parse(reader_1[4].ToString()) / Temp_Tipo_Valor[posicion, 4] * 100;
+                            t5 = double.Parse(reader_1[5].ToString()) / Temp_Tipo_Valor[posicion, 5] * 100;
+                            t6 = double.Parse(reader_1[6].ToString()) / Temp_Tipo_Valor[posicion, 6] * 100;
+                            t7 = double.Parse(reader_1[7].ToString()) / Temp_Tipo_Valor[posicion, 7] * 100;
+                            t8 = double.Parse(reader_1[8].ToString()) / Temp_Tipo_Valor[posicion, 8] * 100;
+                            t9 = double.Parse(reader_1[9].ToString()) / Temp_Tipo_Valor[posicion, 9] * 100;
+                            t10 = double.Parse(reader_1[10].ToString()) / Temp_Tipo_Valor[posicion, 10] * 100;
+                            t11 = double.Parse(reader_1[11].ToString()) / Temp_Tipo_Valor[posicion, 11] * 100;
+                            t12 = double.Parse(reader_1[12].ToString()) / Temp_Tipo_Valor[posicion, 12] * 100;
+                            t13 = double.Parse(reader_1[13].ToString()) / Temp_Tipo_Valor[posicion, 13] * 100;
 
-                    Actualizar_BD_Penetracion(V1_M, "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                            Actualizar_BD_Penetracion("00.Belcorp", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
                 }
+                // LOREAL
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
 
-                //// BELCORP
-                //using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO"))
-                //{
-                //    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
-                //    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
-                //    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
-                //    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
-                //    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
-                //    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
-                //    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Tipo_Valor[posicion, 1] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Tipo_Valor[posicion, 2] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Tipo_Valor[posicion, 3] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Tipo_Valor[posicion, 4] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Tipo_Valor[posicion, 5] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Tipo_Valor[posicion, 6] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Tipo_Valor[posicion, 7] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Tipo_Valor[posicion, 8] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Tipo_Valor[posicion, 9] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Tipo_Valor[posicion, 10] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Tipo_Valor[posicion, 11] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Tipo_Valor[posicion, 12] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Tipo_Valor[posicion, 13] * 100;
 
-                //    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
-                //    {
-                //        int cols = reader_1.FieldCount;
-                //        while (reader_1.Read())
-                //        {
-                //            t1 = double.Parse(reader_1[1].ToString()) / Temp_Categoria_Valor[posicion, 1] * 100;
-                //            t2 = double.Parse(reader_1[2].ToString()) / Temp_Categoria_Valor[posicion, 2] * 100;
-                //            t3 = double.Parse(reader_1[3].ToString()) / Temp_Categoria_Valor[posicion, 3] * 100;
-                //            t4 = double.Parse(reader_1[4].ToString()) / Temp_Categoria_Valor[posicion, 4] * 100;
-                //            t5 = double.Parse(reader_1[5].ToString()) / Temp_Categoria_Valor[posicion, 5] * 100;
-                //            t6 = double.Parse(reader_1[6].ToString()) / Temp_Categoria_Valor[posicion, 6] * 100;
-                //            t7 = double.Parse(reader_1[7].ToString()) / Temp_Categoria_Valor[posicion, 7] * 100;
-                //            t8 = double.Parse(reader_1[8].ToString()) / Temp_Categoria_Valor[posicion, 8] * 100;
-                //            t9 = double.Parse(reader_1[9].ToString()) / Temp_Categoria_Valor[posicion, 9] * 100;
-                //            t10 = double.Parse(reader_1[10].ToString()) / Temp_Categoria_Valor[posicion, 10] * 100;
-                //            t11 = double.Parse(reader_1[11].ToString()) / Temp_Categoria_Valor[posicion, 11] * 100;
-                //            t12 = double.Parse(reader_1[12].ToString()) / Temp_Categoria_Valor[posicion, 12] * 100;
-                //            t13 = double.Parse(reader_1[13].ToString()) / Temp_Categoria_Valor[posicion, 13] * 100;
+                            Actualizar_BD_Penetracion("50.Total L'Oreal", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+                // ESTEE LAUDER
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
 
-                //            Actualizar_BD_Penetracion("00.Belcorp", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-                //        }
-                //    }
-                //}
-                //// LOREAL
-                //using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO"))
-                //{
-                //    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
-                //    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
-                //    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
-                //    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
-                //    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
-                //    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
-                //    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Tipo_Valor[0, 0] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Tipo_Valor[0, 1] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Tipo_Valor[0, 2] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Tipo_Valor[0, 3] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Tipo_Valor[0, 4] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Tipo_Valor[0, 5] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Tipo_Valor[0, 6] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Tipo_Valor[0, 7] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Tipo_Valor[0, 8] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Tipo_Valor[0, 9] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Tipo_Valor[0, 10] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Tipo_Valor[0, 11] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Tipo_Valor[0, 12] * 100;
 
-                //    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
-                //    {
-                //        int cols = reader_1.FieldCount;
-                //        while (reader_1.Read())
-                //        {
-                //            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Categoria_Valor[posicion, 1] * 100;
-                //            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Categoria_Valor[posicion, 2] * 100;
-                //            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Categoria_Valor[posicion, 3] * 100;
-                //            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Categoria_Valor[posicion, 4] * 100;
-                //            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Categoria_Valor[posicion, 5] * 100;
-                //            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Categoria_Valor[posicion, 6] * 100;
-                //            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Categoria_Valor[posicion, 7] * 100;
-                //            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Categoria_Valor[posicion, 8] * 100;
-                //            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Categoria_Valor[posicion, 9] * 100;
-                //            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Categoria_Valor[posicion, 10] * 100;
-                //            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Categoria_Valor[posicion, 11] * 100;
-                //            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Categoria_Valor[posicion, 12] * 100;
-                //            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Categoria_Valor[posicion, 13] * 100;
-
-                //            Actualizar_BD_Penetracion("50.Total L'Oreal", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-                //        }
-                //    }
-                //}
-                //// ESTEE LAUDER
-                //using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO"))
-                //{
-                //    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
-                //    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
-                //    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
-                //    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
-                //    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
-                //    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
-                //    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
-                //    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
-
-                //    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
-                //    {
-                //        int cols = reader_1.FieldCount;
-                //        while (reader_1.Read())
-                //        {
-                //            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Total_Valor[0, 0] * 100;
-                //            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Total_Valor[0, 1] * 100;
-                //            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Total_Valor[0, 2] * 100;
-                //            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Total_Valor[0, 3] * 100;
-                //            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Total_Valor[0, 4] * 100;
-                //            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Total_Valor[0, 5] * 100;
-                //            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Total_Valor[0, 6] * 100;
-                //            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Total_Valor[0, 7] * 100;
-                //            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Total_Valor[0, 8] * 100;
-                //            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Total_Valor[0, 9] * 100;
-                //            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Total_Valor[0, 10] * 100;
-                //            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Total_Valor[0, 11] * 100;
-                //            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Total_Valor[0, 12] * 100;
-
-                //            Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-                //        }
-                //    }
-                //}
-
+                            Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE DOLARES", Ciudad_, Mercado, "DOLARES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
             }
+            
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Tipo : " + HoraFin.ToString());
 
             #endregion TIPO
 
+            #region PPU
+            HoraStart = DateTime.Now;
+            //PPU MONEDA LOCAL - TOTAL
+            Recuperar_Marcas_Top_5_x_PPU_Total_Cosmeticos(xCiudad, _PER3M_2, 1);
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_PPU_TOTAL_MERCADO"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                //int rows = 0;
 
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            switch (i)
+                            {
+                                case 1: t1 = valor_1; break;
+                                case 2: t2 = valor_1; break;
+                                case 3: t3 = valor_1; break;
+                                case 4: t4 = valor_1; break;
+                                case 5: t5 = valor_1; break;
+                                case 6: t6 = valor_1; break;
+                                case 7: t7 = valor_1; break;
+                                case 8: t8 = valor_1; break;
+                                case 9: t9 = valor_1; break;
+                                case 10: t10 = valor_1; break;
+                                case 11: t11 = valor_1; break;
+                                case 12: t12 = valor_1; break;
+                                case 13: t13 = valor_1; break;
+                            }
+                        }
+
+                        V1_M = Validar_marca(reader_1[0].ToString());
+                        Actualizar_BD_Penetracion(V1_M, "Suma", Unidad, Ciudad_, "0. Cosmeticos", Unidad, "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        //rows++;
+                    }
+                }
+            }
+
+            //PPU MONEDA DOLARES - TOTAL
+            Recuperar_Marcas_Top_5_x_PPU_Total_Cosmeticos(xCiudad, _PER3M_2, 2);
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_PPU_TOTAL_MERCADO"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, 2);
+                //int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            switch (i)
+                            {
+                                case 1: t1 = valor_1; break;
+                                case 2: t2 = valor_1; break;
+                                case 3: t3 = valor_1; break;
+                                case 4: t4 = valor_1; break;
+                                case 5: t5 = valor_1; break;
+                                case 6: t6 = valor_1; break;
+                                case 7: t7 = valor_1; break;
+                                case 8: t8 = valor_1; break;
+                                case 9: t9 = valor_1; break;
+                                case 10: t10 = valor_1; break;
+                                case 11: t11 = valor_1; break;
+                                case 12: t12 = valor_1; break;
+                                case 13: t13 = valor_1; break;
+                            }
+                        }
+
+                        V1_M = Validar_marca(reader_1[0].ToString());
+                        Actualizar_BD_Penetracion(V1_M, "Suma", "PPU (DOL.)", Ciudad_, "0. Cosmeticos", "PPU (DOL.)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }
+                }
+            }                                  
+            Grupos(xCiudad, xCab, xAños, 1, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Belcorp_3M_Tipo, "00.Belcorp");
+            Grupos(xCiudad, xCab, xAños, 2, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Belcorp_3M_Tipo, "00.Belcorp");
+            Grupos(xCiudad, xCab, xAños, 1, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Loreal_3M_Tipo, "50.Total L'Oreal");
+            Grupos(xCiudad, xCab, xAños, 2, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Loreal_3M_Tipo, "50.Total L'Oreal");
+            Grupos(xCiudad, xCab, xAños, 1, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Lauder_3M_Tipo, "51.Total Estee Lauder");
+            Grupos(xCiudad, xCab, xAños, 2, _PER12M_1, _PER12M_2, _PER6M_1, _PER6M_2, _PER3M_1, _PER3M_2, _PER1M_1, _PER3M_2, _PERYTDM_1, _PERYTDM_2, Codigo_Grupo_Lauder_3M_Tipo, "51.Total Estee Lauder");
+
+
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total PPU : " + HoraFin.ToString());
+
+            #endregion
 
 
             #region NSE
@@ -3047,6 +3424,77 @@ namespace BL.Periodos
             #endregion
         }
 
+        public void Grupos(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, string xMarcas_Grupo, string xTituloMarca)
+        {
+            if (xMoneda == 1) {
+                Unidad = "PPU (ML)"; }
+            else            {
+                Unidad = "PPU (DOL.)"; }
+
+            if (xCiudad == "1") {
+                Ciudad_ = "1. Capital"; }
+            else if (xCiudad == "1,2,5") {
+                Ciudad_ = "0. Consolidado"; }
+            else { Ciudad_ = "2. Ciudades"; }
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_PPU_TOTAL_MERCADO_GRUPO"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, xMarcas_Grupo);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, 2);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            switch (i)
+                            {
+                                case 1: t1 = valor_1; break;
+                                case 2: t2 = valor_1; break;
+                                case 3: t3 = valor_1; break;
+                                case 4: t4 = valor_1; break;
+                                case 5: t5 = valor_1; break;
+                                case 6: t6 = valor_1; break;
+                                case 7: t7 = valor_1; break;
+                                case 8: t8 = valor_1; break;
+                                case 9: t9 = valor_1; break;
+                                case 10: t10 = valor_1; break;
+                                case 11: t11 = valor_1; break;
+                                case 12: t12 = valor_1; break;
+                                case 13: t13 = valor_1; break;
+                            }
+                        }
+                        Actualizar_BD_Penetracion(xTituloMarca, "Suma", Unidad, Ciudad_, "0. Cosmeticos", Unidad, "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }
+                }
+            }
+        }
 
         // HOGARES
         public void Universo_Periodos()
@@ -4156,8 +4604,6 @@ namespace BL.Periodos
             }
         }
 
-
-  
         private int[] CompararArray(int[] x1, int[,] x2)
         {
             //Procedimiento para validar si dos arreglos tienen los mismos valores.
@@ -4179,7 +4625,891 @@ namespace BL.Periodos
         }
 
         // UNIDADES
-        public void Periodos_Cosmeticos_Total_Unidades(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, [Optional] int NumMeses)
+        public void Periodos_Cosmeticos_Total_Unidades(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, [Optional] int NumMeses) 
+        {
+            HoraStart = DateTime.Now;
+            Recuperar_Marcas_Top_5_Retail_x_Total_Cosmeticos_UU(xCiudad, 1);
+
+            if (xMoneda == 1)
+            {
+                Variable = "MONEDA LOCAL";
+                VariableGM = "GASTO MEDIO (ML)";
+                Variable_Promedio = "MONEDA LOCAL MES";
+                V2 = "";
+                Unidad = "PPU (ML)";
+            }
+            else
+            {
+                Variable = "DOLARES";
+                VariableGM = "GASTO MEDIO (DOL.)";
+                Variable_Promedio = "DOLARES MES";
+                V2 = "";
+                Unidad = "PPU (DOL.)";
+            }
+
+            if (xCiudad == "1")
+            {
+                V1 = "Lima";
+                Ciudad_ = "1. Capital";
+                V1_ = "Cosmeticos";
+            }
+            else if (xCiudad == "1,2,5")
+            {
+                V1 = "Consolidado";
+                Ciudad_ = "0. Consolidado";
+            }
+            else
+            {
+                V1 = "Ciudades";
+                Ciudad_ = "2. Ciudades";
+                V1_ = "Cosmeticos";
+            }
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_MERCADO"))
+            {
+                //db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            if (V1 == "Consolidado")
+                            {
+                                periodo_Total_Mercado_UU[rows, i - 1] = valor_1;
+                                Temp_Total_UU[rows, i - 1] = valor_1;
+                            }
+                            else if (V1 == "Lima")
+                            {
+                                periodo_Total_Lima_UU[rows, i - 1] = valor_1;
+                                Temp_Total_UU[rows, i - 1] = valor_1;
+                            }
+                            else
+                            {
+                                periodo_Total_Ciudades_UU[rows, i - 1] = valor_1;
+                                Temp_Total_UU[rows, i - 1] = valor_1;
+                            }
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_UU"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            //if (V1 == "Consolidado")
+                            //{
+                            //    Total_Mercado_Marca_UU[rows, i] = valor_1;
+                            //    Temp_Total_Marca_UU[rows, i] = valor_1;
+                            //}
+                            //else if (V1 == "Lima")
+                            //{
+                            //    Total_Lima_Marca_UU[rows, i] = valor_1;
+                            //    Temp_Total_Marca_UU[rows, i] = valor_1;
+                            //}
+                            //else
+                            //{
+                            //    Total_Ciudades_Marca_UU[rows, i] = valor_1;
+                            //    Temp_Total_Marca_UU[rows, i] = valor_1;
+                            //}
+
+                            switch (i)
+                            {
+                                case 1: t1 = valor_1 / Temp_Total_UU[0, 0] * 100; break;
+                                case 2: t2 = valor_1 / Temp_Total_UU[0, 1] * 100; break;
+                                case 3: t3 = valor_1 / Temp_Total_UU[0, 2] * 100; break;
+                                case 4: t4 = valor_1 / Temp_Total_UU[0, 3] * 100; break;
+                                case 5: t5 = valor_1 / Temp_Total_UU[0, 4] * 100; break;
+                                case 6: t6 = valor_1 / Temp_Total_UU[0, 5] * 100; break;
+                                case 7: t7 = valor_1 / Temp_Total_UU[0, 6] * 100; break;
+                                case 8: t8 = valor_1 / Temp_Total_UU[0, 7] * 100; break;
+                                case 9: t9 = valor_1 / Temp_Total_UU[0, 8] * 100; break;
+                                case 10: t10 = valor_1 / Temp_Total_UU[0, 9] * 100; break;
+                                case 11: t11 = valor_1 / Temp_Total_UU[0, 10] * 100; break;
+                                case 12: t12 = valor_1 / Temp_Total_UU[0, 11] * 100; break;
+                                case 13: t13 = valor_1 / Temp_Total_UU[0, 12] * 100; break;
+                            }
+                        }
+                        V1_M = Validar_marca(reader_1[0].ToString());
+                        Actualizar_BD_Penetracion(V1_M, "%", "SHARE UNIDADES", Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
+                        rows++;
+                    }
+                }
+            }           
+
+            // BELCORP
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        t1 = double.Parse(reader_1[1].ToString()) / Temp_Total_UU[0, 0] * 100;
+                        t2 = double.Parse(reader_1[2].ToString()) / Temp_Total_UU[0, 1] * 100;
+                        t3 = double.Parse(reader_1[3].ToString()) / Temp_Total_UU[0, 2] * 100;
+                        t4 = double.Parse(reader_1[4].ToString()) / Temp_Total_UU[0, 3] * 100;
+                        t5 = double.Parse(reader_1[5].ToString()) / Temp_Total_UU[0, 4] * 100;
+                        t6 = double.Parse(reader_1[6].ToString()) / Temp_Total_UU[0, 5] * 100;
+                        t7 = double.Parse(reader_1[7].ToString()) / Temp_Total_UU[0, 6] * 100;
+                        t8 = double.Parse(reader_1[8].ToString()) / Temp_Total_UU[0, 7] * 100;
+                        t9 = double.Parse(reader_1[9].ToString()) / Temp_Total_UU[0, 8] * 100;
+                        t10 = double.Parse(reader_1[10].ToString()) / Temp_Total_UU[0, 9] * 100;
+                        t11 = double.Parse(reader_1[11].ToString()) / Temp_Total_UU[0, 10] * 100;
+                        t12 = double.Parse(reader_1[12].ToString()) / Temp_Total_UU[0, 11] * 100;
+                        t13 = double.Parse(reader_1[13].ToString()) / Temp_Total_UU[0, 12] * 100;
+
+                        Actualizar_BD_Penetracion("00.Belcorp", "%", "SHARE UNIDADES", Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }
+                }
+            }
+            // LOREAL
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        t1 = double.Parse(reader_1[1].ToString()) / Temp_Total_UU[0, 0] * 100;
+                        t2 = double.Parse(reader_1[2].ToString()) / Temp_Total_UU[0, 1] * 100;
+                        t3 = double.Parse(reader_1[3].ToString()) / Temp_Total_UU[0, 2] * 100;
+                        t4 = double.Parse(reader_1[4].ToString()) / Temp_Total_UU[0, 3] * 100;
+                        t5 = double.Parse(reader_1[5].ToString()) / Temp_Total_UU[0, 4] * 100;
+                        t6 = double.Parse(reader_1[6].ToString()) / Temp_Total_UU[0, 5] * 100;
+                        t7 = double.Parse(reader_1[7].ToString()) / Temp_Total_UU[0, 6] * 100;
+                        t8 = double.Parse(reader_1[8].ToString()) / Temp_Total_UU[0, 7] * 100;
+                        t9 = double.Parse(reader_1[9].ToString()) / Temp_Total_UU[0, 8] * 100;
+                        t10 = double.Parse(reader_1[10].ToString()) / Temp_Total_UU[0, 9] * 100;
+                        t11 = double.Parse(reader_1[11].ToString()) / Temp_Total_UU[0, 10] * 100;
+                        t12 = double.Parse(reader_1[12].ToString()) / Temp_Total_UU[0, 11] * 100;
+                        t13 = double.Parse(reader_1[13].ToString()) / Temp_Total_UU[0, 12] * 100;
+
+                        Actualizar_BD_Penetracion("50.Total L'Oreal", "%", "SHARE UNIDADES", Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }
+                }
+            }
+            // ESTEE LAUDER
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        t1 = double.Parse(reader_1[1].ToString()) / Temp_Total_UU[0, 0] * 100;
+                        t2 = double.Parse(reader_1[2].ToString()) / Temp_Total_UU[0, 1] * 100;
+                        t3 = double.Parse(reader_1[3].ToString()) / Temp_Total_UU[0, 2] * 100;
+                        t4 = double.Parse(reader_1[4].ToString()) / Temp_Total_UU[0, 3] * 100;
+                        t5 = double.Parse(reader_1[5].ToString()) / Temp_Total_UU[0, 4] * 100;
+                        t6 = double.Parse(reader_1[6].ToString()) / Temp_Total_UU[0, 5] * 100;
+                        t7 = double.Parse(reader_1[7].ToString()) / Temp_Total_UU[0, 6] * 100;
+                        t8 = double.Parse(reader_1[8].ToString()) / Temp_Total_UU[0, 7] * 100;
+                        t9 = double.Parse(reader_1[9].ToString()) / Temp_Total_UU[0, 8] * 100;
+                        t10 = double.Parse(reader_1[10].ToString()) / Temp_Total_UU[0, 9] * 100;
+                        t11 = double.Parse(reader_1[11].ToString()) / Temp_Total_UU[0, 10] * 100;
+                        t12 = double.Parse(reader_1[12].ToString()) / Temp_Total_UU[0, 11] * 100;
+                        t13 = double.Parse(reader_1[13].ToString()) / Temp_Total_UU[0, 12] * 100;
+
+                        Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE UNIDADES", Ciudad_, "0. Cosmeticos", "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }
+                }
+            }
+
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Mercado UU : " + HoraFin.ToString());
+
+            #region CATEGORIA
+            HoraStart = DateTime.Now;
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_CATEGORIA"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            if (V1 == "Consolidado")
+                            {
+                                periodo_Total_Mercado_Categoria_UU[rows, i - 1] = valor_1;
+                                Temp_Categoria_UU[rows, i - 1] = valor_1;
+                            }
+                            else if (V1 == "Lima")
+                            {
+                                periodo_Total_Lima_Categoria_UU[rows, i - 1] = valor_1;
+                                Temp_Categoria_UU[rows, i - 1] = valor_1;
+                            }
+                            else
+                            {
+                                periodo_Total_Ciudades_Categoria_UU[rows, i - 1] = valor_1;
+                                Temp_Categoria_UU[rows, i - 1] = valor_1;
+                            }
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            int posicion = 0;
+            for (int x = 0; x < Codigo_Nombres_Categoria.GetLength(0); x++)
+            {
+                Recuperar_Marcas_Top_5_Retail_x_Categoria_UU(xCiudad, int.Parse(Codigo_Nombres_Categoria[x, 0].ToString()), 1);
+
+                for (int i = 0; i < Temp_Categoria_UU.Length; i++)
+                {
+                    if (Codigo_Nombres_Categoria[x, 0] == Temp_Categoria_UU[i, 0].ToString())
+                    {
+                        posicion = i;
+                        Mercado = Codigo_Nombres_Categoria[x, 1];
+                        break;
+                    }
+                }
+
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_CATEGORIA_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Categoria);
+                    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    int rows = 0;
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                            {
+                                if (reader_1[i] == DBNull.Value)
+                                {
+                                    valor_1 = 0;
+                                }
+                                else
+                                {
+                                    valor_1 = double.Parse(reader_1[i].ToString());
+                                }
+
+                                //if (V1 == "Consolidado")
+                                //{
+                                //    Categ_Mercado_Marca_UU[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_UU[rows, i] = valor_1;
+                                //}
+                                //else if (V1 == "Lima")
+                                //{
+                                //    Categ_Lima_Marca_UU[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_UU[rows, i] = valor_1;
+                                //}
+                                //else
+                                //{
+                                //    Categ_Ciudades_Marca_UU[rows, i] = valor_1;
+                                //    Temp_Categ_Marca_UU[rows, i] = valor_1;
+                                //}
+
+                                switch (i)
+                                {
+                                    case 2: t1 = valor_1 / Temp_Categoria_UU[posicion, 1] * 100; break;
+                                    case 3: t2 = valor_1 / Temp_Categoria_UU[posicion, 2] * 100; break;
+                                    case 4: t3 = valor_1 / Temp_Categoria_UU[posicion, 3] * 100; break;
+                                    case 5: t4 = valor_1 / Temp_Categoria_UU[posicion, 4] * 100; break;
+                                    case 6: t5 = valor_1 / Temp_Categoria_UU[posicion, 5] * 100; break;
+                                    case 7: t6 = valor_1 / Temp_Categoria_UU[posicion, 6] * 100; break;
+                                    case 8: t7 = valor_1 / Temp_Categoria_UU[posicion, 7] * 100; break;
+                                    case 9: t8 = valor_1 / Temp_Categoria_UU[posicion, 8] * 100; break;
+                                    case 10: t9 = valor_1 / Temp_Categoria_UU[posicion, 9] * 100; break;
+                                    case 11: t10 = valor_1 / Temp_Categoria_UU[posicion, 10] * 100; break;
+                                    case 12: t11 = valor_1 / Temp_Categoria_UU[posicion, 11] * 100; break;
+                                    case 13: t12 = valor_1 / Temp_Categoria_UU[posicion, 12] * 100; break;
+                                    case 14: t13 = valor_1 / Temp_Categoria_UU[posicion, 13] * 100; break;
+                                }
+                            }
+                            V1_M = Validar_marca(reader_1[1].ToString());
+                            Actualizar_BD_Penetracion(V1_M, "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                            rows++;
+                        }
+                    }
+                }
+
+                // BELCORP
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = double.Parse(reader_1[1].ToString()) / Temp_Categoria_UU[posicion, 1] * 100;
+                            t2 = double.Parse(reader_1[2].ToString()) / Temp_Categoria_UU[posicion, 2] * 100;
+                            t3 = double.Parse(reader_1[3].ToString()) / Temp_Categoria_UU[posicion, 3] * 100;
+                            t4 = double.Parse(reader_1[4].ToString()) / Temp_Categoria_UU[posicion, 4] * 100;
+                            t5 = double.Parse(reader_1[5].ToString()) / Temp_Categoria_UU[posicion, 5] * 100;
+                            t6 = double.Parse(reader_1[6].ToString()) / Temp_Categoria_UU[posicion, 6] * 100;
+                            t7 = double.Parse(reader_1[7].ToString()) / Temp_Categoria_UU[posicion, 7] * 100;
+                            t8 = double.Parse(reader_1[8].ToString()) / Temp_Categoria_UU[posicion, 8] * 100;
+                            t9 = double.Parse(reader_1[9].ToString()) / Temp_Categoria_UU[posicion, 9] * 100;
+                            t10 = double.Parse(reader_1[10].ToString()) / Temp_Categoria_UU[posicion, 10] * 100;
+                            t11 = double.Parse(reader_1[11].ToString()) / Temp_Categoria_UU[posicion, 11] * 100;
+                            t12 = double.Parse(reader_1[12].ToString()) / Temp_Categoria_UU[posicion, 12] * 100;
+                            t13 = double.Parse(reader_1[13].ToString()) / Temp_Categoria_UU[posicion, 13] * 100;
+
+                            Actualizar_BD_Penetracion("00.Belcorp", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+                // LOREAL
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Categoria_UU[posicion, 1] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Categoria_UU[posicion, 2] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Categoria_UU[posicion, 3] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Categoria_UU[posicion, 4] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Categoria_UU[posicion, 5] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Categoria_UU[posicion, 6] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Categoria_UU[posicion, 7] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Categoria_UU[posicion, 8] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Categoria_UU[posicion, 9] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Categoria_UU[posicion, 10] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Categoria_UU[posicion, 11] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Categoria_UU[posicion, 12] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Categoria_UU[posicion, 13] * 100;
+
+                            Actualizar_BD_Penetracion("50.Total L'Oreal", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+                // ESTEE LAUDER
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_MERCADO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_Nombres_Categoria[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Categoria_UU[0, 0] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Categoria_UU[0, 1] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Categoria_UU[0, 2] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Categoria_UU[0, 3] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Categoria_UU[0, 4] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Categoria_UU[0, 5] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Categoria_UU[0, 6] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Categoria_UU[0, 7] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Categoria_UU[0, 8] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Categoria_UU[0, 9] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Categoria_UU[0, 10] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Categoria_UU[0, 11] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Categoria_UU[0, 12] * 100;
+
+                            Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+
+            }
+
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Categoria UU : " + HoraFin.ToString());
+            #endregion CATEGORIA
+
+            #region TIPO
+            HoraStart = DateTime.Now;
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_UNIDAD_TOTAL_TIPO"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_cadena_Tipos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                int rows = 0;
+
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+                    {
+                        for (int i = 1; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            if (V1 == "Consolidado")
+                            {
+                                periodo_Total_Mercado_Tipo_UU[rows, i - 1] = valor_1;
+                                Temp_Tipo_UU[rows, i - 1] = valor_1;
+                            }
+                            else if (V1 == "Lima")
+                            {
+                                periodo_Total_Lima_Tipo_UU[rows, i - 1] = valor_1;
+                                Temp_Tipo_UU[rows, i - 1] = valor_1;
+                            }
+                            else
+                            {
+                                periodo_Total_Ciudades_Tipo_UU[rows, i - 1] = valor_1;
+                                Temp_Tipo_UU[rows, i - 1] = valor_1;
+                            }
+                        }
+                        rows++;
+                    }
+                }
+            }
+
+            posicion = 0;
+            for (int x = 0; x < Codigo_Nombres_Tipo.GetLength(0); x++)
+            {
+                Recuperar_Marcas_Top_5_Retail_x_Tipo(xCiudad, int.Parse(Codigo_Nombres_Tipo[x, 0].ToString()), 1);
+
+                for (int i = 0; i < Temp_Tipo_UU.Length; i++)
+                {
+                    if (Codigo_Nombres_Tipo[x, 0] == Temp_Tipo_UU[i, 0].ToString())
+                    {
+                        posicion = i;
+                        Mercado = Codigo_Nombres_Tipo[x, 1];
+                        break;
+                    }
+                }
+                //double[,] Temp_Tipo_Marca_Valor = new double[15, 15];  // TIPO MARCA VALORES
+
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    int rows = 0;
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+
+                        while (reader_1.Read())
+                        {
+
+                            for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                            {
+                                if (reader_1[i] == DBNull.Value)
+                                {
+                                    valor_1 = 0;
+                                }
+                                else
+                                {
+                                    valor_1 = double.Parse(reader_1[i].ToString());
+                                }
+
+                                switch (i)
+                                {
+                                    case 2: t1 = valor_1 / Temp_Tipo_UU[posicion, 1] * 100; break;
+                                    case 3: t2 = valor_1 / Temp_Tipo_UU[posicion, 2] * 100; break;
+                                    case 4: t3 = valor_1 / Temp_Tipo_UU[posicion, 3] * 100; break;
+                                    case 5: t4 = valor_1 / Temp_Tipo_UU[posicion, 4] * 100; break;
+                                    case 6: t5 = valor_1 / Temp_Tipo_UU[posicion, 5] * 100; break;
+                                    case 7: t6 = valor_1 / Temp_Tipo_UU[posicion, 6] * 100; break;
+                                    case 8: t7 = valor_1 / Temp_Tipo_UU[posicion, 7] * 100; break;
+                                    case 9: t8 = valor_1 / Temp_Tipo_UU[posicion, 8] * 100; break;
+                                    case 10: t9 = valor_1 / Temp_Tipo_UU[posicion, 9] * 100; break;
+                                    case 11: t10 = valor_1 / Temp_Tipo_UU[posicion, 10] * 100; break;
+                                    case 12: t11 = valor_1 / Temp_Tipo_UU[posicion, 11] * 100; break;
+                                    case 13: t12 = valor_1 / Temp_Tipo_UU[posicion, 12] * 100; break;
+                                    case 14: t13 = valor_1 / Temp_Tipo_UU[posicion, 13] * 100; break;
+                                }
+                            }
+                            V1_M = Validar_marca(reader_1[1].ToString());
+                            Actualizar_BD_Penetracion(V1_M, "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+
+                            rows++;
+                        }
+                    }
+                }
+
+                // BELCORP
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Belcorp_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = double.Parse(reader_1[1].ToString()) / Temp_Tipo_UU[posicion, 1] * 100;
+                            t2 = double.Parse(reader_1[2].ToString()) / Temp_Tipo_UU[posicion, 2] * 100;
+                            t3 = double.Parse(reader_1[3].ToString()) / Temp_Tipo_UU[posicion, 3] * 100;
+                            t4 = double.Parse(reader_1[4].ToString()) / Temp_Tipo_UU[posicion, 4] * 100;
+                            t5 = double.Parse(reader_1[5].ToString()) / Temp_Tipo_UU[posicion, 5] * 100;
+                            t6 = double.Parse(reader_1[6].ToString()) / Temp_Tipo_UU[posicion, 6] * 100;
+                            t7 = double.Parse(reader_1[7].ToString()) / Temp_Tipo_UU[posicion, 7] * 100;
+                            t8 = double.Parse(reader_1[8].ToString()) / Temp_Tipo_UU[posicion, 8] * 100;
+                            t9 = double.Parse(reader_1[9].ToString()) / Temp_Tipo_UU[posicion, 9] * 100;
+                            t10 = double.Parse(reader_1[10].ToString()) / Temp_Tipo_UU[posicion, 10] * 100;
+                            t11 = double.Parse(reader_1[11].ToString()) / Temp_Tipo_UU[posicion, 11] * 100;
+                            t12 = double.Parse(reader_1[12].ToString()) / Temp_Tipo_UU[posicion, 12] * 100;
+                            t13 = double.Parse(reader_1[13].ToString()) / Temp_Tipo_UU[posicion, 13] * 100;
+
+                            Actualizar_BD_Penetracion("00.Belcorp", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+                // LOREAL
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Loreal_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Tipo_UU[posicion, 1] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Tipo_UU[posicion, 2] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Tipo_UU[posicion, 3] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Tipo_UU[posicion, 4] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Tipo_UU[posicion, 5] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Tipo_UU[posicion, 6] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Tipo_UU[posicion, 7] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Tipo_UU[posicion, 8] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Tipo_UU[posicion, 9] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Tipo_UU[posicion, 10] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Tipo_UU[posicion, 11] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Tipo_UU[posicion, 12] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Tipo_UU[posicion, 13] * 100;
+
+                            Actualizar_BD_Penetracion("50.Total L'Oreal", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+                // ESTEE LAUDER
+                using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_TOTAL_TIPO_GRUPO_UU"))
+                {
+                    db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Grupo_Lauder_3M_Tipo);
+                    db_Zoho.AddInParameter(cmd_1, "_TIPO", DbType.String, Codigo_Nombres_Tipo[x, 0]);
+                    db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                    db_Zoho.AddInParameter(cmd_1, "_NSE", DbType.String, Codigo_cadena_NSE);
+                    db_Zoho.AddInParameter(cmd_1, "_CABECERA", DbType.String, xCab);
+                    db_Zoho.AddInParameter(cmd_1, "_AÑOS", DbType.String, xAños);
+                    db_Zoho.AddInParameter(cmd_1, "_MONEDA", DbType.Int32, xMoneda);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_1", DbType.String, _PER12M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER12M_2", DbType.String, _PER12M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_1", DbType.String, _PER6M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER6M_2", DbType.String, _PER6M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_1", DbType.String, _PER3M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER3M_2", DbType.String, _PER3M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_1", DbType.String, _PER1M_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PER1M_2", DbType.String, _PER1M_2);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_1", DbType.String, _PERYTDM_1);
+                    db_Zoho.AddInParameter(cmd_1, "_PERYTDM_2", DbType.String, _PERYTDM_2);
+
+                    using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                    {
+                        int cols = reader_1.FieldCount;
+                        while (reader_1.Read())
+                        {
+                            t1 = reader_1[1] == DBNull.Value ? 0 : double.Parse(reader_1[1].ToString()) / Temp_Tipo_UU[0, 0] * 100;
+                            t2 = reader_1[2] == DBNull.Value ? 0 : double.Parse(reader_1[2].ToString()) / Temp_Tipo_UU[0, 1] * 100;
+                            t3 = reader_1[3] == DBNull.Value ? 0 : double.Parse(reader_1[3].ToString()) / Temp_Tipo_UU[0, 2] * 100;
+                            t4 = reader_1[4] == DBNull.Value ? 0 : double.Parse(reader_1[4].ToString()) / Temp_Tipo_UU[0, 3] * 100;
+                            t5 = reader_1[5] == DBNull.Value ? 0 : double.Parse(reader_1[5].ToString()) / Temp_Tipo_UU[0, 4] * 100;
+                            t6 = reader_1[6] == DBNull.Value ? 0 : double.Parse(reader_1[6].ToString()) / Temp_Tipo_UU[0, 5] * 100;
+                            t7 = reader_1[7] == DBNull.Value ? 0 : double.Parse(reader_1[7].ToString()) / Temp_Tipo_UU[0, 6] * 100;
+                            t8 = reader_1[8] == DBNull.Value ? 0 : double.Parse(reader_1[8].ToString()) / Temp_Tipo_UU[0, 7] * 100;
+                            t9 = reader_1[9] == DBNull.Value ? 0 : double.Parse(reader_1[9].ToString()) / Temp_Tipo_UU[0, 8] * 100;
+                            t10 = reader_1[10] == DBNull.Value ? 0 : double.Parse(reader_1[10].ToString()) / Temp_Tipo_UU[0, 9] * 100;
+                            t11 = reader_1[11] == DBNull.Value ? 0 : double.Parse(reader_1[11].ToString()) / Temp_Tipo_UU[0, 10] * 100;
+                            t12 = reader_1[12] == DBNull.Value ? 0 : double.Parse(reader_1[12].ToString()) / Temp_Tipo_UU[0, 11] * 100;
+                            t13 = reader_1[13] == DBNull.Value ? 0 : double.Parse(reader_1[13].ToString()) / Temp_Tipo_UU[0, 12] * 100;
+
+                            Actualizar_BD_Penetracion("51.Total Estee Lauder", "%", "SHARE UNIDADES", Ciudad_, Mercado, "UNIDADES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                        }
+                    }
+                }
+
+            }
+            HoraFin = DateTime.Now - HoraStart;
+            Debug.Print("Total Tipo UU : " + HoraFin.ToString());
+            #endregion TIPO
+
+
+
+        }
+
+        #region BACKUP UNIDADES
+        public void Periodos_Cosmeticos_Total_Unidades_1(string xCiudad, string xCab, string xAños, int xMoneda, string _PER12M_1, string _PER12M_2, string _PER6M_1, string _PER6M_2, string _PER3M_1, string _PER3M_2, string _PER1M_1, string _PER1M_2, string _PERYTDM_1, string _PERYTDM_2, [Optional] int NumMeses)
         {
 
             Variable = "UNIDADES";
@@ -5452,8 +6782,8 @@ namespace BL.Periodos
             }
 
         }
+        #endregion
 
-       
         private void Actualizar_BD(string _V1, string _V2, string _Variable, string _Ciudad, string _Mercado, string _Unidad, string _Reporte, double _ANO_0, double _ANO_1, double _ANO_2, double _PER_12M_1, double _PER_12M_2, double _PER_6M_1, double _PER_6M_2, double _PER_3M_1, double _PER_3M_2, double _PER_1M_1, double _PER_1M_2, double _PER_YTD_1, double _PER_YTD_2)
         {
             using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_INSERTA_DATA_PERIODOS"))
