@@ -2355,8 +2355,7 @@ namespace BL.Periodos
             }
         }
         public void Periodos_Cosmeticos_Total_Hogares(string xCiudad)
-        {
-            int Universo_Ciudad;
+        {            
             Variable = "HOGARES";
             V2 = "";
 
@@ -2365,25 +2364,26 @@ namespace BL.Periodos
                 V1 = "Lima";
                 Ciudad_ = "1. Capital";
                 V1_ = "Cosmeticos";
-                Universo_Ciudad = 1;
+                //Universo_Ciudad = 1;
             }
             else if (xCiudad == "1,2,5")
             {
                 V1 = "Consolidado";
                 Ciudad_ = "0. Consolidado";
-                Universo_Ciudad = 3;
+                //Universo_Ciudad = 3;
             }
             else
             {
                 V1 = "Ciudades";
                 Ciudad_ = "2. Ciudades";
                 V1_ = "Cosmeticos";
-                Universo_Ciudad = 2;
+                //Universo_Ciudad = 2;
             }
 
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_HOGAR_TOTAL_MERCADO"))
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_HOGAR_TOTAL_MERCADO"))
             {
                 db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
                 int rows = 0;
                 int rowUniverso = 0;
                 using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
@@ -2693,104 +2693,6 @@ namespace BL.Periodos
                         break;
                     }
                 }
-            }
-
-            // CODIGO RECORRIDO POR MODALIDAD      
-            string CodigoModalidad;
-            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODOS._SP_HOGAR_TOTAL_MODALIDAD"))
-            {
-                db_Zoho.AddInParameter(cmd_1, "_MODALIDAD", DbType.String, Codigo_cadena_Modalidad);
-                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
-                int rows = 0;
-                int columnas = 0;
-                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
-                {
-                    int cols = reader_1.FieldCount;
-                    columnas = cols;
-                    while (reader_1.Read())
-                    {
-                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
-                        {
-                            if (reader_1[i] == DBNull.Value)
-                            {
-                                valor_1 = 0;
-                            }
-                            else
-                            {
-                                valor_1 = double.Parse(reader_1[i].ToString());
-                            }
-
-                            if (V1 == "Consolidado")
-                            {
-                                periodo_Total_Mercado_Modalidad_Hogar[rows, i] = valor_1;
-                                periodo_Canal_Temp_Unid[rows, i] = valor_1;
-                            }
-                            else if (V1 == "Lima")
-                            {
-                                periodo_Total_Lima_Modalidad_Hogar[rows, i] = valor_1;
-                                periodo_Canal_Temp_Unid[rows, i] = valor_1;
-                            }
-                            else
-                            {
-                                periodo_Total_Ciudades_Modalidad_Hogar[rows, i] = valor_1;
-                                periodo_Canal_Temp_Unid[rows, i] = valor_1;
-                            }
-                        }
-                        rows++;
-                    }
-                }
-            }
-            for (int k = 0; k < periodo_Canal_Temp_Unid.GetLength(0); k++) //FILAS
-            {
-                CodigoModalidad = periodo_Canal_Temp_Unid[k, 0].ToString();
-                for (int i = 0; i < Codigo_Nombres_Modalidad.Length / 2; i++) // SE DIVIDE ENTRE 2 PQ TIENE 2 DIMENSIONES
-                {
-                    if (CodigoModalidad == Codigo_Nombres_Modalidad[i, 0])
-                    {
-                        V1_ = Codigo_Nombres_Modalidad[i, 1].Substring(3, Codigo_Nombres_Modalidad[i, 1].Length - 3); ;
-                        Mercado = Codigo_Nombres_Modalidad[i, 1];
-                        break;
-                    }
-                }
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, Mercado, "HOGARES", "MENSUAL", periodo_Canal_Temp_Unid[k, 1], periodo_Canal_Temp_Unid[k, 2], periodo_Canal_Temp_Unid[k, 3], periodo_Canal_Temp_Unid[k, 4], periodo_Canal_Temp_Unid[k, 5], periodo_Canal_Temp_Unid[k, 6], periodo_Canal_Temp_Unid[k, 7], periodo_Canal_Temp_Unid[k, 8], periodo_Canal_Temp_Unid[k, 9], periodo_Canal_Temp_Unid[k, 10], periodo_Canal_Temp_Unid[k, 11], periodo_Canal_Temp_Unid[k, 12], periodo_Canal_Temp_Unid[k, 13]);
-
-                Actualizar_BD(V1_, "Suma", Variable, Ciudad_, "0. Cosmeticos", "HOGARES", "MENSUAL", periodo_Canal_Temp_Unid[k, 1], periodo_Canal_Temp_Unid[k, 2], periodo_Canal_Temp_Unid[k, 3], periodo_Canal_Temp_Unid[k, 4], periodo_Canal_Temp_Unid[k, 5], periodo_Canal_Temp_Unid[k, 6], periodo_Canal_Temp_Unid[k, 7], periodo_Canal_Temp_Unid[k, 8], periodo_Canal_Temp_Unid[k, 9], periodo_Canal_Temp_Unid[k, 10], periodo_Canal_Temp_Unid[k, 11], periodo_Canal_Temp_Unid[k, 12], periodo_Canal_Temp_Unid[k, 13]);
-
-                // CALCULAR PENETRACION POR HOGAR
-                if (V1 == "Consolidado")
-                {
-                    periodo_Total_Temporal = (double[,])periodo_Total_Mercado_Hogar.Clone();
-                }
-                else if (V1 == "Lima")
-                {
-                    periodo_Total_Temporal = (double[,])periodo_Total_Lima_Hogar.Clone();
-                }
-                else
-                {
-                    periodo_Total_Temporal = (double[,])periodo_Total_Ciudades_Hogar.Clone();
-                }
-
-                //for (int i = 0; i < periodo_Total_Temporal.GetLength(0); i++) // GetLength(0) lee numero de filas array
-                //{
-                double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
-                t1 = periodo_Total_Temporal[0, 0] != 0 ? periodo_Canal_Temp_Unid[k, 1] / periodo_Total_Temporal[0, 0] * 100 : 0;
-                t2 = periodo_Total_Temporal[0, 1] != 0 ? periodo_Canal_Temp_Unid[k, 2] / periodo_Total_Temporal[0, 1] * 100 : 0;
-                t3 = periodo_Total_Temporal[0, 2] != 0 ? periodo_Canal_Temp_Unid[k, 3] / periodo_Total_Temporal[0, 2] * 100 : 0;
-                t4 = periodo_Total_Temporal[0, 3] != 0 ? periodo_Canal_Temp_Unid[k, 4] / periodo_Total_Temporal[0, 3] * 100 : 0;
-                t5 = periodo_Total_Temporal[0, 4] != 0 ? periodo_Canal_Temp_Unid[k, 5] / periodo_Total_Temporal[0, 4] * 100 : 0;
-                t6 = periodo_Total_Temporal[0, 5] != 0 ? periodo_Canal_Temp_Unid[k, 6] / periodo_Total_Temporal[0, 5] * 100 : 0;
-                t7 = periodo_Total_Temporal[0, 6] != 0 ? periodo_Canal_Temp_Unid[k, 7] / periodo_Total_Temporal[0, 6] * 100 : 0;
-                t8 = periodo_Total_Temporal[0, 7] != 0 ? periodo_Canal_Temp_Unid[k, 8] / periodo_Total_Temporal[0, 7] * 100 : 0;
-                t9 = periodo_Total_Temporal[0, 8] != 0 ? periodo_Canal_Temp_Unid[k, 9] / periodo_Total_Temporal[0, 8] * 100 : 0;
-                t10 = periodo_Total_Temporal[0, 9] != 0 ? periodo_Canal_Temp_Unid[k, 10] / periodo_Total_Temporal[0, 9] * 100 : 0;
-                t11 = periodo_Total_Temporal[0, 10] != 0 ? periodo_Canal_Temp_Unid[k, 11] / periodo_Total_Temporal[0, 10] * 100 : 0;
-                t12 = periodo_Total_Temporal[0, 11] != 0 ? periodo_Canal_Temp_Unid[k, 12] / periodo_Total_Temporal[0, 11] * 100 : 0;
-                t13 = periodo_Total_Temporal[0, 12] != 0 ? periodo_Canal_Temp_Unid[k, 13] / periodo_Total_Temporal[0, 12] * 100 : 0;
-
-                Actualizar_BD_Penetracion(V1_, "Suma", "PENETRACIONES", Ciudad_, Mercado, "PENETRACIONES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-
-                Actualizar_BD_Penetracion(V1_, "Suma", "PENETRACIONES", Ciudad_, "0. Cosmeticos", "PENETRACIONES (%)", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-                //}
             }
 
         }
