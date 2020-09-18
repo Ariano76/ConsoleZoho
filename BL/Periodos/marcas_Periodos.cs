@@ -470,6 +470,36 @@ namespace BL.Periodos
                 Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
             }
         }
+        public void Recuperar_Marcas_Top_5_Retail_x_Hogar_Total(string xCiudad, string xCategoria)
+        {
+            string xIdMarca = "";
+            for (int i = 0; i < Codigo_MARCA_VD.GetLength(0); i++)
+            {
+                xIdMarca += Codigo_MARCA_VD[i].ToString() + ",";
+            }
+            Codigo_Marcas_3M_Total_Cosmeticos = xIdMarca.ToString();
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_HOGAR_TOP_5_TOTAL_3M"))
+            {
+                int cont = 0;
+                string xIdMarcaOtros = "";
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_IDMARCAS", DbType.String, xIdMarca.Substring(0, xIdMarca.Length - 1));
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, xCategoria);
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = 0;
+                    while (reader_1.Read())
+                    {
+                        Codigo_MARCA_VR[cont] = reader_1[cols].ToString();
+                        Codigo_MARCA_Nombre_VR[cont] = reader_1[1].ToString();
+                        xIdMarcaOtros += reader_1[cols].ToString() + ",";
+                        cont++;
+                    }
+                }
+                Codigo_Marcas_3M_Total_Cosmeticos += xIdMarcaOtros.Substring(0, xIdMarcaOtros.Length - 1);
+            }
+        }
         public void Recuperar_Marcas_Top_5_x_PPU_Total_Cosmeticos(string xCiudad, String xPeriodo, int xMoneda)
         {
             string xIdMarca = "";
@@ -2354,6 +2384,85 @@ namespace BL.Periodos
                 }
             }
         }
+        public void Hogares(string xCiudad)
+        {
+            Variable = "HOGARES";
+            V2 = "";
+
+            Recuperar_Marcas_Top_5_Retail_x_Hogar_Total(xCiudad, Codigo_cadena_Categoria);
+
+            if (xCiudad == "1")
+            {
+                V1 = "Lima";
+                Ciudad_ = "1. Capital";
+                V1_ = "Cosmeticos";
+                //Universo_Ciudad = 1;
+            }
+            else if (xCiudad == "1,2,5")
+            {
+                V1 = "Consolidado";
+                Ciudad_ = "0. Consolidado";
+                //Universo_Ciudad = 3;
+            }
+            else
+            {
+                V1 = "Ciudades";
+                Ciudad_ = "2. Ciudades";
+                V1_ = "Cosmeticos";
+                //Universo_Ciudad = 2;
+            }
+
+            using (DbCommand cmd_1 = db_Zoho.GetStoredProcCommand("PERIODO_MARCA._SP_HOGAR_TOTAL_MERCADO"))
+            {
+                db_Zoho.AddInParameter(cmd_1, "_CIUDAD", DbType.String, xCiudad);
+                db_Zoho.AddInParameter(cmd_1, "_MARCAS", DbType.String, Codigo_Marcas_3M_Total_Cosmeticos);
+                db_Zoho.AddInParameter(cmd_1, "_CATEGORIA", DbType.String, Codigo_cadena_Categoria);
+                //int rows = 0;
+                //int rowUniverso = 0;
+                
+                using (IDataReader reader_1 = db_Zoho.ExecuteReader(cmd_1))
+                {
+                    int cols = reader_1.FieldCount;
+                    while (reader_1.Read())
+
+                    {
+                        //double t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13;
+                        for (int i = 0; i < cols; i++) // LEYENDO DESDE LA COLUMNA CON LOS VALORES
+                        {                            
+                            if (reader_1[i] == DBNull.Value)
+                            {
+                                valor_1 = 0;
+                            }
+                            else
+                            {
+                                valor_1 = double.Parse(reader_1[i].ToString());
+                            }
+
+                            switch (i)
+                            {
+                                case 1: t1 = valor_1 ; break;
+                                case 2: t2 = valor_1 ; break;
+                                case 3: t3 = valor_1 ; break;
+                                case 4: t4 = valor_1 ; break;
+                                case 5: t5 = valor_1 ; break;
+                                case 6: t6 = valor_1 ; break;
+                                case 7: t7 = valor_1 ; break;
+                                case 8: t8 = valor_1 ; break;
+                                case 9: t9 = valor_1 ; break;
+                                case 10: t10 = valor_1 ; break;
+                                case 11: t11 = valor_1 ; break;
+                                case 12: t12 = valor_1 ; break;
+                                case 13: t13 = valor_1 ; break;
+                            }
+                        }
+                        //rows++;
+                        V1_M = Validar_marca(reader_1[0].ToString());
+                        Actualizar_BD(V1_M, "Suma", Variable, Ciudad_, "0. Cosmeticos", "HOGARES", "MENSUAL", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+                    }                   
+                }
+            }
+        }
+
         public void Periodos_Cosmeticos_Total_Hogares(string xCiudad)
         {            
             Variable = "HOGARES";

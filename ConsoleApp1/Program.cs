@@ -1830,11 +1830,15 @@ namespace ConsoleApp1
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Hogares("1,2,5");
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Hogares("1");
             //objPeriodos_Marcas.Periodos_Cosmeticos_Total_Hogares("2,5");
-            //Tiempo_Proceso("PERIODOS HOGARES . . . . .", HoraStart);
-            //Record_Progreso();
+            objPeriodos_Marcas.Hogares("1,2,5");
+            objPeriodos_Marcas.Hogares("1");
+            objPeriodos_Marcas.Hogares("2,5");
+
+            Tiempo_Proceso("PERIODOS HOGARES . . . . .", HoraStart);
+            Record_Progreso();
 
             //// UNIDADES PAIS
-            //HoraStart = DateTime.Now;
+            HoraStart = DateTime.Now;
             objPeriodos_Marcas.Periodos_Cosmeticos_Total_Unidades("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 2, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
             //// MONEDA LOCAL            
             objPeriodos_Marcas.Periodos_Cosmeticos_Total_Valores("1,2,5", x3UltimosAños[0], x3UltimosAños[1], 1, xPeriodos12Meses_One_Year_Ago[1], xPeriodos12Meses[1], xPeriodos6MesesAgo[1], xPeriodos6Meses[1], xPeriodos3MesesAgo[1], xPeriodos3Meses[1], xPeriodos1MesesAgo[1], xPeriodos1Meses[1], xPeriodosYTDMesesAgo[1], xPeriodosYTDMeses[1], Numero_Meses_YTD);
